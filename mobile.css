@@ -19,7 +19,12 @@
     align-items: flex-start;
   }
 
-  .hero-photo {
+  .hero-photo-desktop {
+    display: none;
+  }
+
+  .hero-photo-mobile {
+    display: block;
     object-fit: cover;
     object-position: left center;
   }
