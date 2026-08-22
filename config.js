@@ -1,13 +1,8 @@
 /**
- * EBS Investment Club — public apply page config
+ * EBS Investment Club — landing page
  *
- * Paste the Microsoft Forms embed URL below (Collect responses → Embed → copy the
- * iframe src, or the share link). Leave empty to show the on-page placeholder.
- *
- * The form must be set to "Anyone can respond" or applicants outside EBS Microsoft 365
- * will be asked to sign in.
+ * Apply now links open this Microsoft Form (not embedded).
  */
 window.EBSIC_CONFIG = {
-  formEmbedUrl: "",
-  formHeight: 2800,
+  formUrl: "https://forms.cloud.microsoft/e/5nPxMLS6NB",
 };
