@@ -8,6 +8,6 @@
  * will be asked to sign in.
  */
 window.EBSIC_CONFIG = {
-  formEmbedUrl: "",
+  formEmbedUrl: "https://forms.cloud.microsoft/e/5nPxMLS6NB?embed=true",
   formHeight: 2800,
 };

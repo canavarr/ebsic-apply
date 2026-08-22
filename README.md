@@ -30,6 +30,10 @@ We cannot create the form from this repo. An officer with an EBS Microsoft 365 a
 8. Commit and push. GitHub Pages will pick it up after the next deploy.
 9. Optional: **Open in Excel** / **Responses** in Forms, or a Power Automate flow that emails the board on each submit.
 
+The live form is already set in `config.js`:
+
+`https://forms.cloud.microsoft/e/5nPxMLS6NB?embed=true`
+
 If `formEmbedUrl` is empty, the page shows a placeholder and the question list instead of the iframe.
 
 ### Questions to recreate

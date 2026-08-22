@@ -36,6 +36,9 @@
   frame.width = "100%";
   frame.height = String(height);
   frame.setAttribute("allowfullscreen", "");
+  frame.setAttribute("webkitallowfullscreen", "");
+  frame.setAttribute("mozallowfullscreen", "");
+  frame.setAttribute("msallowfullscreen", "");
   frame.setAttribute("loading", "lazy");
   mount.appendChild(frame);
 
