@@ -110,41 +110,186 @@
           <h2>Tell us who you are</h2>
           <p>
             English only. All fields are required unless marked optional.
-            Responses go to the club via Microsoft Forms.
           </p>
-          <a id="form-open-link" class="form-open" hidden href="#" target="_blank" rel="noreferrer">
-            Open the form in a new tab
-          </a>
         </div>
 
-        <div class="form-panel">
-          <div id="form-mount">
-            <div class="form-placeholder">
-              <p class="placeholder-kicker">Form connection</p>
-              <h3>The application form loads here</h3>
-              <p>
-                Club officers: create the Microsoft Form with the questions in
-                the README, set it to <strong>Anyone can respond</strong>, then
-                paste the embed URL into <code>config.js</code>.
-              </p>
-              <ol class="question-preview">
-                <li>Full name</li>
-                <li>Study group</li>
-                <li>Email</li>
-                <li>Phone</li>
-                <li>Programme and year (BA / MA / other)</li>
-                <li>LinkedIn <span>(optional)</span></li>
-                <li>How they heard about the club</li>
-                <li>Investing experience (none / beginner / some / active)</li>
-                <li>Preferred team no. 1</li>
-                <li>Preferred team no. 2</li>
-                <li>Introduction and fit for the selected team(s)</li>
-                <li>Why they want to be part of the EBS Investment Club</li>
-                <li>Skillset they will bring to the team</li>
-                <li>Consent to be contacted about membership</li>
-              </ol>
-            </div>
+        <div class="form-panel" id="form-panel">
+          <div
+            class="form-success"
+            id="form-success"
+            hidden
+            tabindex="-1"
+            role="status"
+          >
+            <p class="eyebrow">Application received</p>
+            <h3>Thank you. We have your application.</h3>
+            <p>
+              The board will read it and contact you about membership.
+            </p>
           </div>
+
+          <form class="apply-form" id="apply-form">
+            <fieldset>
+              <legend>Your details</legend>
+              <div class="field-grid">
+                <label>
+                  Full name
+                  <input type="text" name="full_name" autocomplete="name" required />
+                </label>
+                <label>
+                  Study group
+                  <input type="text" name="study_group" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" autocomplete="email" required />
+                </label>
+                <label>
+                  Phone
+                  <input type="tel" name="phone" autocomplete="tel" required />
+                </label>
+                <div class="field">
+                  <span class="field-label" id="programme-label">Programme</span>
+                  <div class="choice-row" role="radiogroup" aria-labelledby="programme-label">
+                    <label class="choice">
+                      <input type="radio" name="programme" value="BA" required />
+                      <span>BA</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="programme" value="MA" />
+                      <span>MA</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="programme" value="Other" />
+                      <span>Other</span>
+                    </label>
+                  </div>
+                </div>
+                <label>
+                  Year of study
+                  <input type="text" name="year" inputmode="numeric" placeholder="2" required />
+                </label>
+                <label>
+                  LinkedIn <em>(optional)</em>
+                  <input type="text" name="linkedin" inputmode="url" placeholder="linkedin.com/in/…" />
+                </label>
+                <label>
+                  How did you hear about the club?
+                  <input type="text" name="heard" required />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Investing experience</legend>
+              <div class="choice-row" role="radiogroup" aria-label="Investing experience">
+                <label class="choice">
+                  <input type="radio" name="experience" value="None" required />
+                  <span>None</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="experience" value="Beginner" />
+                  <span>Beginner</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="experience" value="Some" />
+                  <span>Some</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="experience" value="Active" />
+                  <span>Active</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Team preferences</legend>
+              <p class="field-help">
+                Rank two teams. Your second choice can match the first if you
+                only want one team.
+              </p>
+              <div class="field-grid">
+                <div class="field">
+                  <span class="field-label" id="team1-label">Preferred team no. 1</span>
+                  <div class="choice-stack" role="radiogroup" aria-labelledby="team1-label">
+                    <label class="choice">
+                      <input type="radio" name="team_1" value="Events team" required />
+                      <span>Events team</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="team_1" value="Marketing Team" />
+                      <span>Marketing Team</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="team_1" value="Portfolio Management Team" />
+                      <span>Portfolio Management Team</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="field">
+                  <span class="field-label" id="team2-label">Preferred team no. 2</span>
+                  <div class="choice-stack" role="radiogroup" aria-labelledby="team2-label">
+                    <label class="choice">
+                      <input type="radio" name="team_2" value="Events team" required />
+                      <span>Events team</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="team_2" value="Marketing Team" />
+                      <span>Marketing Team</span>
+                    </label>
+                    <label class="choice">
+                      <input type="radio" name="team_2" value="Portfolio Management Team" />
+                      <span>Portfolio Management Team</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Written answers</legend>
+              <label>
+                Please briefly introduce yourself and explain why you think you
+                would be a good fit for the team(s) you selected.
+                <textarea name="introduction" rows="5" required></textarea>
+              </label>
+              <label>
+                Why do I want to be part of the EBS Investment Club?
+                <textarea name="why_join" rows="5" required></textarea>
+              </label>
+              <label>
+                What skillset will I bring to the team?
+                <textarea name="skillset" rows="5" required></textarea>
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Consent</legend>
+              <div class="choice-row" role="radiogroup" aria-label="Consent to contact">
+                <label class="choice">
+                  <input type="radio" name="consent" value="Yes" required />
+                  <span>Yes — you may contact me about membership</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="consent" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <input
+              class="hp"
+              type="text"
+              name="_honey"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <p class="form-status" id="form-status" hidden role="alert"></p>
+
+            <button type="submit">Submit application</button>
+          </form>
         </div>
       </section>
     </main>
