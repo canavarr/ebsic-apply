@@ -1,6 +1,5 @@
-/* Phone / large phone — covers current iPhones and Androids
-   (portrait and landscape), including iPhone 16 Pro Max landscape. */
-@media (max-width: 1024px) {
+/* Phone — iPhone / Android portrait (~390–430px), not tablet */
+@media (max-width: 767px) {
   .topbar {
     padding: 18px 20px;
   }
@@ -16,9 +15,10 @@
   .hero {
     border-radius: 16px;
     aspect-ratio: 4 / 5;
-    min-height: 0;
-    max-height: 62vh;
-    align-items: flex-start;
+    width: 100%;
+    max-height: none;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-photo-desktop {
@@ -35,7 +35,7 @@
     display: block;
     height: auto;
     padding: 32px 22px;
-    max-width: none;
+    max-width: 22rem;
   }
 
   .hero-content .btn-apply {
