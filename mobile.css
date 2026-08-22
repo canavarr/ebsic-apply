@@ -26,7 +26,7 @@
 
   .hero-content {
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 32px 22px;
     max-width: none;
     text-align: left;
