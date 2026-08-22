@@ -15,9 +15,9 @@
 
   .hero {
     border-radius: 16px;
-    aspect-ratio: 6 / 5;
-    min-height: 0;
-    align-items: flex-start;
+    aspect-ratio: 3 / 5;
+    min-height: 70vh;
+    align-items: stretch;
   }
 
   .hero-photo-desktop {
@@ -27,12 +27,20 @@
   .hero-photo-mobile {
     display: block;
     object-fit: cover;
-    object-position: left center;
+    object-position: center 30%;
   }
 
   .hero-content {
-    padding: 36px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 36px 24px 28px;
     max-width: none;
+  }
+
+  .hero-content .btn-apply {
+    margin-top: auto;
   }
 
   .hero h1 {
