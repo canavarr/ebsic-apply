@@ -15,10 +15,10 @@ The form must stay set to **Anyone can respond**.
 ## Page
 
 - Navy header with the white Investment Club EBS lockup
-- Hero: grayscale hall photo, blue wash, “Want to grow your future?”
+- Hero: lecture-hall photo, Zin Display headline, “Want to grow your future?”
 - Three team cards: Events, Marketing, Portfolio
 - Footer: logo and `investeerimisklubi@ebs.ee`
-- Type: Zin Display Condensed Medium for the hero headline, Montserrat (Medium / SemiBold / Bold) everywhere else
+- Type: Zin Display Condensed Medium for headlines, Montserrat (Medium / SemiBold / Bold) for body copy
 
 ## GitHub Pages
 
@@ -42,6 +42,6 @@ python3 -m http.server 4173
 - `assets/` — logo, mark, hero photo
 - `assets/fonts/` — Zin Display Condensed Medium and Montserrat (Medium, SemiBold, Bold)
 
-Hero photo is a grayscale lecture-hall crop. Replace `assets/hero.jpg` with the club photo from the design if you have the original file.
+Hero photo is the club lecture-hall image in `assets/hero.png`.
 
 The original print file `EBS_LOGO_INVESTMENT_CLUB_PLAIN_WHITE_CMYK.eps` stays in the repo for design work. It is not used on the page.
