@@ -224,6 +224,9 @@
   }
 
   /* ---------- Responsive ---------- */
+  /* Tablet / small desktop breakpoint stays here.
+     Phone-width (≤640px) rules live in mobile.css instead —
+     do not duplicate a max-width:640px block in this file. */
   @media (max-width: 1100px){
     .hero h1{ font-size: 56px; }
     .teams{ grid-template-columns: 1fr; padding: 60px 32px; }
