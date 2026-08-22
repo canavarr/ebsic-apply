@@ -18,6 +18,7 @@ The form must stay set to **Anyone can respond**.
 - Hero: grayscale hall photo, blue wash, “Want to grow your future?”
 - Three team cards: Events, Marketing, Portfolio
 - Footer: logo and `investeerimisklubi@ebs.ee`
+- Type: Zin Display Condensed Medium for the hero headline, Montserrat (Medium / SemiBold / Bold) everywhere else
 
 ## GitHub Pages
 
@@ -39,6 +40,7 @@ python3 -m http.server 4173
 - `config.js` — Microsoft Form URL
 - `app.js` — applies that URL to every Apply now link
 - `assets/` — logo, mark, hero photo
+- `assets/fonts/` — Zin Display Condensed Medium and Montserrat (Medium, SemiBold, Bold)
 
 Hero photo is a grayscale lecture-hall crop. Replace `assets/hero.jpg` with the club photo from the design if you have the original file.
 

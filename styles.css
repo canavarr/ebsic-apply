@@ -1,11 +1,44 @@
+@font-face {
+  font-family: "Zin Display Cond";
+  src: url("assets/fonts/ZinDisplayCond-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("assets/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --navy: #0b1c38;
-  --blue: #1d5fd6;
+  --blue: #007bff;
   --gray: #e6eaef;
   --ink: #0b1c38;
   --body: #5b6573;
   --pill: #e4e7ec;
-  --font: Manrope, "Segoe UI", Helvetica, Arial, sans-serif;
+  --display: "Zin Display Cond", "Arial Narrow", sans-serif;
+  --sans: Montserrat, Helvetica, Arial, sans-serif;
 }
 
 *,
@@ -23,7 +56,8 @@ body {
   min-height: 100vh;
   background: var(--navy);
   color: #fff;
-  font-family: var(--font);
+  font-family: var(--sans);
+  font-weight: 500;
 }
 
 .skip-link {
@@ -85,9 +119,9 @@ body {
   background: linear-gradient(
     90deg,
     #0b1c38 0%,
-    rgba(21, 74, 176, 0.88) 34%,
-    rgba(37, 99, 210, 0.42) 58%,
-    rgba(37, 99, 210, 0.08) 78%,
+    rgba(0, 123, 255, 0.88) 34%,
+    rgba(0, 123, 255, 0.38) 58%,
+    rgba(0, 123, 255, 0.08) 78%,
     transparent 100%
   );
 }
@@ -104,18 +138,20 @@ body {
 
 .hero-text h1 {
   margin: 0 0 14px;
-  max-width: 8.6ch;
-  font-size: clamp(34px, 4.4vw, 52px);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.035em;
+  max-width: 11ch;
+  font-family: var(--display);
+  font-size: clamp(40px, 5.2vw, 62px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
 .hero-text p {
   margin: 0;
-  max-width: 280px;
-  font-size: 16px;
+  max-width: 300px;
+  font-family: var(--sans);
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.95);
@@ -128,6 +164,7 @@ body {
   width: max-content;
   border-radius: 999px;
   text-decoration: none;
+  font-family: var(--sans);
   font-weight: 700;
 }
 
@@ -142,7 +179,8 @@ body {
   padding: 9px 16px;
   background: var(--pill);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .teams {
@@ -168,16 +206,17 @@ body {
 
 .card h2 {
   margin: 0 0 12px;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--navy);
 }
 
 .card p {
   margin: 0 0 28px;
   color: var(--body);
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.55;
 }
