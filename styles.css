@@ -242,20 +242,20 @@
     .hero-wrap{ padding: 0 16px 24px; }
     .hero{
       border-radius: 16px;
-      aspect-ratio: 3 / 5;
-      min-height: 70vh;
-      align-items: stretch;
+      aspect-ratio: 4 / 5;
+      min-height: 0;
+      max-height: 62vh;
+      align-items: flex-start;
     }
     .hero-photo-desktop{ display: none; }
-    .hero-photo-mobile{ display: block; object-fit: cover; object-position: center 30%; }
+    .hero-photo-mobile{ display: block; object-fit: cover; object-position: center 28%; }
     .hero-content{
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 36px 24px 28px;
+      display: block;
+      height: auto;
+      padding: 32px 22px;
       max-width: none;
     }
-    .hero-content .btn-apply{ margin-top: auto; }
+    .hero-content .btn-apply{ margin-top: 0; }
     .hero h1{ font-size: 34px; line-height: 1.05; margin-bottom: 14px; }
     .hero p{ font-size: 16px; margin-bottom: 26px; max-width: none; }
     .btn-apply{ padding: 14px 26px; font-size: 15px; }
