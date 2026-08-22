@@ -14,13 +14,14 @@
 
   .hero {
     border-radius: 16px;
-    aspect-ratio: unset;
-    min-height: 460px;
-    align-items: flex-end;
+    aspect-ratio: 6 / 5;
+    min-height: 0;
+    align-items: flex-start;
   }
 
   .hero-photo {
-    object-position: 72% center;
+    object-fit: cover;
+    object-position: left center;
   }
 
   .hero-content {
