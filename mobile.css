@@ -1,5 +1,6 @@
-/* Phone layout — screens up to 640px */
-@media (max-width: 640px) {
+/* Phone / large phone — covers current iPhones and Androids
+   (portrait and landscape), including iPhone 16 Pro Max landscape. */
+@media (max-width: 1024px) {
   .topbar {
     padding: 18px 20px;
   }
