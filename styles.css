@@ -28,13 +28,13 @@
   }
 
   :root{
-    --navy: #0b1f4b;
-    --paper: #f4f5f8;
+    --navy: #001F4C;
+    --paper: #F6F8F9;
     --card: #ffffff;
-    --pill: #e7e9ee;
+    --pill: #F2F4F6;
     --pill-hover: #d9dce6;
-    --pill-text: #0b1f4b;
-    --body-text: #3d4661;
+    --pill-text: #001F4C;
+    --body-text: #001F4C;
   }
 
   *{ box-sizing: border-box; }
@@ -96,7 +96,7 @@
   .hero-content{
     position:relative;
     z-index:2;
-    padding: 60px 0 60px 64px;
+    padding: 60px 40px 60px 64px;
     max-width: 780px;
   }
 
