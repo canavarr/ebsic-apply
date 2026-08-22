@@ -40,6 +40,6 @@ python3 -m http.server 4173
 - `app.js` — applies that URL to every Apply now link
 - `assets/` — logo, mark, hero photo
 
-Hero photo is a grayscale crop of an [Unsplash](https://unsplash.com/photos/people-sitting-on-chair-in-front-of-computer-QckxruozjRg) audience shot. Replace `assets/hero.jpg` if you have a club event photo you prefer.
+Hero photo is a grayscale lecture-hall crop. Replace `assets/hero.jpg` with the club photo from the design if you have the original file.
 
 The original print file `EBS_LOGO_INVESTMENT_CLUB_PLAIN_WHITE_CMYK.eps` stays in the repo for design work. It is not used on the page.
