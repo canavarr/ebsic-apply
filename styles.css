@@ -34,7 +34,6 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
   letter-spacing: 0.01em;
-  color-scheme: dark;
 }
 
 body::before {
@@ -233,193 +232,81 @@ h3 {
   padding-bottom: 5rem;
 }
 
+.form-open {
+  display: inline-block;
+  margin-top: 0.6rem;
+  color: var(--gold);
+}
+
 .form-panel {
   border: 1px solid var(--line);
   background: var(--bg-raise);
+  overflow: hidden;
 }
 
-.form-panel.is-success {
-  background: linear-gradient(180deg, rgba(201, 164, 108, 0.08), transparent 40%),
-    var(--bg-raise);
+#form-mount iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fff;
 }
 
-.apply-form,
-.form-success {
-  padding: 1.7rem 1.5rem 2rem;
+.form-placeholder {
+  padding: 2rem 1.5rem 2.2rem;
 }
 
-.form-success h3 {
+.placeholder-kicker {
+  margin: 0 0 0.5rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.form-placeholder h3 {
   margin-bottom: 0.6rem;
 }
 
-.form-success p:last-child {
-  margin-bottom: 0;
+.form-placeholder p {
   color: var(--muted);
   font-weight: 300;
+  max-width: 40rem;
 }
 
-.apply-form fieldset {
-  margin: 0 0 2rem;
+code {
+  font-size: 0.92em;
+  color: var(--gold);
+}
+
+.question-preview {
+  margin: 1.6rem 0 0;
   padding: 0;
-  border: 0;
-}
-
-.apply-form legend {
-  margin: 0 0 1rem;
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  letter-spacing: -0.02em;
-}
-
-.field-help {
-  margin: -0.4rem 0 1.1rem;
-  color: var(--muted);
-  font-weight: 300;
-  font-size: 0.95rem;
-}
-
-.field-grid {
+  list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem 1.1rem;
+  gap: 0.45rem;
+  counter-reset: q;
 }
 
-.apply-form label,
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  color: var(--muted);
-  font-size: 0.88rem;
-  letter-spacing: 0.02em;
-}
-
-.apply-form label em,
-.field-label {
-  font-style: normal;
-  color: var(--muted);
-}
-
-.apply-form input[type="text"],
-.apply-form input[type="email"],
-.apply-form input[type="tel"],
-.apply-form textarea {
-  width: 100%;
-  padding: 0.78rem 0.9rem;
-  border: 1px solid var(--line);
-  background: #0c0e13;
+.question-preview li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--line);
   color: var(--ink);
-  font: inherit;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  border-radius: 0;
 }
 
-.apply-form textarea {
-  resize: vertical;
-  min-height: 8rem;
-  line-height: 1.5;
-}
-
-.apply-form input:focus,
-.apply-form textarea:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px var(--gold-dim);
-}
-
-.apply-form fieldset:nth-of-type(4) > label + label {
-  margin-top: 1.15rem;
-}
-
-.choice-row,
-.choice-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.choice-stack {
-  flex-direction: column;
-}
-
-.choice {
-  position: relative;
-  display: block;
-  margin: 0;
-}
-
-.choice input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.choice span {
-  display: block;
-  padding: 0.62rem 0.9rem;
-  border: 1px solid var(--line);
-  background: #0c0e13;
-  color: var(--ink);
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-}
-
-.choice input:focus-visible + span {
-  box-shadow: 0 0 0 3px var(--gold-dim);
-}
-
-.choice input:checked + span {
-  border-color: var(--gold);
-  background: rgba(201, 164, 108, 0.14);
+.question-preview li::before {
+  counter-increment: q;
+  content: counter(q, decimal-leading-zero);
   color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
 }
 
-.choice-stack .choice span {
-  width: 100%;
-}
-
-.apply-form button[type="submit"] {
-  appearance: none;
-  margin-top: 0.4rem;
-  padding: 0.9rem 1.4rem;
-  border: 1px solid var(--gold);
-  background: var(--gold);
-  color: #16120c;
-  font: inherit;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  cursor: pointer;
-}
-
-.apply-form button[type="submit"]:hover,
-.apply-form button[type="submit"]:focus-visible {
-  background: #d8b67b;
-}
-
-.apply-form button[type="submit"]:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-.form-status {
-  margin: 0 0 1rem;
-  color: var(--gold);
-}
-
-.form-status.is-error {
-  color: #e7b6a4;
-}
-
-.hp {
-  position: absolute;
-  left: -9999px;
-  height: 0;
-  width: 0;
-  overflow: hidden;
+.question-preview span {
+  color: var(--muted);
 }
 
 .site-footer {
@@ -442,7 +329,7 @@ h3 {
     border-width: 0 0 0 0;
   }
 
-  .field-grid {
+  .team-grid {
     grid-template-columns: 1fr;
   }
 

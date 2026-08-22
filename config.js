@@ -1,11 +1,13 @@
 /**
  * EBS Investment Club — public apply page config
  *
- * Applications are sent by email via FormSubmit (no Microsoft styling).
- * Change submitEmail to the inbox that should receive applications.
- * The first submission to a new address gets a confirmation mail from
- * FormSubmit — open it once, then live applications will arrive.
+ * Paste the Microsoft Forms embed URL below (Collect responses → Embed → copy the
+ * iframe src, or the share link). Leave empty to show the on-page placeholder.
+ *
+ * The form must be set to "Anyone can respond" or applicants outside EBS Microsoft 365
+ * will be asked to sign in.
  */
 window.EBSIC_CONFIG = {
-  submitEmail: "investeerimisklubi@ebs.ee",
+  formEmbedUrl: "https://forms.cloud.microsoft/e/5nPxMLS6NB?embed=true",
+  formHeight: 2800,
 };
