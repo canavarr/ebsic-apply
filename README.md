@@ -2,7 +2,7 @@
 
 Landing page for the Estonian Business School Investment Club. Applicants read the three teams, then **Apply now** opens the Microsoft Form in a new flow (the form is not embedded).
 
-Live hosting is GitHub Pages from this repository (root of `main`).
+Live hosting is GitHub Pages at **https://ebsic.ee**.
 
 ## Apply link
 
@@ -22,10 +22,29 @@ The form must stay set to **Anyone can respond**.
 
 ## GitHub Pages
 
+Custom domain: **ebsic.ee** (see `CNAME`).
+
 1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main`, folder: `/ (root)`
-4. Site URL: `https://canavarr.github.io/ebsic-apply/`
+2. Source: **Deploy from a branch**, folder `/ (root)`
+3. Custom domain: `ebsic.ee`
+4. After DNS is verified, enable **Enforce HTTPS**
+
+### DNS at Elkdata
+
+`ebsic.ee` is on Elkdata. Keep the existing **MX** records so mail is unchanged. Replace only the website **A** record:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153` |
+| AAAA | `@` | `2606:50c0:8001::153` |
+| AAAA | `@` | `2606:50c0:8002::153` |
+| AAAA | `@` | `2606:50c0:8003::153` |
+
+Delete the old A record `85.194.202.140`. Leave `www` as a CNAME to `ebsic.ee`.
 
 Preview locally:
 
