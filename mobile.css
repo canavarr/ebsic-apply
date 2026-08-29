@@ -8,6 +8,29 @@
     height: 24px;
   }
 
+  .nav-toggle {
+    display: block;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 16px 18px;
+    background: var(--navy);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+  }
+
+  .topbar.nav-open .site-nav {
+    display: flex;
+  }
+
   .hero-wrap {
     padding: 0 16px 24px;
     display: flow-root;

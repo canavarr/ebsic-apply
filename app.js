@@ -22,6 +22,15 @@
     });
   }
 
+  const topbar = document.querySelector(".topbar");
+  const navToggle = document.querySelector(".nav-toggle");
+  if (topbar && navToggle) {
+    navToggle.addEventListener("click", () => {
+      const open = topbar.classList.toggle("nav-open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+
   const form = document.getElementById("newsletter-form");
   if (!form) return;
 
