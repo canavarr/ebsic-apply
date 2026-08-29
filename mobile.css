@@ -62,16 +62,24 @@
     font-size: 24px;
   }
 
-  .footer {
-    padding: 24px 20px 32px;
-  }
-
   .footer .logo-img {
     height: 22px;
+  }
+
+  .footer {
+    padding: 24px 20px 32px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .newsletter {
+    max-width: none;
+    width: 100%;
   }
 
   .footer-email {
     font-size: 14px;
     word-break: break-word;
+    white-space: normal;
   }
 }
