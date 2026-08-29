@@ -35,8 +35,9 @@
     --pill-hover: #d9dce6;
     --pill-text: #001F4C;
     --body-text: #001F4C;
-    --accent: #2F7BFF;
-    --accent-hover: #1F68E8;
+    --accent: #006ACC;
+    --accent-hover: #0058b0;
+    --email-field: #D9F9F7;
   }
 
   *{ box-sizing: border-box; }
@@ -213,12 +214,16 @@
 
   /* ---------- Newsletter ---------- */
   .signup{
-    background: var(--paper);
+    background: var(--card);
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(16,38,90,.04);
     padding: 48px 64px 90px;
     display:grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 560px);
     gap: 48px 72px;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
 
   .signup-title{
@@ -268,7 +273,7 @@
     padding: 16px 22px;
     border: none;
     border-radius: 999px;
-    background: var(--pill);
+    background: var(--email-field);
     color: var(--navy);
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
