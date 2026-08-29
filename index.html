@@ -8,8 +8,8 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=12">
-<link rel="stylesheet" href="mobile.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="mobile.css?v=13">
 </head>
 <body>
 <div class="page">
@@ -48,10 +48,10 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <img class="logo-img" src="assets/logo.svg" width="1600" height="461" alt="EBS Investment Club">
+  <section class="signup" aria-labelledby="signup-title">
+    <h2 class="signup-title" id="signup-title">Stay ahead,<br>stay informed</h2>
     <form class="newsletter" id="newsletter-form" action="https://ebsic.substack.com/subscribe" method="get" target="_blank">
-      <label class="newsletter-label" for="newsletter-email">Join our newsletter</label>
+      <label class="newsletter-copy" for="newsletter-email">Be first to hear about EBS Investment Club events and opportunities to build your network</label>
       <div class="newsletter-row">
         <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input
@@ -61,14 +61,17 @@
           name="email"
           required
           autocomplete="email"
-          placeholder="Your email"
+          placeholder="Email address"
           inputmode="email"
         >
-        <button class="newsletter-join" type="submit">Join</button>
+        <button class="newsletter-join" type="submit">Subscribe <span class="arrow">&#8594;</span></button>
       </div>
-      <p class="newsletter-note">We’ll send club news via Substack. Confirm the email they send you.</p>
       <p class="newsletter-status" id="newsletter-status" role="status" hidden></p>
     </form>
+  </section>
+
+  <footer class="footer">
+    <img class="logo-img" src="assets/logo.svg" width="1600" height="461" alt="EBS Investment Club">
     <a class="footer-email" href="mailto:investeerimisklubi@ebs.ee">investeerimisklubi@ebs.ee</a>
   </footer>
 
