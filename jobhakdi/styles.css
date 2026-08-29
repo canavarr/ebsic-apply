@@ -140,13 +140,16 @@ body.nav-lock{ overflow: hidden; }
   width: 100%;
 }
 
+.hero-picture{
+  display:block;
+  width:100%;
+}
+
 .hero-photo{
   display:block;
   width:100%;
   height:auto;
 }
-
-.hero-photo-mobile{ display:none; }
 
 .hero-content{
   position:absolute;
@@ -652,8 +655,6 @@ body.nav-lock{ overflow: hidden; }
   }
   .hero-wrap{ padding: 0 16px 24px; }
   .hero{ border-radius: 16px; }
-  .hero-photo-desktop{ display: none; }
-  .hero-photo-mobile{ display: block; }
   .hero-content{
     justify-content: center;
     padding: 28px 20px;

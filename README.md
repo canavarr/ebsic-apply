@@ -100,7 +100,7 @@ python3 -m http.server 4173
 ## Files
 
 - `index.html` — landing page
-- `styles.css` / `mobile.css` — layout
+- `styles.css` — layout
 - `config.js` — Microsoft Form URL and Supabase project URL / anon key
 - `app.js` — Apply links, header menu, and newsletter Subscribe
 - `jobhakdi/` — Jo Bhakdi event page (`ebsic.ee/jobhakdi`)
