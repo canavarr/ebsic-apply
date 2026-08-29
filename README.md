@@ -104,7 +104,7 @@ python3 -m http.server 4173
 - `config.js` — Microsoft Form URL and Supabase project URL / anon key
 - `app.js` — Apply links, header menu, and newsletter Subscribe
 - `jobhakdi/` — Jo Bhakdi event page (`ebsic.ee/jobhakdi`)
-- `assets/logo.svg` — header and footer lockup
+- `assets/ebsic-logo.svg` — header and footer lockup
 - `assets/icons/` — menu and Join us icons
 - `assets/images/hero-image.png` / `hero-mobile.png` — home hero
 - `assets/fonts/` — Zin Display Condensed Medium and Montserrat (Medium, SemiBold, Bold)
