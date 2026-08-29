@@ -100,20 +100,20 @@ a{ color: inherit; }
   align-items:flex-start;
   padding: 48px 40px 48px 64px;
   width: 62%;
-  max-width: 820px;
+  max-width: 920px;
 }
 
 .hero-icon{
-  width: 46px;
-  height: 46px;
+  width: 72px;
+  height: 72px;
   margin-bottom: 22px;
 }
 
 .hero h1{
   font-family: "Zin Display Cond", Georgia, serif;
   font-weight: 500;
-  font-size: 100px;
-  line-height: 0.98;
+  font-size: 80px;
+  line-height: 1;
   color: #fff;
   margin: 0 0 28px 0;
   letter-spacing: 0.2px;
@@ -130,8 +130,8 @@ a{ color: inherit; }
 .hero-meta-row{
   display:flex;
   align-items:center;
-  gap: 12px;
-  font-size: 30px;
+  gap: 20px;
+  font-size: 20px;
   font-weight: 500;
   color: #eef2fb;
 }
@@ -147,9 +147,9 @@ a{ color: inherit; }
   background:#fff;
   color: var(--navy);
   font-family: "Montserrat", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  padding: 17px 34px;
+  padding: 20px 40px;
   border-radius: 999px;
   text-decoration:none;
   border:none;
