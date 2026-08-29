@@ -14,18 +14,48 @@ The form must stay set to **Anyone can respond**.
 
 ## Newsletter
 
-Footer **Subscribe** opens the Substack subscribe page for [ebsic.substack.com](https://ebsic.substack.com). The URL is set in [`config.js`](config.js) as `substackUrl`.
+**Subscribe** saves the address in a Supabase table. The person stays on the page. The club inbox is not emailed.
 
-Anyone can subscribe on that publication. Subscribers confirm via the email Substack sends them. The club inbox is not notified of each Subscribe.
+### Dashboard (once)
 
-To point Subscribe at a different publication, change `substackUrl` only.
+1. Create a free project at [supabase.com](https://supabase.com).
+2. Open **SQL Editor** and run:
+
+```sql
+create table newsletter_signups (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  created_at timestamptz not null default now()
+);
+
+create unique index newsletter_signups_email_lower
+  on newsletter_signups (lower(email));
+
+alter table newsletter_signups enable row level security;
+
+create policy "anon can insert"
+  on newsletter_signups
+  for insert
+  to anon
+  with check (true);
+```
+
+Row Level Security is on. The public `anon` role can **insert** only. There is no `select` policy for `anon`, so visitors cannot read the list.
+
+3. **Project Settings → API**: copy **Project URL** and the **anon public** key into [`config.js`](config.js) as `supabaseUrl` and `supabaseAnonKey`. Do not put the **service role** key on the site.
+
+Until those two values are set, Subscribe shows “Newsletter signup is not configured yet.”
+
+### Export the list
+
+In Supabase: **Table Editor → newsletter_signups → Export → CSV**.
 
 ## Page
 
 - Navy header with the white Investment Club EBS lockup
 - Hero: lecture-hall photo, Zin Display headline, “Want to grow your future?”
 - Three team cards: Events, Marketing, Portfolio
-- Newsletter band: “Stay ahead, stay informed” and Substack Subscribe
+- Newsletter band: “Stay ahead, stay informed” and Subscribe (Supabase)
 - Footer: logo and `investeerimisklubi@ebs.ee`
 - Type: Zin Display Condensed Medium for headlines, Montserrat (Medium / SemiBold / Bold) for body copy
 
@@ -65,7 +95,7 @@ python3 -m http.server 4173
 
 - `index.html` — landing page
 - `styles.css` — layout
-- `config.js` — Microsoft Form URL and Substack publication URL
+- `config.js` — Microsoft Form URL and Supabase project URL / anon key
 - `app.js` — Apply links and newsletter Subscribe
 - `assets/` — logo, mark, hero photo
 - `assets/fonts/` — Zin Display Condensed Medium and Montserrat (Medium, SemiBold, Bold)
