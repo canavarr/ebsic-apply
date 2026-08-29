@@ -37,7 +37,7 @@
     --body-text: #001F4C;
     --accent: #006ACC;
     --accent-hover: #0058b0;
-    --email-field: #D9F9F7;
+    --footer-email: #D9F9F7;
   }
 
   *{ box-sizing: border-box; }
@@ -273,7 +273,7 @@
     padding: 16px 22px;
     border: none;
     border-radius: 999px;
-    background: var(--email-field);
+    background: var(--pill);
     color: var(--navy);
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
@@ -344,7 +344,7 @@
   .footer .logo-img{ height: 28px; }
 
   .footer-email{
-    color: #fff;
+    color: var(--footer-email);
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 500;
