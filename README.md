@@ -50,6 +50,12 @@ Until those two values are set, Subscribe shows “Newsletter signup is not conf
 
 In Supabase: **Table Editor → newsletter_signups → Export → CSV**.
 
+## Event page
+
+[ebsic.ee/jobhakdi](https://ebsic.ee/jobhakdi) is the Jo Bhakdi event landing page (`jobhakdi/index.html`).
+
+**Register now** uses `eventRegisterUrl` in [`config.js`](config.js). Paste a Microsoft Form (or other) URL there when registration is open. Until then the buttons stay on the page.
+
 ## Page
 
 - Navy header with the white Investment Club EBS lockup

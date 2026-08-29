@@ -4,9 +4,19 @@
   const supabaseUrl = (config.supabaseUrl || "").trim().replace(/\/$/, "");
   const supabaseAnonKey = (config.supabaseAnonKey || "").trim();
 
+  const registerUrl = (config.eventRegisterUrl || "").trim();
+
   if (formUrl) {
     document.querySelectorAll(".js-apply").forEach((link) => {
       link.href = formUrl;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+    });
+  }
+
+  if (registerUrl) {
+    document.querySelectorAll(".js-register").forEach((link) => {
+      link.href = registerUrl;
       link.target = "_blank";
       link.rel = "noreferrer";
     });
