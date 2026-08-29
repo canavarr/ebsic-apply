@@ -27,7 +27,9 @@
   if (topbar && navToggle) {
     navToggle.addEventListener("click", () => {
       const open = topbar.classList.toggle("nav-open");
+      document.body.classList.toggle("nav-lock", open);
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Menu");
     });
   }
 

@@ -100,12 +100,11 @@ python3 -m http.server 4173
 ## Files
 
 - `index.html` — landing page
-- `styles.css` — layout
+- `styles.css` / `mobile.css` — layout
 - `config.js` — Microsoft Form URL and Supabase project URL / anon key
-- `app.js` — Apply links and newsletter Subscribe
-- `assets/` — logo, mark, hero photo
+- `app.js` — Apply links, header menu, and newsletter Subscribe
+- `jobhakdi/` — Jo Bhakdi event page (`ebsic.ee/jobhakdi`)
+- `assets/logo.svg` — header and footer lockup
+- `assets/icons/` — menu and Join us icons
+- `assets/images/hero-image.png` / `hero-mobile.png` — home hero
 - `assets/fonts/` — Zin Display Condensed Medium and Montserrat (Medium, SemiBold, Bold)
-
-Hero photo is the club lecture-hall image in `assets/hero.png`.
-
-The original print file `EBS_LOGO_INVESTMENT_CLUB_PLAIN_WHITE_CMYK.eps` stays in the repo for design work. It is not used on the page.
