@@ -88,6 +88,17 @@
         return;
       }
 
+      const code = payload && payload.code;
+      if (code === "PGRST205") {
+        showStatus("List is not set up yet. Run the SQL in the README.", "error");
+        return;
+      }
+
+      if (response.status === 401 || response.status === 403) {
+        showStatus("Subscribe is blocked. Check the table policy in Supabase.", "error");
+        return;
+      }
+
       showStatus("Could not subscribe. Try again.", "error");
     } catch (err) {
       showStatus("Could not subscribe. Try again.", "error");

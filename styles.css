@@ -71,7 +71,8 @@
 
   /* ---------- Hero ---------- */
   .hero-wrap{
-    padding: 0 40px;
+    padding: 0 40px 40px;
+    display: flow-root;
   }
 
   .hero{
