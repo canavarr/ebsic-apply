@@ -368,6 +368,76 @@ body.nav-lock{ overflow: hidden; }
   line-height: 1.35;
 }
 
+.dinner-bar{
+  background: var(--paper);
+  padding: 0 64px 56px;
+}
+
+.dinner-inner{
+  background: var(--navy);
+  border-radius: 22px;
+  padding: 48px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 32px;
+  flex-wrap:wrap;
+  box-shadow: 0 2px 10px rgba(16,38,90,.05);
+}
+
+.dinner-text{ max-width: 620px; }
+
+.dinner-eyebrow{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #9fd6ff;
+  margin: 0 0 10px 0;
+}
+
+.dinner-inner h3{
+  font-family: "Zin Display Cond", Georgia, serif;
+  font-weight: 500;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.dinner-inner p{
+  font-size: 16px;
+  line-height: 1.6;
+  color: #eef2fb;
+  margin: 0;
+}
+
+.btn-dinner{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 17px 32px;
+  border-radius: 999px;
+  text-decoration:none;
+  white-space:nowrap;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.btn-dinner:hover{
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-dinner:focus-visible{
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
 .social-bar{
   background: var(--paper);
   padding: 0 64px 70px;
@@ -582,6 +652,8 @@ body.nav-lock{ overflow: hidden; }
     padding: 36px;
   }
   .social-bar{ padding: 0 32px 56px; }
+  .dinner-bar{ padding: 0 32px 48px; }
+  .dinner-inner{ padding: 36px 32px; }
   .signup{ grid-template-columns: 1fr; padding: 24px 32px 60px; gap: 28px; }
   .signup-title{ font-size: 48px; }
   .topbar{ padding: 22px 28px; }
@@ -669,6 +741,9 @@ body.nav-lock{ overflow: hidden; }
   .attend-col, .speaker-col{ padding: 30px 22px; }
   .attend-col h2{ font-size: 26px; }
   .social-bar{ padding: 0 16px 40px; }
+  .dinner-bar{ padding: 0 16px 32px; }
+  .dinner-inner{ flex-direction:column; align-items:flex-start; padding: 32px 24px; }
+  .btn-dinner{ width:100%; justify-content:center; }
   .social-inner{ padding: 26px 22px; flex-direction:column; align-items:flex-start; }
   .signup{ padding: 16px 20px 48px; gap: 22px; }
   .signup-title{ font-size: 34px; }
