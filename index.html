@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1NCRSWQ4VV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1NCRSWQ4VV');
+</script>
+<title>EBS Investment Club</title>
+<meta name="theme-color" content="#0b1f4b">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=20">
+</head>
+<body>
+<div class="page">
+
+  <header class="topbar">
+    <a class="logo-link" href="./">
+      <img class="logo-img" src="assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <img class="nav-burger" src="assets/icons/menu-icon.svg" width="18" height="16" alt="">
+      <span class="nav-close" aria-hidden="true"></span>
+    </button>
+    <nav class="site-nav" id="site-nav">
+      <a class="nav-events" href="jobhakdi/">Events</a>
+      <a href="https://forms.cloud.microsoft/e/5nPxMLS6NB" class="btn-join js-apply" target="_blank" rel="noreferrer">
+        Join us <img class="join-icon" src="assets/icons/join-us-icon.svg" width="16" height="17" alt="">
+      </a>
+    </nav>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <picture class="hero-picture">
+        <source media="(max-width: 767px)" srcset="assets/images/hero-mobile.png" width="1009" height="841">
+        <img class="hero-photo" src="assets/images/hero-image.png" alt="EBS Investment Club presentation event" width="1840" height="841" fetchpriority="high" decoding="async">
+      </picture>
+      <div class="hero-content">
+        <h1>Want to grow<br>your future?</h1>
+        <p>Learn how to invest into your future and network with like-minded people</p>
+        <a href="https://forms.cloud.microsoft/e/5nPxMLS6NB" class="btn-apply js-apply" target="_blank" rel="noreferrer">Apply now</a>
+      </div>
+    </section>
+  </div>
+
+  <section class="teams">
+    <div class="card">
+      <h2>Events team</h2>
+      <p>The Events team is responsible for planning and executing the club's events. This includes inviting speakers, handling event logistics and developing the club's community. This role is ideal for someone who enjoys organizing, communicating and creating engaging events.</p>
+      <a href="https://forms.cloud.microsoft/e/5nPxMLS6NB" class="btn-team js-apply" target="_blank" rel="noreferrer">Apply now <span class="arrow">&#8594;</span></a>
+    </div>
+    <div class="card">
+      <h2>Marketing Team</h2>
+      <p>The Marketing Team is responsible for the club's visibility and communication. This includes managing social media (Instagram, LinkedIn), promoting events and workshops and developing the visual identity. This role is ideal for someone interested in marketing, branding or content creation.</p>
+      <a href="https://forms.cloud.microsoft/e/5nPxMLS6NB" class="btn-team js-apply" target="_blank" rel="noreferrer">Apply now <span class="arrow">&#8594;</span></a>
+    </div>
+    <div class="card">
+      <h2>Portfolio Team</h2>
+      <p>The Portfolio Team focuses on investment analysis and strategy. Analyzing companies and markets, presenting investment ideas and contributing to the development of the club's investment knowledge. This role suits someone interested in financial analysis, investing and long-term thinking.</p>
+      <a href="https://forms.cloud.microsoft/e/5nPxMLS6NB" class="btn-team js-apply" target="_blank" rel="noreferrer">Apply now <span class="arrow">&#8594;</span></a>
+    </div>
+  </section>
+
+  <section class="signup" aria-labelledby="signup-title">
+    <h2 class="signup-title" id="signup-title">Stay ahead,<br>stay informed</h2>
+    <form class="newsletter" id="newsletter-form">
+      <label class="newsletter-copy" for="newsletter-email">Be first to hear about EBS Investment Club events and opportunities to build your network</label>
+      <div class="newsletter-row">
+        <input type="text" name="website" class="newsletter-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input
+          id="newsletter-email"
+          class="newsletter-input"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="Email address"
+          inputmode="email"
+        >
+        <button class="newsletter-join" type="submit">Subscribe <span class="arrow">&#8594;</span></button>
+      </div>
+      <p class="newsletter-status" id="newsletter-status" role="status" hidden></p>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <img class="logo-img" src="assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    <a class="footer-email" href="mailto:investeerimisklubi@ebs.ee">investeerimisklubi@ebs.ee</a>
+  </footer>
+
+</div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
