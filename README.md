@@ -54,7 +54,9 @@ In Supabase: **Table Editor → newsletter_signups → Export → CSV**.
 
 [ebsic.ee/jobhakdi](https://ebsic.ee/jobhakdi) is the Jo Bhakdi event landing page (`jobhakdi/index.html`).
 
-**Register now** uses `eventRegisterUrl` in [`config.js`](config.js). Paste a Microsoft Form (or other) URL there when registration is open. Until then the buttons stay on the page.
+**Register now** opens [Fienta tickets](https://fienta.com/ebs-investment-club-jobhakdi) (`eventRegisterUrl` in [`config.js`](config.js)).
+
+**Submit your application** (dinner with Jo Bhakdi) opens the [Pioneerlands RSVP](https://pioneerlands.org/pioneer-academy/dinner) (`eventDinnerUrl`).
 
 ## Page
 

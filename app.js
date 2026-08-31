@@ -5,6 +5,7 @@
   const supabaseAnonKey = (config.supabaseAnonKey || "").trim();
 
   const registerUrl = (config.eventRegisterUrl || "").trim();
+  const dinnerUrl = (config.eventDinnerUrl || "").trim();
 
   if (formUrl) {
     document.querySelectorAll(".js-apply").forEach((link) => {
@@ -17,6 +18,14 @@
   if (registerUrl) {
     document.querySelectorAll(".js-register").forEach((link) => {
       link.href = registerUrl;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+    });
+  }
+
+  if (dinnerUrl) {
+    document.querySelectorAll(".js-dinner-apply").forEach((link) => {
+      link.href = dinnerUrl;
       link.target = "_blank";
       link.rel = "noreferrer";
     });
