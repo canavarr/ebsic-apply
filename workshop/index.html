@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stock Analysis Workshop — EBS Investment Club</title>
+<meta name="description" content="EBS Investment Club stock analysis workshop: register your team's stock pick, check the live board, and upload your analysis.">
+<meta name="theme-color" content="#001F4C">
+<meta name="color-scheme" content="light">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stock Analysis Workshop — EBS Investment Club">
+<meta property="og:description" content="Pick a stock, spend an hour building your case, then pitch it in three minutes.">
+<meta property="og:image" content="../assets/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<link rel="preload" href="../assets/fonts/ZinDisplayCond-Medium.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="../assets/fonts/Montserrat-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+  @font-face{
+    font-family: "Zin Display Cond";
+    src: url("../assets/fonts/ZinDisplayCond-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face{
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root{
+    --navy: #001F4C;
+    --navy-soft: #16336e;
+    --paper: #F6F8F9;
+    --card: #ffffff;
+    --tint: #fafbfd;
+    --pill: #F2F4F6;
+    --pill-hover: #d9dce6;
+    --pill-text: #001F4C;
+    --body-text: #001F4C;
+    --body-soft: rgba(0, 31, 76, 0.78);
+    --muted: #6b7490;
+    --muted-strong: #5f6884;
+    --accent-line: #dbe4f5;
+    --accent: #006ACC;
+    --accent-hover: #0058b0;
+    --sky: #9fd6ff;
+    --footer-email: #D9F9F7;
+    --success: #0b7a40;
+    --warning: #9A5C06;
+    --error: #b42318;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--navy);
+    font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    color: var(--navy);
+  }
+
+  a{ color: inherit; }
+  h1,h2,h3{ margin:0; }
+  p{ margin:0; }
+
+  .page{
+    max-width: 1920px;
+    margin: 0 auto;
+    background: var(--navy);
+  }
+
+  .skip-link{
+    position:absolute;
+    left:-9999px;
+    top:12px;
+    background:#fff;
+    color:var(--navy);
+    font-size:14px;
+    font-weight:600;
+    padding:12px 20px;
+    border-radius:999px;
+    z-index:50;
+  }
+  .skip-link:focus{ left:24px; }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 24px;
+    padding: 30px 56px;
+    position: relative;
+  }
+  .logo-link{ display:block; }
+  .logo-img{ height: 32px; width:auto; display:block; }
+
+  .site-nav{
+    display:flex;
+    align-items:center;
+    gap: 28px;
+  }
+  .nav-events{
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+  }
+  .nav-events:hover{ opacity:.85; }
+
+  .btn-join{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fff;
+    color: var(--navy);
+    font-size:16px;
+    font-weight:600;
+    padding:12px 20px;
+    border-radius:999px;
+    text-decoration:none;
+  }
+  .btn-join:hover{ opacity:.92; }
+
+  /* ---------- Hero ---------- */
+  .hero-wrap{
+    padding: 0 40px 40px;
+    display: flow-root;
+  }
+  .hero{
+    position:relative;
+    border-radius: 22px;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 140% at 88% 12%, rgba(0,106,204,.55) 0%, rgba(0,106,204,0) 58%),
+      linear-gradient(112deg, #001F4C 0%, #062a63 52%, var(--navy-soft) 100%);
+  }
+  .hero-content{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding: 64px 40px 64px 64px;
+    width: 72%;
+    max-width: 920px;
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color: var(--sky);
+    margin: 0 0 14px 0;
+  }
+  .hero h1{
+    font-family:"Zin Display Cond", Georgia, serif;
+    font-weight:500;
+    font-size:80px;
+    line-height:1;
+    color:#fff;
+    margin:0 0 28px 0;
+    letter-spacing:.2px;
+    text-transform:uppercase;
+  }
+  .hero-meta{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:32px;
+  }
+  .hero-meta-row{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    font-size:20px;
+    font-weight:500;
+    color:#eef2fb;
+  }
+  .hero-meta-row svg{ width:28px; height:28px; flex-shrink:0; }
+
+  /* ---------- Buttons (three brand shapes) ---------- */
+  .btn-apply{
+    display:inline-block;
+    background:#fff;
+    color: var(--navy);
+    font-size:16px;
+    font-weight:600;
+    padding:20px 40px;
+    border-radius:999px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  }
+  .btn-apply:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,.24);
+  }
+  .btn-apply:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+
+  .btn-team{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background: var(--pill);
+    color: var(--pill-text);
+    font-family:"Montserrat", sans-serif;
+    font-size:16px;
+    font-weight:600;
+    padding:17px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .btn-team:hover{ background: var(--pill-hover); transform: translateY(-1px); }
+  .btn-team:focus-visible{ outline:3px solid var(--navy); outline-offset:3px; }
+  .btn-team:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
+
+  .btn-dinner{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: var(--accent);
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    padding:17px 32px;
+    border-radius:999px;
+    text-decoration:none;
+    white-space:nowrap;
+    border:none;
+    cursor:pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .btn-dinner:hover{ background: var(--accent-hover); transform: translateY(-1px); }
+  .btn-dinner:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+
+  /* ---------- Content sections ---------- */
+  .content-section{
+    background: var(--paper);
+    padding: 72px 64px 48px;
+  }
+  /* Bands stack on their own bottom padding, so only the first carries a top gap. */
+  .content-section + .content-section,
+  .upload-bar + .content-section{ padding-top: 0; }
+
+  .event-card{
+    background: var(--card);
+    border-radius: 22px;
+    box-shadow: 0 2px 10px rgba(16,38,90,.05);
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .attend-col{ padding: 48px 44px; }
+  .attend-col h2,
+  .card-head h2{
+    font-family:"Zin Display Cond", Georgia, serif;
+    font-weight:500;
+    font-size:34px;
+    color: var(--navy);
+    margin:0 0 22px 0;
+    text-transform:uppercase;
+    letter-spacing:.2px;
+  }
+  .attend-col p{
+    font-size:16px;
+    line-height:1.7;
+    color: var(--body-soft);
+    margin:0 0 20px 0;
+  }
+  .attend-col .btn-team{ margin-top:8px; }
+
+  .format-col{
+    padding: 48px 40px;
+    border-left: 1px solid var(--accent-line);
+    background: var(--tint);
+    border-radius: 0 22px 22px 0;
+  }
+  .format-heading{
+    font-family:"Zin Display Cond", Georgia, serif;
+    font-size:34px;
+    font-weight:500;
+    text-transform:uppercase;
+    color: var(--navy);
+    margin:0 0 18px 0;
+  }
+  .format-list{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .format-num{
+    font-family:"Zin Display Cond", Georgia, serif;
+    font-size:26px;
+    font-weight:500;
+    color: var(--navy);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .format-label{
+    font-size:12.5px;
+    font-weight:500;
+    color: var(--muted-strong);
+    line-height:1.35;
+  }
+
+  /* ---------- Standalone white card ---------- */
+  .panel{
+    background: var(--card);
+    border-radius:22px;
+    box-shadow: 0 2px 10px rgba(16,38,90,.05);
+    padding: 48px 44px;
+  }
+  .card-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .card-head h2{ margin-bottom:0; }
+
+  .field{ margin-top:24px; }
+  .field-label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color: var(--navy);
+    margin-bottom:8px;
+  }
+
+  .input-pill{
+    width:100%;
+    font-family:"Montserrat", sans-serif;
+    font-size:15px;
+    font-weight:500;
+    padding:16px 22px;
+    border:none;
+    border-radius:999px;
+    background: var(--pill);
+    color: var(--navy);
+  }
+  .input-pill::placeholder{ color: rgba(0,31,76,.4); }
+  .input-pill:focus{ outline:3px solid var(--navy); outline-offset:2px; }
+
+  .hint{
+    font-size:14px;
+    line-height:1.6;
+    color: var(--body-soft);
+    margin-top:10px;
+  }
+
+  /* ---------- Badge chips ---------- */
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .badge{
+    font-family:"Montserrat", sans-serif;
+    font-size:12px;
+    font-weight:600;
+    color: var(--navy);
+    background: var(--accent-line);
+    padding:9px 16px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition: background .18s ease, color .18s ease, opacity .18s ease;
+  }
+  .badge:hover{ background: var(--navy); color:#fff; }
+  .badge:focus-visible{ outline:3px solid var(--navy); outline-offset:3px; }
+  .badge[aria-pressed="true"]{ background: var(--navy); color:#fff; }
+  .badge.is-taken,
+  .badge.is-taken:hover,
+  .badge.is-taken[aria-pressed="true"]{
+    background: var(--pill);
+    color: var(--muted);
+    text-decoration: line-through;
+    opacity:.8;
+  }
+
+  .feedback{ margin-top:12px; font-size:14px; font-weight:600; min-height:20px; }
+  .feedback[data-state="taken"]{ color: var(--warning); }
+  .feedback[data-state="ok"]{ color: var(--success); }
+  .feedback[data-state="error"]{ color: var(--error); }
+
+  .btn-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+
+  .status-msg{ margin-top:16px; font-size:14px; font-weight:600; }
+  .status-msg:empty{ margin-top:0; }
+  .status-msg[data-state="ok"]{ color: var(--success); }
+  .status-msg[data-state="error"]{ color: var(--error); }
+  .status-msg[data-state="pending"]{ color: var(--muted); }
+
+  /* ---------- Navy emphasis bar (upload step) ---------- */
+  .upload-bar{
+    background: var(--paper);
+    padding: 0 64px 56px;
+  }
+  .upload-inner{
+    background: var(--navy);
+    border-radius:22px;
+    padding: 48px 56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:32px;
+    flex-wrap:wrap;
+    box-shadow: 0 2px 10px rgba(16,38,90,.05);
+  }
+  .upload-text{ max-width:620px; }
+  .bar-eyebrow{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color: var(--sky);
+    margin:0 0 10px 0;
+  }
+  .upload-inner h3{
+    font-family:"Zin Display Cond", Georgia, serif;
+    font-weight:500;
+    font-size:30px;
+    text-transform:uppercase;
+    color:#fff;
+    margin:0 0 12px 0;
+  }
+  .upload-inner p{
+    font-size:16px;
+    line-height:1.6;
+    color:#eef2fb;
+    margin:0;
+  }
+  .fname-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:18px;
+  }
+  .fname{
+    flex:1 1 260px;
+    min-width:0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    color:#fff;
+    background: rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:999px;
+    padding:11px 18px;
+    word-break:break-all;
+  }
+  .copy-btn{
+    flex:0 0 auto;
+    font-family:"Montserrat", sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:11px 20px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.35);
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    transition: background .18s ease, color .18s ease;
+  }
+  .copy-btn:hover{ background:#fff; color: var(--navy); }
+  .copy-btn:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+
+  /* ---------- Live board ---------- */
+  .board-count{
+    font-size:12px;
+    font-weight:600;
+    color: var(--navy);
+    background: var(--accent-line);
+    padding:6px 12px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .board-wrap{ margin-top:24px; overflow-x:auto; }
+  table.board{ width:100%; border-collapse:collapse; font-size:15px; }
+  table.board th{
+    text-align:left;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color: var(--muted);
+    font-weight:700;
+    padding:0 14px 12px;
+    border-bottom:1px solid var(--accent-line);
+    white-space:nowrap;
+  }
+  table.board td{
+    padding:15px 14px;
+    border-bottom:1px solid var(--accent-line);
+    color: var(--body-soft);
+  }
+  table.board tbody tr:last-child td{ border-bottom:none; }
+  table.board tbody tr:nth-child(even){ background: var(--tint); }
+  .team-cell{ font-weight:700; color: var(--navy); }
+  .empty-board{
+    padding:34px 4px;
+    text-align:center;
+    color: var(--muted);
+    font-size:15px;
+  }
+  .scroll-x{ overflow-x:auto; }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    background: var(--navy);
+    padding: 28px 56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .footer .logo-img{ height:28px; }
+  .footer-email{
+    color: var(--footer-email);
+    font-size:16px;
+    font-weight:500;
+    opacity:.95;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .footer-email:hover{ opacity:1; }
+
+  /* ---------- Responsive (brand breakpoints) ---------- */
+  @media (max-width: 1100px){
+    .hero h1{ font-size:56px; }
+    .hero-content{ padding:40px 32px; width:100%; max-width:none; }
+    .hero-meta-row{ font-size:18px; }
+    .hero-meta-row svg{ width:22px; height:22px; }
+    .btn-apply{ padding:15px 28px; }
+    .hero-wrap{ padding:0 20px 28px; }
+    .content-section{ padding:56px 32px 32px; }
+    .event-card{ grid-template-columns:1fr; }
+    .attend-col{ padding:40px 36px; }
+    .format-col{
+      border-left:none;
+      border-top:1px solid var(--accent-line);
+      border-radius:0 0 22px 22px;
+      padding:36px;
+    }
+    .panel{ padding:40px 36px; }
+    .upload-bar{ padding:0 32px 48px; }
+    .upload-inner{ padding:36px 32px; }
+    .topbar{ padding:22px 28px; }
+    .footer{ padding:24px 28px; }
+    .footer-email{ white-space:normal; }
+  }
+
+  @media (max-width: 767px){
+    .topbar{ padding:18px 20px; gap:14px; }
+    .logo-img{ height:24px; }
+    .site-nav{ gap:14px; }
+    .nav-events{ font-size:15px; }
+    .btn-join{ padding:10px 16px; font-size:15px; }
+    .hero-wrap{ padding:0 16px 24px; }
+    .hero{ border-radius:16px; }
+    .hero-content{ padding:32px 22px; }
+    .hero h1{ font-size:34px; margin-bottom:16px; }
+    .hero-meta{ gap:12px; margin-bottom:26px; }
+    .hero-meta-row{ font-size:16px; gap:14px; }
+    .hero-meta-row svg{ width:18px; height:18px; }
+    .btn-apply{ padding:14px 26px; width:100%; text-align:center; }
+    .content-section{ padding:40px 16px 24px; }
+    .attend-col, .format-col{ padding:30px 22px; }
+    .attend-col h2, .card-head h2, .format-heading{ font-size:26px; }
+    .panel{ padding:30px 22px; }
+    .upload-bar{ padding:0 16px 32px; }
+    .upload-inner{ flex-direction:column; align-items:flex-start; padding:32px 24px; }
+    .upload-inner h3{ font-size:26px; }
+    .btn-dinner{ width:100%; justify-content:center; }
+    .btn-team{ width:100%; }
+    .copy-btn{ width:100%; }
+    .footer{ padding:22px 20px; flex-direction:column; align-items:flex-start; gap:16px; }
+    .footer .logo-img{ height:22px; }
+    .footer-email{ font-size:14px; word-break:break-word; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn-apply, .btn-team, .btn-dinner, .badge, .copy-btn{ transition:none; }
+    .btn-apply:hover, .btn-team:hover, .btn-dinner:hover{ transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#register">Skip to registration</a>
+
+<div class="page">
+
+  <header class="topbar">
+    <a class="logo-link" href="../">
+      <img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    </a>
+    <nav class="site-nav">
+      <a class="nav-events" href="../jobhakdi/">Events</a>
+      <a class="btn-join" href="https://forms.cloud.microsoft/e/5nPxMLS6NB" target="_blank" rel="noreferrer">Join us</a>
+    </nav>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Investment Club Workshop</p>
+        <h1>Stock analysis<br>workshop</h1>
+        <div class="hero-meta">
+          <div class="hero-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2" stroke-linecap="round"></path>
+            </svg>
+            <span>About an hour to research</span>
+          </div>
+          <div class="hero-meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true">
+              <path d="M4 5h16v11H4z" stroke-linejoin="round"></path>
+              <path d="M12 16v3M8 21h8M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>Three minutes to pitch it</span>
+          </div>
+        </div>
+        <a class="btn-apply" href="#register">Register your pick &#8594;</a>
+      </div>
+    </section>
+  </div>
+
+  <section class="content-section">
+    <div class="event-card">
+      <div class="attend-col">
+        <h2>How it works</h2>
+        <p>We'll walk through two ways to approach a stock: fundamental — the business and its numbers — and technical, the chart. Use whichever suits your team, or mix both.</p>
+        <p>Agree on a stock as a team first, then check the live board before you commit to it. Two teams pitching the same company makes for a duller round, so the board locks each pick to whoever claims it first.</p>
+        <p>From there you have about an hour to build the case and get your file uploaded. Keep the pitch tight: three minutes, one argument, and the numbers that back it.</p>
+        <a class="btn-team" href="#register">Register your pick <span aria-hidden="true">&#8594;</span></a>
+      </div>
+
+      <div class="format-col">
+        <div class="format-heading">The format</div>
+        <div class="format-list">
+          <div>
+            <div class="format-num">5&ndash;10 min</div>
+            <div class="format-label">Agree on a stock as a team before moving on.</div>
+          </div>
+          <div>
+            <div class="format-num">1 hour</div>
+            <div class="format-label">Research and build your case before the file is due.</div>
+          </div>
+          <div>
+            <div class="format-num">3 min</div>
+            <div class="format-label">Pitch it to the room and take questions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="register">
+    <div class="panel">
+      <div class="card-head">
+        <h2>Register your pick</h2>
+      </div>
+
+      <form id="register-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="team-input">Team name</label>
+          <input class="input-pill" type="text" id="team-input" placeholder="e.g. Team Compound Interest" autocomplete="off" maxlength="60" enterkeyhint="next">
+        </div>
+        <div class="field">
+          <label class="field-label" for="stock-input">Stock</label>
+          <input class="input-pill" type="text" id="stock-input" placeholder="e.g. Apple (AAPL)" autocomplete="off" maxlength="80" enterkeyhint="go" aria-describedby="stock-feedback">
+          <div class="chips" id="stock-chips">
+            <button type="button" class="badge" data-stock="Apple (AAPL)">Apple (AAPL)</button>
+            <button type="button" class="badge" data-stock="Microsoft (MSFT)">Microsoft (MSFT)</button>
+            <button type="button" class="badge" data-stock="Alphabet (GOOGL)">Alphabet (GOOGL)</button>
+            <button type="button" class="badge" data-stock="Amazon (AMZN)">Amazon (AMZN)</button>
+            <button type="button" class="badge" data-stock="Nvidia (NVDA)">Nvidia (NVDA)</button>
+            <button type="button" class="badge" data-stock="Meta (META)">Meta (META)</button>
+            <button type="button" class="badge" data-stock="Tesla (TSLA)">Tesla (TSLA)</button>
+            <button type="button" class="badge" data-stock="Visa (V)">Visa (V)</button>
+            <button type="button" class="badge" data-stock="Mastercard (MA)">Mastercard (MA)</button>
+            <button type="button" class="badge" data-stock="Coca-Cola (KO)">Coca-Cola (KO)</button>
+            <button type="button" class="badge" data-stock="Johnson &amp; Johnson (JNJ)">Johnson &amp; Johnson (JNJ)</button>
+            <button type="button" class="badge" data-stock="JPMorgan Chase (JPM)">JPMorgan Chase (JPM)</button>
+            <button type="button" class="badge" data-stock="Procter &amp; Gamble (PG)">Procter &amp; Gamble (PG)</button>
+            <button type="button" class="badge" data-stock="Nike (NKE)">Nike (NKE)</button>
+            <button type="button" class="badge" data-stock="Disney (DIS)">Disney (DIS)</button>
+            <button type="button" class="badge" data-stock="Netflix (NFLX)">Netflix (NFLX)</button>
+          </div>
+          <div class="feedback" id="stock-feedback" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-team" id="submit-btn" type="submit">Register team &amp; stock <span aria-hidden="true">&#8594;</span></button>
+        </div>
+        <div class="status-msg" id="status-msg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="upload-bar">
+    <div class="upload-inner">
+      <div class="upload-text">
+        <p class="bar-eyebrow">Step 2</p>
+        <h3>Upload your analysis</h3>
+        <p>Word or PowerPoint. Open the shared folder and drop your file in, named exactly like this:</p>
+        <div class="fname-row">
+          <div class="fname" id="filename-preview">TeamName_StockName.pptx (or .docx)</div>
+          <button type="button" class="copy-btn" id="copy-filename">Copy name</button>
+        </div>
+      </div>
+      <a class="btn-dinner" id="drive-link" href="https://drive.google.com/drive/folders/1e_yTns-7DJlxYjJWmEQHjJu68uXbPuT_?usp=sharing" target="_blank" rel="noopener">Open upload folder &#8599;</a>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="panel">
+      <div class="card-head">
+        <h2>Live board</h2>
+        <span class="board-count" id="board-count" aria-live="polite">0 teams registered</span>
+      </div>
+      <div id="board-body"><div class="empty-board">No teams registered yet. Be the first.</div></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a class="logo-link" href="../">
+      <img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    </a>
+    <a class="footer-email" href="mailto:investeerimisklubi@ebs.ee">investeerimisklubi@ebs.ee</a>
+  </footer>
+
+</div>
+
+<!--
+  FIREBASE SETUP
+  1. Go to https://console.firebase.google.com, create a project (free).
+  2. In the project, open Build > Firestore Database > Create database.
+     Start in "production mode" (rules are set below, not left wide open by default).
+  3. Go to Project settings > General > Your apps > add a Web app.
+     Copy config.example.js to config.js and paste the values it gives you there.
+     config.js is gitignored, so the keys stay out of the repo.
+  4. Go to Firestore > Rules and paste the ruleset from firestore.rules.txt
+     (shipped alongside this file), then Publish.
+-->
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+
+<script>
+(function(){
+
+  // Supplied by config.js, which is gitignored — copy config.example.js to
+  // config.js and fill it in. Missing config is handled, not thrown: the page
+  // still renders and the board reports that it isn't connected.
+  var firebaseConfig = (window.IC_WORKSHOP_CONFIG && window.IC_WORKSHOP_CONFIG.firebase) || null;
+
+  var latestSubs = [];
+  var db = null;
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function slugify(s){
+    return String(s).trim().replace(/[^a-z0-9]+/gi,"");
+  }
+
+  function normStock(s){
+    return String(s).trim().toLowerCase().replace(/\s+/g," ");
+  }
+
+  function fmtTime(iso){
+    try{
+      var d = new Date(iso);
+      return d.toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
+    }catch(e){ return ""; }
+  }
+
+  function isDuplicateStock(subs, stock, excludeId){
+    var n = normStock(stock);
+    if (!n) return null;
+    for (var i=0;i<subs.length;i++){
+      var s = subs[i];
+      if (s.id === excludeId) continue;
+      if (normStock(s.stockName) === n) return s;
+    }
+    return null;
+  }
+
+  function renderBoardBodyOnly(subs){
+    var sorted = subs.slice().sort(function(a,b){
+      return new Date(a.submittedAt) - new Date(b.submittedAt);
+    });
+    var count = sorted.length;
+    var countEl = document.getElementById("board-count");
+    if (countEl) countEl.textContent = count === 1 ? "1 team registered" : count + " teams registered";
+    var bodyEl = document.getElementById("board-body");
+    if (!bodyEl) return;
+    if (count === 0){
+      bodyEl.innerHTML = '<div class="empty-board">No teams registered yet. Be the first.</div>';
+      return;
+    }
+    var rows = sorted.map(function(s){
+      return "<tr><td class=\"team-cell\">" + escapeHtml(s.teamName) + "</td><td>" +
+        escapeHtml(s.stockName) + "</td><td>" + escapeHtml(fmtTime(s.submittedAt)) + "</td></tr>";
+    }).join("");
+    bodyEl.innerHTML = '<div class="board-wrap"><table class="board"><thead><tr><th>Team</th><th>Stock</th><th>Registered</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function updateFilenamePreview(){
+    var team = slugify(document.getElementById("team-input").value) || "TeamName";
+    var stock = slugify(document.getElementById("stock-input").value) || "StockName";
+    document.getElementById("filename-preview").textContent = team + "_" + stock + ".pptx (or .docx)";
+  }
+
+  function updateStockFeedback(){
+    var stockVal = document.getElementById("stock-input").value;
+    var fb = document.getElementById("stock-feedback");
+    if (!stockVal.trim()){
+      fb.textContent = "";
+      fb.removeAttribute("data-state");
+      return true;
+    }
+    var dupe = isDuplicateStock(latestSubs, stockVal, null);
+    if (dupe){
+      fb.textContent = "Already claimed by " + dupe.teamName + ". Pick another stock.";
+      fb.setAttribute("data-state","taken");
+      return false;
+    }
+    fb.textContent = "Available.";
+    fb.setAttribute("data-state","ok");
+    return true;
+  }
+
+  function setStatus(msg, state){
+    var el = document.getElementById("status-msg");
+    el.textContent = msg || "";
+    if (state) el.setAttribute("data-state", state); else el.removeAttribute("data-state");
+  }
+
+  // Mirror the live board onto the shortcut chips: anything already claimed is
+  // struck through, and the chip matching what's typed reads as pressed. Purely
+  // presentational — every chip stays clickable so a team can re-submit its own pick.
+  function updateChipStates(){
+    var current = normStock(document.getElementById("stock-input").value);
+    Array.prototype.forEach.call(document.querySelectorAll("#stock-chips .badge"), function(chip){
+      var val = chip.getAttribute("data-stock");
+      var taken = !!isDuplicateStock(latestSubs, val, null);
+      chip.classList.toggle("is-taken", taken);
+      chip.setAttribute("aria-pressed", normStock(val) === current ? "true" : "false");
+      if (taken){
+        chip.setAttribute("title", "Already claimed");
+      } else {
+        chip.removeAttribute("title");
+      }
+    });
+  }
+
+  function copyFilename(){
+    var btn = document.getElementById("copy-filename");
+    var name = document.getElementById("filename-preview").textContent.replace(/\.pptx \(or \.docx\)$/, "");
+    var restore = function(label){
+      btn.textContent = label;
+      setTimeout(function(){ btn.textContent = "Copy name"; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(name).then(function(){ restore("Copied"); }, function(){ restore("Copy failed"); });
+      return;
+    }
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = name;
+      ta.setAttribute("readonly","");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      restore("Copied");
+    }catch(e){ restore("Copy failed"); }
+  }
+
+  // One document per stock, keyed by its slug. Firestore only lets the
+  // write through when that document doesn't exist yet (see firestore.rules.txt),
+  // so two teams racing for the same stock can never both land: whichever
+  // request arrives second is rejected outright, no polling or retries needed.
+  function registerClaim(teamName, stockName){
+    var stockSlug = slugify(stockName).toLowerCase();
+    if (!stockSlug){
+      return Promise.reject({ code: "invalid" });
+    }
+    var ref = db.collection("claims").doc(stockSlug);
+    return db.runTransaction(function(tx){
+      return tx.get(ref).then(function(doc){
+        if (doc.exists){
+          var existing = doc.data();
+          if (existing.teamName === teamName && normStock(existing.stockName) === normStock(stockName)){
+            return;
+          }
+          return Promise.reject({ code: "taken", takenBy: doc.data().teamName });
+        }
+        tx.set(ref, {
+          teamName: teamName,
+          stockName: stockName,
+          submittedAt: new Date().toISOString()
+        });
+      });
+    });
+  }
+
+  function wire(){
+    Array.prototype.forEach.call(document.querySelectorAll("#stock-chips .badge"), function(chip){
+      chip.addEventListener("click", function(){
+        document.getElementById("stock-input").value = chip.getAttribute("data-stock");
+        updateFilenamePreview();
+        updateStockFeedback();
+        updateChipStates();
+      });
+    });
+
+    document.getElementById("team-input").addEventListener("input", updateFilenamePreview);
+    document.getElementById("stock-input").addEventListener("input", function(){
+      updateFilenamePreview();
+      updateStockFeedback();
+      updateChipStates();
+    });
+
+    document.getElementById("copy-filename").addEventListener("click", copyFilename);
+
+    // Registration hangs off the form's submit event, so clicking the button and
+    // pressing Enter in either field both land here, once, on the same path.
+    document.getElementById("register-form").addEventListener("submit", function(e){
+      e.preventDefault();
+      var teamName = document.getElementById("team-input").value.trim();
+      var stockName = document.getElementById("stock-input").value.trim();
+      if (!teamName || !stockName){
+        setStatus("Enter both a team name and a stock before registering.", "error");
+        return;
+      }
+      var duplicate = isDuplicateStock(latestSubs, stockName, null);
+      if (duplicate && duplicate.teamName !== teamName){
+        setStatus("That stock is already claimed. Pick another one.", "error");
+        return;
+      }
+      if (!db){
+        setStatus("Live registration isn't connected. Message the organizer with your team and stock.", "error");
+        return;
+      }
+
+      var btn = document.getElementById("submit-btn");
+      btn.disabled = true;
+      setStatus("Registering…", "pending");
+
+      registerClaim(teamName, stockName).then(function(){
+        btn.disabled = false;
+        setStatus("Registered! Now drop your file in the upload folder above, named " + slugify(teamName) + "_" + slugify(stockName) + ".", "ok");
+      }).catch(function(err){
+        btn.disabled = false;
+        if (err && err.code === "taken"){
+          setStatus("Another team just claimed that stock" + (err.takenBy ? " (" + err.takenBy + ")" : "") + ". Pick a different one.", "error");
+        } else {
+          setStatus("Couldn't register right now. Please try again.", "error");
+        }
+      });
+    });
+
+    try{
+      if (!firebaseConfig) throw new Error("missing config.js");
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      db.collection("claims").onSnapshot(function(snapshot){
+        var subs = [];
+        snapshot.forEach(function(doc){
+          var d = doc.data();
+          subs.push({ id: doc.id, teamName: d.teamName, stockName: d.stockName, submittedAt: d.submittedAt });
+        });
+        latestSubs = subs;
+        renderBoardBodyOnly(subs);
+        updateStockFeedback();
+        updateChipStates();
+      }, function(err){
+        setStatus("Could not load the live board. Check your connection and refresh.", "error");
+      });
+    }catch(e){
+      setStatus("Live board isn't connected yet. Copy config.example.js to config.js and add your Firebase settings.", "error");
+    }
+  }
+
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", wire);
+  } else {
+    wire();
+  }
+})();
+</script>
+
+</body>
+</html>
