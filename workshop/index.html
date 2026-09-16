@@ -371,6 +371,15 @@
   .input-pill::placeholder{ color: rgba(0,31,76,.4); }
   .input-pill:focus{ outline:3px solid var(--navy); outline-offset:2px; }
 
+  .field-row{ display:flex; gap:12px; align-items:flex-end; }
+  .field-col{ flex:1 1 auto; min-width:0; }
+  .field-col-ticker{ flex:0 0 150px; }
+  .input-ticker{ text-transform:uppercase; letter-spacing:.06em; font-weight:600; }
+  @media (max-width:560px){
+    .field-row{ flex-direction:column; align-items:stretch; gap:16px; }
+    .field-col-ticker{ flex:1 1 auto; }
+  }
+
   .hint{
     font-size:14px;
     line-height:1.6;
@@ -693,27 +702,36 @@
           <input class="input-pill" type="text" id="team-input" placeholder="e.g. Team Compound Interest" autocomplete="off" maxlength="60" enterkeyhint="next">
         </div>
         <div class="field">
-          <label class="field-label" for="stock-input">Stock</label>
-          <input class="input-pill" type="text" id="stock-input" placeholder="e.g. Apple (AAPL)" autocomplete="off" maxlength="80" enterkeyhint="go" aria-describedby="stock-feedback">
-          <div class="chips" id="stock-chips">
-            <button type="button" class="badge" data-stock="Apple (AAPL)">Apple (AAPL)</button>
-            <button type="button" class="badge" data-stock="Microsoft (MSFT)">Microsoft (MSFT)</button>
-            <button type="button" class="badge" data-stock="Alphabet (GOOGL)">Alphabet (GOOGL)</button>
-            <button type="button" class="badge" data-stock="Amazon (AMZN)">Amazon (AMZN)</button>
-            <button type="button" class="badge" data-stock="Nvidia (NVDA)">Nvidia (NVDA)</button>
-            <button type="button" class="badge" data-stock="Meta (META)">Meta (META)</button>
-            <button type="button" class="badge" data-stock="Tesla (TSLA)">Tesla (TSLA)</button>
-            <button type="button" class="badge" data-stock="Visa (V)">Visa (V)</button>
-            <button type="button" class="badge" data-stock="Mastercard (MA)">Mastercard (MA)</button>
-            <button type="button" class="badge" data-stock="Coca-Cola (KO)">Coca-Cola (KO)</button>
-            <button type="button" class="badge" data-stock="Johnson &amp; Johnson (JNJ)">Johnson &amp; Johnson (JNJ)</button>
-            <button type="button" class="badge" data-stock="JPMorgan Chase (JPM)">JPMorgan Chase (JPM)</button>
-            <button type="button" class="badge" data-stock="Procter &amp; Gamble (PG)">Procter &amp; Gamble (PG)</button>
-            <button type="button" class="badge" data-stock="Nike (NKE)">Nike (NKE)</button>
-            <button type="button" class="badge" data-stock="Disney (DIS)">Disney (DIS)</button>
-            <button type="button" class="badge" data-stock="Netflix (NFLX)">Netflix (NFLX)</button>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label" for="company-input">Company</label>
+              <input class="input-pill" type="text" id="company-input" placeholder="e.g. Meta Platforms" autocomplete="off" maxlength="60" enterkeyhint="next">
+            </div>
+            <div class="field-col field-col-ticker">
+              <label class="field-label" for="ticker-input">Ticker</label>
+              <input class="input-pill input-ticker" type="text" id="ticker-input" placeholder="META" autocomplete="off" spellcheck="false" maxlength="10" enterkeyhint="go" aria-describedby="ticker-feedback">
+            </div>
           </div>
-          <div class="feedback" id="stock-feedback" role="status" aria-live="polite"></div>
+          <p class="hint">The ticker is what reserves the stock &mdash; one team per ticker, however the company name is spelled.</p>
+          <div class="chips" id="stock-chips">
+            <button type="button" class="badge" data-name="Apple" data-ticker="AAPL">Apple (AAPL)</button>
+            <button type="button" class="badge" data-name="Microsoft" data-ticker="MSFT">Microsoft (MSFT)</button>
+            <button type="button" class="badge" data-name="Alphabet" data-ticker="GOOGL">Alphabet (GOOGL)</button>
+            <button type="button" class="badge" data-name="Amazon" data-ticker="AMZN">Amazon (AMZN)</button>
+            <button type="button" class="badge" data-name="Nvidia" data-ticker="NVDA">Nvidia (NVDA)</button>
+            <button type="button" class="badge" data-name="Meta Platforms" data-ticker="META">Meta (META)</button>
+            <button type="button" class="badge" data-name="Tesla" data-ticker="TSLA">Tesla (TSLA)</button>
+            <button type="button" class="badge" data-name="Visa" data-ticker="V">Visa (V)</button>
+            <button type="button" class="badge" data-name="Mastercard" data-ticker="MA">Mastercard (MA)</button>
+            <button type="button" class="badge" data-name="Coca-Cola" data-ticker="KO">Coca-Cola (KO)</button>
+            <button type="button" class="badge" data-name="Johnson &amp; Johnson" data-ticker="JNJ">Johnson &amp; Johnson (JNJ)</button>
+            <button type="button" class="badge" data-name="JPMorgan Chase" data-ticker="JPM">JPMorgan Chase (JPM)</button>
+            <button type="button" class="badge" data-name="Procter &amp; Gamble" data-ticker="PG">Procter &amp; Gamble (PG)</button>
+            <button type="button" class="badge" data-name="Nike" data-ticker="NKE">Nike (NKE)</button>
+            <button type="button" class="badge" data-name="Disney" data-ticker="DIS">Disney (DIS)</button>
+            <button type="button" class="badge" data-name="Netflix" data-ticker="NFLX">Netflix (NFLX)</button>
+          </div>
+          <div class="feedback" id="ticker-feedback" role="status" aria-live="polite"></div>
         </div>
 
         <div class="btn-row">
@@ -731,7 +749,7 @@
         <h3>Upload your analysis</h3>
         <p>Word or PowerPoint. Open the shared folder and drop your file in, named exactly like this:</p>
         <div class="fname-row">
-          <div class="fname" id="filename-preview">TeamName_StockName.pptx (or .docx)</div>
+          <div class="fname" id="filename-preview">TeamName_TICKER.pptx (or .docx)</div>
           <button type="button" class="copy-btn" id="copy-filename">Copy name</button>
         </div>
       </div>
@@ -798,6 +816,29 @@
     return String(s).trim().toLowerCase().replace(/\s+/g," ");
   }
 
+  // The ticker is the claim. normTicker is for display, tickerKey is the
+  // document id — reduced to [a-z0-9] so "BRK.B", "brk-b" and "BRKB" are all
+  // the same claim rather than three separate ones.
+  function normTicker(s){
+    return String(s).trim().toUpperCase().replace(/\s+/g,"");
+  }
+
+  function tickerKey(s){
+    return String(s).trim().toLowerCase().replace(/[^a-z0-9]+/g,"");
+  }
+
+  // Stored as "Company (TICKER)" so the document keeps exactly the three
+  // fields the Firestore rules allow; the ticker is recoverable from it.
+  function splitStock(sub){
+    var m = /^(.*)\s\(([^)]+)\)$/.exec(sub.stockName || "");
+    if (m) return { company: m[1], ticker: m[2] };
+    // Rows written before the ticker was its own field have no "(TICKER)" to
+    // read, and their id is a slug of the whole company name rather than a
+    // ticker. Anything too long to be one is shown as a dash, not invented.
+    var id = String(sub.id || "").toUpperCase();
+    return { company: sub.stockName || "", ticker: id.length > 6 ? "—" : id };
+  }
+
   function fmtTime(iso){
     try{
       var d = new Date(iso);
@@ -805,13 +846,16 @@
     }catch(e){ return ""; }
   }
 
-  function isDuplicateStock(subs, stock, excludeId){
-    var n = normStock(stock);
-    if (!n) return null;
+  // Duplicates are decided by ticker alone, never by the typed company name.
+  // "Meta", "Meta Platforms" and "Meta Platforms, Inc." are one claim, because
+  // all three are META. That is the whole point of splitting the two fields.
+  function isDuplicateTicker(subs, ticker, excludeId){
+    var key = tickerKey(ticker);
+    if (!key) return null;
     for (var i=0;i<subs.length;i++){
       var s = subs[i];
       if (s.id === excludeId) continue;
-      if (normStock(s.stockName) === n) return s;
+      if (s.id === key) return s;
     }
     return null;
   }
@@ -830,33 +874,37 @@
       return;
     }
     var rows = sorted.map(function(s){
+      var p = splitStock(s);
       return "<tr><td class=\"team-cell\">" + escapeHtml(s.teamName) + "</td><td>" +
-        escapeHtml(s.stockName) + "</td><td>" + escapeHtml(fmtTime(s.submittedAt)) + "</td></tr>";
+        escapeHtml(p.company) + "</td><td class=\"ticker-cell\">" + escapeHtml(p.ticker) +
+        "</td><td>" + escapeHtml(fmtTime(s.submittedAt)) + "</td></tr>";
     }).join("");
-    bodyEl.innerHTML = '<div class="board-wrap"><table class="board"><thead><tr><th>Team</th><th>Stock</th><th>Registered</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+    bodyEl.innerHTML = '<div class="board-wrap"><table class="board"><thead><tr><th>Team</th><th>Company</th><th>Ticker</th><th>Registered</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
 
   function updateFilenamePreview(){
     var team = slugify(document.getElementById("team-input").value) || "TeamName";
-    var stock = slugify(document.getElementById("stock-input").value) || "StockName";
-    document.getElementById("filename-preview").textContent = team + "_" + stock + ".pptx (or .docx)";
+    var tick = tickerKey(document.getElementById("ticker-input").value).toUpperCase() || "TICKER";
+    document.getElementById("filename-preview").textContent = team + "_" + tick + ".pptx (or .docx)";
   }
 
-  function updateStockFeedback(){
-    var stockVal = document.getElementById("stock-input").value;
-    var fb = document.getElementById("stock-feedback");
-    if (!stockVal.trim()){
+  function updateTickerFeedback(){
+    var raw = document.getElementById("ticker-input").value;
+    var fb = document.getElementById("ticker-feedback");
+    if (!raw.trim()){
       fb.textContent = "";
       fb.removeAttribute("data-state");
       return true;
     }
-    var dupe = isDuplicateStock(latestSubs, stockVal, null);
+    var dupe = isDuplicateTicker(latestSubs, raw, null);
     if (dupe){
-      fb.textContent = "Already claimed by " + dupe.teamName + ". Pick another stock.";
+      var p = splitStock(dupe);
+      fb.textContent = normTicker(raw) + " is already claimed by " + dupe.teamName +
+        (p.company ? " (" + p.company + ")" : "") + ". Pick another ticker.";
       fb.setAttribute("data-state","taken");
       return false;
     }
-    fb.textContent = "Available.";
+    fb.textContent = normTicker(raw) + " is available.";
     fb.setAttribute("data-state","ok");
     return true;
   }
@@ -871,12 +919,12 @@
   // struck through, and the chip matching what's typed reads as pressed. Purely
   // presentational — every chip stays clickable so a team can re-submit its own pick.
   function updateChipStates(){
-    var current = normStock(document.getElementById("stock-input").value);
+    var current = tickerKey(document.getElementById("ticker-input").value);
     Array.prototype.forEach.call(document.querySelectorAll("#stock-chips .badge"), function(chip){
-      var val = chip.getAttribute("data-stock");
-      var taken = !!isDuplicateStock(latestSubs, val, null);
+      var tick = chip.getAttribute("data-ticker");
+      var taken = !!isDuplicateTicker(latestSubs, tick, null);
       chip.classList.toggle("is-taken", taken);
-      chip.setAttribute("aria-pressed", normStock(val) === current ? "true" : "false");
+      chip.setAttribute("aria-pressed", tickerKey(tick) === current && current !== "" ? "true" : "false");
       if (taken){
         chip.setAttribute("title", "Already claimed");
       } else {
@@ -914,20 +962,22 @@
   // write through when that document doesn't exist yet (see firestore.rules.txt),
   // so two teams racing for the same stock can never both land: whichever
   // request arrives second is rejected outright, no polling or retries needed.
-  function registerClaim(teamName, stockName){
-    var stockSlug = slugify(stockName).toLowerCase();
-    if (!stockSlug){
+  function registerClaim(teamName, companyName, ticker){
+    var key = tickerKey(ticker);
+    if (!key || !companyName){
       return Promise.reject({ code: "invalid" });
     }
-    var ref = db.collection("claims").doc(stockSlug);
+    // Exactly three fields, matching what the deployed rules permit.
+    var stockName = companyName + " (" + normTicker(ticker) + ")";
+    var ref = db.collection("claims").doc(key);
     return db.runTransaction(function(tx){
       return tx.get(ref).then(function(doc){
         if (doc.exists){
           var existing = doc.data();
-          if (existing.teamName === teamName && normStock(existing.stockName) === normStock(stockName)){
+          if (existing.teamName === teamName){
             return;
           }
-          return Promise.reject({ code: "taken", takenBy: doc.data().teamName });
+          return Promise.reject({ code: "taken", takenBy: existing.teamName });
         }
         tx.set(ref, {
           teamName: teamName,
@@ -941,17 +991,19 @@
   function wire(){
     Array.prototype.forEach.call(document.querySelectorAll("#stock-chips .badge"), function(chip){
       chip.addEventListener("click", function(){
-        document.getElementById("stock-input").value = chip.getAttribute("data-stock");
+        document.getElementById("company-input").value = chip.getAttribute("data-name");
+        document.getElementById("ticker-input").value = chip.getAttribute("data-ticker");
         updateFilenamePreview();
-        updateStockFeedback();
+        updateTickerFeedback();
         updateChipStates();
       });
     });
 
     document.getElementById("team-input").addEventListener("input", updateFilenamePreview);
-    document.getElementById("stock-input").addEventListener("input", function(){
+    document.getElementById("company-input").addEventListener("input", updateChipStates);
+    document.getElementById("ticker-input").addEventListener("input", function(){
       updateFilenamePreview();
-      updateStockFeedback();
+      updateTickerFeedback();
       updateChipStates();
     });
 
@@ -962,14 +1014,19 @@
     document.getElementById("register-form").addEventListener("submit", function(e){
       e.preventDefault();
       var teamName = document.getElementById("team-input").value.trim();
-      var stockName = document.getElementById("stock-input").value.trim();
-      if (!teamName || !stockName){
-        setStatus("Enter both a team name and a stock before registering.", "error");
+      var companyName = document.getElementById("company-input").value.trim();
+      var ticker = document.getElementById("ticker-input").value.trim();
+      if (!teamName || !companyName || !ticker){
+        setStatus("Enter a team name, a company and its ticker before registering.", "error");
         return;
       }
-      var duplicate = isDuplicateStock(latestSubs, stockName, null);
+      if (!tickerKey(ticker)){
+        setStatus("That ticker doesn't look right — use letters and numbers, like META.", "error");
+        return;
+      }
+      var duplicate = isDuplicateTicker(latestSubs, ticker, null);
       if (duplicate && duplicate.teamName !== teamName){
-        setStatus("That stock is already claimed. Pick another one.", "error");
+        setStatus(normTicker(ticker) + " is already claimed by " + duplicate.teamName + ". Pick another ticker.", "error");
         return;
       }
       if (!db){
@@ -981,13 +1038,14 @@
       btn.disabled = true;
       setStatus("Registering…", "pending");
 
-      registerClaim(teamName, stockName).then(function(){
+      registerClaim(teamName, companyName, ticker).then(function(){
         btn.disabled = false;
-        setStatus("Registered! Now drop your file in the upload folder above, named " + slugify(teamName) + "_" + slugify(stockName) + ".", "ok");
+        setStatus("Registered " + normTicker(ticker) + "! Now drop your file in the upload folder above, named " +
+          slugify(teamName) + "_" + tickerKey(ticker).toUpperCase() + ".", "ok");
       }).catch(function(err){
         btn.disabled = false;
         if (err && err.code === "taken"){
-          setStatus("Another team just claimed that stock" + (err.takenBy ? " (" + err.takenBy + ")" : "") + ". Pick a different one.", "error");
+          setStatus("Another team just claimed " + normTicker(ticker) + (err.takenBy ? " (" + err.takenBy + ")" : "") + ". Pick a different ticker.", "error");
         } else {
           setStatus("Couldn't register right now. Please try again.", "error");
         }
@@ -1006,7 +1064,7 @@
         });
         latestSubs = subs;
         renderBoardBodyOnly(subs);
-        updateStockFeedback();
+        updateTickerFeedback();
         updateChipStates();
       }, function(err){
         setStatus("Could not load the live board. Check your connection and refresh.", "error");
