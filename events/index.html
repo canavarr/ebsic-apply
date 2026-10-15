@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events — EBS Investment Club</title>
+<meta name="description" content="What's coming up at EBS Investment Club: speaker events, workshops and club meetings.">
+<meta name="theme-color" content="#001F4C">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<link rel="preload" href="../assets/fonts/ZinDisplayCond-Medium.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="../assets/fonts/Montserrat-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+  @font-face{ font-family:"Zin Display Cond"; src:url("../assets/fonts/ZinDisplayCond-Medium.otf") format("opentype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+
+  :root{
+    --navy:#001F4C; --navy-soft:#16336e; --paper:#F6F8F9; --card:#ffffff; --tint:#fafbfd;
+    --pill:#F2F4F6; --pill-hover:#d9dce6; --body-soft:rgba(0,31,76,.78);
+    --muted:#6b7490; --muted-strong:#5f6884; --accent-line:#dbe4f5;
+    --accent:#006ACC; --accent-hover:#0058b0; --sky:#9fd6ff; --footer-email:#D9F9F7;
+    --draft:#9A5C06; --draft-bg:#FFF6E6;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--navy); color:var(--navy); font-family:"Montserrat","Segoe UI",Arial,sans-serif; }
+  a{ color:inherit; }
+  h1,h2,h3{ margin:0; }
+  p{ margin:0; }
+  .page{ max-width:1920px; margin:0 auto; background:var(--navy); }
+  .skip-link{ position:absolute; left:-9999px; top:12px; background:#fff; color:var(--navy); font-size:14px; font-weight:600; padding:12px 20px; border-radius:999px; z-index:50; }
+  .skip-link:focus{ left:24px; }
+
+  .draft-note{ background:var(--draft-bg); color:var(--draft); font-size:13.5px; font-weight:600; line-height:1.5; padding:12px 24px; text-align:center; }
+  .draft-note code{ font-size:12.5px; background:rgba(154,92,6,.12); padding:2px 6px; border-radius:4px; }
+
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px 56px; }
+  .logo-img{ height:32px; width:auto; display:block; }
+  .site-nav{ display:flex; align-items:center; gap:28px; }
+  .nav-link{ color:#fff; text-decoration:none; font-size:16px; font-weight:600; }
+  .nav-link:hover{ opacity:.85; }
+
+  /* ---- Navigation feel: see the same block on the home page ---- */
+  html{ scroll-behavior:smooth; }
+  [id]{ scroll-margin-top:28px; }
+
+  @view-transition{ navigation:auto; }
+  .topbar{ view-transition-name:site-header; }
+  ::view-transition-old(root),
+  ::view-transition-new(root){ animation-duration:.26s; }
+
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px;
+    background:currentColor; border-radius:2px;
+    transform:scaleX(0); transform-origin:left center;
+    transition:transform .24s cubic-bezier(.4,0,.2,1);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after{ transform:scaleX(1); }
+  /* The page you are on keeps its underline, rather than dropping out of the nav. */
+  .nav-link[aria-current="page"]{ opacity:1; }
+  .nav-link[aria-current="page"]::after{ transform:scaleX(1); }
+  .btn-join{ transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; }
+  .btn-join:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.22); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .nav-link::after{ transition:none; }
+    .btn-join:hover{ transform:none; }
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*){ animation:none !important; }
+  }
+  .btn-join{ display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--navy); font-size:16px; font-weight:600; padding:12px 20px; border-radius:999px; text-decoration:none; }
+
+  .hero-wrap{ padding:0 40px 40px; display:flow-root; }
+  .hero{
+    border-radius:22px; padding:60px 64px;
+    background:
+      radial-gradient(120% 140% at 88% 10%, rgba(0,106,204,.55) 0%, rgba(0,106,204,0) 58%),
+      linear-gradient(112deg,#001F4C 0%,#062a63 52%,var(--navy-soft) 100%);
+  }
+  .hero-eyebrow{ font-size:13px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--sky); margin:0 0 16px; }
+  .hero h1{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:72px; line-height:1; color:#fff; text-transform:uppercase; margin:0 0 20px; }
+  .hero p{ font-size:18px; line-height:1.55; color:#eef2fb; max-width:56ch; }
+
+  .band{ background:var(--paper); padding:64px 64px 44px; }
+  .band + .band{ padding-top:0; }
+  .band-head{ max-width:780px; margin:0 0 26px; }
+  .band-head h2{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:42px; line-height:1.02; text-transform:uppercase; margin:0 0 12px; }
+  .band-head p{ font-size:16px; line-height:1.7; color:var(--body-soft); }
+
+  /* ---- Agenda ---- */
+  .month{ font-family:"Zin Display Cond",Georgia,serif; font-size:26px; font-weight:500; text-transform:uppercase;
+          color:var(--muted-strong); margin:30px 0 14px; letter-spacing:.04em; }
+  .month:first-of-type{ margin-top:0; }
+
+  .event{
+    background:var(--card); border-radius:22px; box-shadow:0 2px 10px rgba(16,38,90,.05);
+    display:flex; gap:28px; align-items:flex-start; padding:26px 30px; margin-bottom:14px;
+  }
+  .datebox{
+    flex:0 0 84px; text-align:center; background:var(--navy); color:#fff;
+    border-radius:16px; padding:12px 8px 10px;
+  }
+  .datebox .dow{ font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--sky); }
+  .datebox .day{ font-family:"Zin Display Cond",Georgia,serif; font-size:34px; line-height:1.05; }
+  .datebox .mon{ font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; opacity:.9; }
+
+  .ev-body{ flex:1 1 auto; min-width:0; }
+  .ev-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .ev-kind{
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--navy); background:var(--accent-line); padding:5px 11px; border-radius:999px;
+  }
+  .ev-tbc{ background:var(--draft-bg); color:var(--draft); }
+  .ev-body h3{ font-size:21px; font-weight:700; line-height:1.3; margin:0 0 8px; }
+  .ev-meta{ display:flex; flex-wrap:wrap; gap:6px 20px; font-size:14px; color:var(--muted-strong); margin-bottom:10px; }
+  .ev-meta span{ display:inline-flex; align-items:center; gap:7px; }
+  .ev-meta svg{ width:15px; height:15px; flex-shrink:0; }
+  .ev-body p{ font-size:15px; line-height:1.6; color:var(--body-soft); margin:0 0 14px; }
+  .ev-actions{ display:flex; flex-wrap:wrap; gap:10px; }
+
+  .btn-team{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--pill);
+    color:var(--navy); font:inherit; font-size:15px; font-weight:600; padding:13px 22px; border-radius:999px;
+    text-decoration:none; border:none; cursor:pointer; transition:background .18s ease, transform .18s ease;
+  }
+  .btn-team:hover{ background:var(--pill-hover); transform:translateY(-1px); }
+  .btn-ics{
+    display:inline-flex; align-items:center; gap:8px; font:inherit; font-size:15px; font-weight:600;
+    padding:13px 22px; border-radius:999px; border:1.5px solid var(--navy); background:#fff;
+    color:var(--navy); cursor:pointer; transition:background .18s ease, color .18s ease;
+  }
+  .btn-ics:hover{ background:var(--navy); color:#fff; }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--navy); outline-offset:3px; }
+  .topbar a:focus-visible, .hero a:focus-visible, .footer a:focus-visible{ outline-color:#fff; }
+
+  .event.past{ background:var(--tint); box-shadow:none; border:1px solid var(--accent-line); }
+  .event.past .datebox{ background:var(--pill-hover); color:var(--navy); }
+  .event.past .datebox .dow{ color:var(--muted-strong); }
+
+  .empty{ background:var(--card); border-radius:22px; padding:36px; text-align:center; color:var(--muted); font-size:15px; box-shadow:0 2px 10px rgba(16,38,90,.05); }
+
+  .footer{ background:var(--navy); padding:40px 56px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .footer .logo-img{ height:28px; }
+  .footer-email{ color:var(--footer-email); font-size:16px; font-weight:500; text-decoration:none; }
+
+  @media (max-width:1100px){
+    .topbar{ padding:22px 28px; }
+    .hero-wrap{ padding:0 20px 28px; }
+    .hero{ padding:44px 30px; }
+    .hero h1{ font-size:50px; }
+    .band{ padding:52px 32px 36px; }
+    .footer{ padding:32px 28px; }
+  }
+  @media (max-width:767px){
+    .topbar{ padding:18px 20px; gap:14px; }
+    .logo-img{ height:24px; }
+    .site-nav{ gap:14px; }
+    .nav-link{ font-size:15px; }
+    .btn-join{ padding:10px 16px; font-size:15px; }
+    .hero-wrap{ padding:0 16px 24px; }
+    .hero{ border-radius:16px; padding:32px 22px; }
+    .hero h1{ font-size:34px; }
+    .band{ padding:38px 16px 26px; }
+    .band-head h2{ font-size:30px; }
+    .event{ flex-direction:column; gap:16px; padding:22px 20px; }
+    .datebox{ flex:0 0 auto; display:inline-flex; align-items:baseline; gap:8px; padding:10px 16px; }
+    .datebox .day{ font-size:26px; }
+    .btn-team, .btn-ics{ width:100%; justify-content:center; }
+    .footer{ padding:26px 20px; flex-direction:column; align-items:flex-start; gap:14px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="page">
+
+  <!-- DRAFT ONLY — delete this element once the real dates are in. -->
+  <div class="draft-note">
+    Draft preview. Only the Jo Bhakdi evening is a real, confirmed event. Everything marked
+    <code>TBC</code> is a placeholder date I invented so the layout can be reviewed — replace them
+    in <code>EVENTS</code> before this is shown to anyone.
+  </div>
+
+  <header class="topbar">
+    <a class="logo-link" href="../">
+      <img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="../#teams">Teams</a>
+      <a class="nav-link" href="../portfolio/">Portfolio</a>
+      <a class="nav-link" href="./" aria-current="page">Events</a>
+      <a class="btn-join" href="https://forms.cloud.microsoft/e/5nPxMLS6NB" target="_blank" rel="noreferrer">Join us</a>
+    </nav>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <p class="hero-eyebrow">What's on</p>
+      <h1>Club<br>events</h1>
+      <p>Speaker evenings, workshops and club meetings. Add anything you want to attend straight
+         to your own calendar.</p>
+    </section>
+  </div>
+
+  <main id="main">
+    <section class="band">
+      <div class="band-head">
+        <h2>Coming up</h2>
+      </div>
+      <div id="upcoming"></div>
+    </section>
+
+    <section class="band">
+      <div class="band-head">
+        <h2>Already<br>happened</h2>
+        <p>Past sessions, kept so you can see what the club actually does.</p>
+      </div>
+      <div id="past"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo-link" href="../">
+      <img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+    </a>
+    <a class="footer-email" href="mailto:investeerimisklubi@ebs.ee">investeerimisklubi@ebs.ee</a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ---------------------------------------------------------------------
+  // EVENTS. `tbc: true` marks a date I invented so the page could be built —
+  // replace those with the real ones and set tbc to false. Times are local
+  // (Europe/Tallinn); `end` is optional and defaults to two hours after start.
+  // ---------------------------------------------------------------------
+  var EVENTS = [
+    {
+      title: "From Silicon Valley to AI investing with Jo Bhakdi",
+      kind: "Speaker evening",
+      start: "2026-09-24T19:00",
+      location: "Estonian Business School, Tallinn",
+      url: "https://ebsic.ee/jobhakdi/",
+      urlLabel: "Event page",
+      blurb: "Founder and investor Jo Bhakdi on AI, investing and building in Silicon Valley.",
+      tbc: false
+    },
+    {
+      title: "Stock analysis workshop",
+      kind: "Workshop",
+      start: "2026-10-29T17:00",
+      location: "Estonian Business School, Tallinn",
+      url: "https://ebsic.ee/workshop/",
+      urlLabel: "Register your pick",
+      blurb: "Teams claim a company, spend an hour on the analysis, and pitch it to the room in three minutes.",
+      tbc: true
+    },
+    {
+      title: "Portfolio review and new pitches",
+      kind: "Club meeting",
+      start: "2026-11-12T18:00",
+      location: "Estonian Business School, Tallinn",
+      url: "../portfolio/",
+      urlLabel: "See the portfolio",
+      blurb: "The Portfolio team walks through current positions and presents candidates for the next one.",
+      tbc: true
+    },
+    {
+      title: "Investing 101: from theory to a first trade",
+      kind: "Workshop",
+      start: "2026-11-26T18:00",
+      location: "Estonian Business School, Tallinn",
+      url: "",
+      urlLabel: "",
+      blurb: "An introduction for members who have joined but not yet bought anything.",
+      tbc: true
+    }
+  ];
+
+  var ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
+                 '<path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z" stroke-linejoin="round"></path>' +
+                 '<circle cx="12" cy="10" r="2.4"></circle></svg>';
+  var ICON_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
+                   '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2" stroke-linecap="round"></path></svg>';
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function parse(s){
+    // Built from parts rather than Date(string) so it is local time in every browser.
+    var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(s);
+    if (!m) return null;
+    return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+  }
+  function endOf(ev){
+    var d = parse(ev.end || "");
+    if (d) return d;
+    var s = parse(ev.start);
+    return s ? new Date(s.getTime() + 2 * 3600 * 1000) : null;
+  }
+  var fmt = function(d, opts){ return d.toLocaleDateString(undefined, opts); };
+  function time(d){ return d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }); }
+
+  function card(ev, isPast){
+    var s = parse(ev.start);
+    if (!s) return "";
+    var e = endOf(ev);
+    return '<article class="event' + (isPast ? " past" : "") + '">' +
+      '<div class="datebox" aria-hidden="true">' +
+        '<div class="dow">' + fmt(s, { weekday: "short" }) + '</div>' +
+        '<div class="day">' + s.getDate() + '</div>' +
+        '<div class="mon">' + fmt(s, { month: "short" }) + '</div>' +
+      '</div>' +
+      '<div class="ev-body">' +
+        '<div class="ev-top">' +
+          '<span class="ev-kind">' + esc(ev.kind) + '</span>' +
+          (ev.tbc ? '<span class="ev-kind ev-tbc">TBC</span>' : '') +
+        '</div>' +
+        '<h3>' + esc(ev.title) + '</h3>' +
+        '<div class="ev-meta">' +
+          '<span>' + ICON_CLOCK + fmt(s, { day: "numeric", month: "long", year: "numeric" }) +
+            ', ' + time(s) + '–' + time(e) + '</span>' +
+          (ev.location ? '<span>' + ICON_PIN + esc(ev.location) + '</span>' : '') +
+        '</div>' +
+        (ev.blurb ? '<p>' + esc(ev.blurb) + '</p>' : '') +
+        '<div class="ev-actions">' +
+          (ev.url ? '<a class="btn-team" href="' + esc(ev.url) + '"' +
+                    (/^https?:/.test(ev.url) ? ' target="_blank" rel="noreferrer"' : '') + '>' +
+                    esc(ev.urlLabel || "Details") + ' <span aria-hidden="true">&#8594;</span></a>' : '') +
+          (isPast ? '' : '<button class="btn-ics" type="button" data-ics="' + esc(ev.start) + '">Add to calendar</button>') +
+        '</div>' +
+      '</div></article>';
+  }
+
+  function groupByMonth(list){
+    var out = [], seen = {};
+    list.forEach(function(ev){
+      var d = parse(ev.start);
+      if (!d) return;
+      var k = d.getFullYear() + "-" + d.getMonth();
+      if (!seen[k]){ seen[k] = { label: fmt(d, { month: "long", year: "numeric" }), items: [] }; out.push(seen[k]); }
+      seen[k].items.push(ev);
+    });
+    return out;
+  }
+
+  function render(){
+    var now = new Date();
+    var upcoming = [], past = [];
+    EVENTS.forEach(function(ev){
+      var e = endOf(ev);
+      (e && e >= now ? upcoming : past).push(ev);
+    });
+    upcoming.sort(function(a,b){ return parse(a.start) - parse(b.start); });
+    past.sort(function(a,b){ return parse(b.start) - parse(a.start); });
+
+    document.getElementById("upcoming").innerHTML = upcoming.length
+      ? groupByMonth(upcoming).map(function(g){
+          return '<h3 class="month">' + esc(g.label) + '</h3>' + g.items.map(function(e){ return card(e, false); }).join("");
+        }).join("")
+      : '<div class="empty">Nothing scheduled right now. Check back, or follow the club for announcements.</div>';
+
+    document.getElementById("past").innerHTML = past.length
+      ? groupByMonth(past).map(function(g){
+          return '<h3 class="month">' + esc(g.label) + '</h3>' + g.items.map(function(e){ return card(e, true); }).join("");
+        }).join("")
+      : '<div class="empty">Nothing here yet.</div>';
+  }
+
+  // Build a .ics the browser downloads — no library, and it works offline.
+  function icsFor(ev){
+    function stamp(d){
+      function p(n){ return String(n).padStart(2, "0"); }
+      return d.getFullYear() + p(d.getMonth()+1) + p(d.getDate()) + "T" +
+             p(d.getHours()) + p(d.getMinutes()) + "00";
+    }
+    var s = parse(ev.start), e = endOf(ev);
+    var lines = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//EBS Investment Club//Calendar//EN",
+      "BEGIN:VEVENT",
+      "UID:" + s.getTime() + "@ebsic.ee",
+      "DTSTAMP:" + stamp(new Date()),
+      "DTSTART:" + stamp(s),
+      "DTEND:" + stamp(e),
+      "SUMMARY:" + ev.title.replace(/[,;]/g, "\\$&"),
+      ev.location ? "LOCATION:" + ev.location.replace(/[,;]/g, "\\$&") : "",
+      ev.blurb ? "DESCRIPTION:" + ev.blurb.replace(/[,;]/g, "\\$&") : "",
+      "END:VEVENT", "END:VCALENDAR"
+    ].filter(Boolean);
+    return lines.join("\r\n");
+  }
+
+  function wire(){
+    document.addEventListener("click", function(e){
+      var btn = e.target.closest && e.target.closest("[data-ics]");
+      if (!btn) return;
+      var ev = EVENTS.filter(function(x){ return x.start === btn.getAttribute("data-ics"); })[0];
+      if (!ev) return;
+      var blob = new Blob([icsFor(ev)], { type: "text/calendar;charset=utf-8" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = ev.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase() + ".ics";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+      btn.textContent = "Downloaded";
+      setTimeout(function(){ btn.textContent = "Add to calendar"; }, 1800);
+    });
+  }
+
+  function init(){ render(); wire(); }
+  if (document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); }
+  else { init(); }
+})();
+</script>
+
+</body>
+</html>
