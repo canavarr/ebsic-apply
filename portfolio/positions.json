@@ -1,0 +1,16 @@
+{
+  "note": "The club's holdings as the broker records them. costEur is the euro cost basis fixed at purchase, not qty x cost x today's FX. snapshot is the broker's price at the time of the statement and is the fallback when no live quote is available. symbol/exchange is the key used in prices.json; ticker is what the broker displays.",
+  "snapshotFxUsdEur": 0.893254,
+  "positions": [
+    { "name": "Alphabet Inc.",                 "ticker": "GOOGL", "symbol": "GOOGL", "exchange": "NASDAQ",
+      "isin": "US02079K3059", "qty": 6,  "cost": 341.08, "snapshot": 359.22, "currency": "USD", "costEur": 1828.00, "group": "Single stock" },
+    { "name": "iShares NASDAQ-100 UCITS ETF",  "ticker": "EXXT",  "symbol": "EXXT",  "exchange": "XETR",
+      "isin": "DE000A0F5UF5", "qty": 21, "cost": 214.11, "snapshot": 265.10, "currency": "EUR", "costEur": 4496.38, "group": "Nasdaq-100" },
+    { "name": "Vanguard S&P 500 UCITS ETF",    "ticker": "VUAA",  "symbol": "VUAA",  "exchange": "XETR",
+      "isin": "IE00BFMXXD54", "qty": 40, "cost": 103.37, "snapshot": 135.18, "currency": "EUR", "costEur": 4134.95, "group": "S&P 500" },
+    { "name": "Vanguard S&P 500 UCITS ETF",    "ticker": "VUAA",  "symbol": "VUAA",  "exchange": "LSE",
+      "isin": "IE00BFMXXD54", "qty": 5,  "cost": 122.24, "snapshot": 150.42, "currency": "USD", "costEur": 545.96,  "group": "S&P 500" },
+    { "name": "Xtrackers STOXX Europe 600 1C", "ticker": "DX2X",  "symbol": "XSX6",  "exchange": "XETR",
+      "isin": "LU0328475792", "qty": 7,  "cost": 139.10, "snapshot": 165.22, "currency": "EUR", "costEur": 973.70,  "group": "Europe 600" }
+  ]
+}

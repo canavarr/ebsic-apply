@@ -30,6 +30,7 @@
        colour only — never body text on paper. */
     --ebs-mint:#73ebc7; --ebs-blue-mid:#006aac;
     --ebs-mint-tint:#ebfffa; --ebs-blue-tint:#d1e6fa; --footer-email:#D9F9F7;
+    --draft:#9A5C06; --draft-bg:#FFF6E6;
   }
 
   *{ box-sizing:border-box; }
@@ -131,7 +132,7 @@
     font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
     color:var(--navy); background:var(--accent-line); padding:5px 11px; border-radius:999px;
   }
-  .ev-tbc{ background:#FFF6E6; color:#9A5C06; }  /* date not confirmed */
+  .ev-tbc{ background:var(--draft-bg); color:var(--draft); }
   .ev-body h3{ font-size:21px; font-weight:700; line-height:1.3; margin:0 0 8px; }
   .ev-meta{ display:flex; flex-wrap:wrap; gap:6px 20px; font-size:14px; color:var(--muted-strong); margin-bottom:10px; }
   .ev-meta span{ display:inline-flex; align-items:center; gap:7px; }
@@ -197,6 +198,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <div class="page">
+
 
   <header class="topbar">
     <a class="logo-link" href="../">
