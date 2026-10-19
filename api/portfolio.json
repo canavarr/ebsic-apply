@@ -1,11 +1,11 @@
 {
   "$schema": "https://ebsic.ee/api/",
   "endpoint": "https://ebsic.ee/api/portfolio.json",
-  "generated": "2026-10-19T17:58:36+00:00",
+  "generated": "2026-10-19T18:20:19+00:00",
   "baseCurrency": "EUR",
   "prices": {
     "source": "Boerse Frankfurt (prices) + Frankfurter/ECB (FX)",
-    "updated": "2026-10-19T08:12:10+00:00",
+    "updated": "2026-10-19T18:20:19+00:00",
     "live": 5,
     "fallback": 0,
     "delayMinutes": 15,
@@ -13,40 +13,40 @@
   },
   "fx": {
     "pair": "USD/EUR",
-    "rate": 0.88865,
+    "rate": 0.89087,
     "source": "Frankfurter / ECB reference rate"
   },
   "totals": {
     "costEur": 11978.99,
-    "valueEur": 14384.95,
-    "profitEur": 2405.96,
-    "returnPct": 20.08,
+    "valueEur": 14388.56,
+    "profitEur": 2409.57,
+    "returnPct": 20.11,
     "positions": 5
   },
   "groups": [
     {
       "group": "S&P 500",
-      "valueEur": 5994.0,
+      "valueEur": 5978.02,
       "costEur": 4680.91,
-      "weightPct": 41.67
+      "weightPct": 41.55
     },
     {
       "group": "Nasdaq-100",
-      "valueEur": 5383.35,
+      "valueEur": 5401.2,
       "costEur": 4496.38,
-      "weightPct": 37.42
+      "weightPct": 37.54
     },
     {
       "group": "Single stock",
-      "valueEur": 1837.2,
+      "valueEur": 1844.4,
       "costEur": 1828.0,
-      "weightPct": 12.77
+      "weightPct": 12.82
     },
     {
       "group": "Europe 600",
-      "valueEur": 1170.4,
+      "valueEur": 1164.94,
       "costEur": 973.7,
-      "weightPct": 8.14
+      "weightPct": 8.1
     }
   ],
   "holdings": [
@@ -60,14 +60,14 @@
       "quantity": 6,
       "currency": "USD",
       "entryPrice": 341.08,
-      "price": 344.57,
+      "price": 345.06,
       "priceSource": "Boerse Frankfurt",
-      "priceAsOf": "2026-10-19T07:56:59Z",
-      "changeSinceEntryPct": 1.02,
+      "priceAsOf": "2026-10-19T18:05:16Z",
+      "changeSinceEntryPct": 1.17,
       "costEur": 1828.0,
-      "valueEur": 1837.2,
-      "profitEur": 9.2,
-      "weightPct": 12.77
+      "valueEur": 1844.4,
+      "profitEur": 16.4,
+      "weightPct": 12.82
     },
     {
       "name": "iShares NASDAQ-100 UCITS ETF",
@@ -79,14 +79,14 @@
       "quantity": 21,
       "currency": "EUR",
       "entryPrice": 214.11,
-      "price": 256.35,
+      "price": 257.2,
       "priceSource": "Boerse Frankfurt",
-      "priceAsOf": "2026-10-19T07:57:07Z",
-      "changeSinceEntryPct": 19.73,
+      "priceAsOf": "2026-10-19T18:05:15Z",
+      "changeSinceEntryPct": 20.13,
       "costEur": 4496.38,
-      "valueEur": 5383.35,
-      "profitEur": 886.97,
-      "weightPct": 37.42
+      "valueEur": 5401.2,
+      "profitEur": 904.82,
+      "weightPct": 37.54
     },
     {
       "name": "Vanguard S&P 500 UCITS ETF",
@@ -98,14 +98,14 @@
       "quantity": 40,
       "currency": "EUR",
       "entryPrice": 103.37,
-      "price": 133.2,
+      "price": 132.84,
       "priceSource": "Boerse Frankfurt",
-      "priceAsOf": "2026-10-19T07:57:07Z",
-      "changeSinceEntryPct": 28.86,
+      "priceAsOf": "2026-10-19T18:05:18Z",
+      "changeSinceEntryPct": 28.51,
       "costEur": 4134.95,
-      "valueEur": 5328.0,
-      "profitEur": 1193.05,
-      "weightPct": 37.04
+      "valueEur": 5313.8,
+      "profitEur": 1178.85,
+      "weightPct": 36.93
     },
     {
       "name": "Vanguard S&P 500 UCITS ETF",
@@ -117,14 +117,14 @@
       "quantity": 5,
       "currency": "USD",
       "entryPrice": 122.24,
-      "price": 149.89,
+      "price": 149.12,
       "priceSource": "Boerse Frankfurt",
-      "priceAsOf": "2026-10-19T07:57:08Z",
-      "changeSinceEntryPct": 22.62,
+      "priceAsOf": "2026-10-19T18:05:18Z",
+      "changeSinceEntryPct": 21.99,
       "costEur": 545.96,
-      "valueEur": 666.0,
-      "profitEur": 120.04,
-      "weightPct": 4.63
+      "valueEur": 664.22,
+      "profitEur": 118.26,
+      "weightPct": 4.62
     },
     {
       "name": "Xtrackers STOXX Europe 600 1C",
@@ -136,14 +136,14 @@
       "quantity": 7,
       "currency": "EUR",
       "entryPrice": 139.1,
-      "price": 167.2,
+      "price": 166.42,
       "priceSource": "Boerse Frankfurt",
-      "priceAsOf": "2026-10-19T07:57:08Z",
-      "changeSinceEntryPct": 20.2,
+      "priceAsOf": "2026-10-19T18:05:14Z",
+      "changeSinceEntryPct": 19.64,
       "costEur": 973.7,
-      "valueEur": 1170.4,
-      "profitEur": 196.7,
-      "weightPct": 8.14
+      "valueEur": 1164.94,
+      "profitEur": 191.24,
+      "weightPct": 8.1
     }
   ],
   "complete": true
