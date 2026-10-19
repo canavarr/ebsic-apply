@@ -1,0 +1,43 @@
+{
+  "updated": "2026-10-19T08:12:10+00:00",
+  "source": "Boerse Frankfurt (prices) + Frankfurter/ECB (FX)",
+  "fxUsdEur": 0.88865,
+  "quotes": {
+    "GOOGL:NASDAQ": {
+      "price": 306.2,
+      "currency": "EUR",
+      "changePct": 0.08,
+      "asOf": "2026-10-19T07:56:59Z",
+      "isin": "US02079K3059"
+    },
+    "EXXT:XETR": {
+      "price": 256.35,
+      "currency": "EUR",
+      "changePct": 0.41,
+      "asOf": "2026-10-19T07:57:07Z",
+      "isin": "DE000A0F5UF5"
+    },
+    "VUAA:XETR": {
+      "price": 133.2,
+      "currency": "EUR",
+      "changePct": 0.3,
+      "asOf": "2026-10-19T07:57:07Z",
+      "isin": "IE00BFMXXD54"
+    },
+    "VUAA:LSE": {
+      "price": 133.2,
+      "currency": "EUR",
+      "changePct": 0.3,
+      "asOf": "2026-10-19T07:57:08Z",
+      "isin": "IE00BFMXXD54"
+    },
+    "XSX6:XETR": {
+      "price": 167.2,
+      "currency": "EUR",
+      "changePct": -0.74,
+      "asOf": "2026-10-19T07:57:08Z",
+      "isin": "LU0328475792"
+    }
+  },
+  "errors": []
+}
