@@ -14,7 +14,9 @@ Sources (both free, neither needs a key):
   - Frankfurter       — ECB reference rate for USD/EUR
 
 Usage:
-    python3 refresh-prices.py            # fetch and write prices.json
+    python3 refresh-prices.py            # fetch once and write prices.json
+    python3 refresh-prices.py --watch    # keep refreshing every 60s
+    python3 refresh-prices.py --watch 30 # ...every 30s
     python3 refresh-prices.py --dry-run  # print what it would write
 
 Run it before opening the page, or on a schedule:
@@ -23,6 +25,7 @@ Run it before opening the page, or on a schedule:
 
 import json
 import sys
+import time
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
@@ -51,8 +54,8 @@ def get_json(url, timeout=20):
         return json.loads(r.read().decode("utf-8"))
 
 
-def main():
-    dry = "--dry-run" in sys.argv
+def once(dry=False):
+    """Fetch every instrument plus the FX rate and write prices.json."""
     quotes, errors = {}, []
 
     for inst in INSTRUMENTS:
@@ -70,7 +73,7 @@ def main():
                 "asOf": d.get("timestamp"),
                 "isin": inst["isin"],
             }
-            print(f"  {inst['key']:14s} {price:>10.2f} EUR   {inst['name']}")
+            print(f"  {inst['key']:14s} {price:>10.2f} EUR   {inst['name']}", flush=True)
         except Exception as e:                      # one bad symbol must not lose the rest
             errors.append(f"{inst['key']}: {e}")
             print(f"  {inst['key']:14s} {'FAILED':>10}   {e}")
@@ -103,8 +106,33 @@ def main():
 
     OUT.write_text(json.dumps(payload, indent=2) + "\n")
     print(f"\nwrote {OUT}  ({len(quotes)} quotes"
-          + (f", {len(errors)} error(s)" if errors else "") + ")")
+          + (f", {len(errors)} error(s)" if errors else "") + ")", flush=True)
     return 1 if len(quotes) == 0 else 0
+
+
+def main():
+    args = sys.argv[1:]
+    dry = "--dry-run" in args
+
+    # --watch [seconds]: keep refreshing so the page tracks the feed as it
+    # updates. The sources are free and unmetered, so a short interval costs
+    # nothing; the underlying quotes are still ~15 minutes delayed.
+    if "--watch" in args:
+        i = args.index("--watch")
+        try:
+            every = int(args[i + 1])
+        except (IndexError, ValueError):
+            every = 60
+        print(f"  watching: refreshing every {every}s, ctrl-c to stop\n", flush=True)
+        try:
+            while True:
+                once(dry)
+                print(f"  ...sleeping {every}s\n", flush=True)
+                time.sleep(every)
+        except KeyboardInterrupt:
+            print("\n  stopped")
+            return 0
+    return once(dry)
 
 
 if __name__ == "__main__":

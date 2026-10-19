@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio — EBS Investment Club</title>
+<title>Portfolio | EBS Investment Club</title>
 <meta name="description" content="The EBS Investment Club portfolio: holdings, allocation and return since entry, with live prices.">
 <meta name="theme-color" content="#001F4C">
 <meta name="color-scheme" content="light">
@@ -24,7 +24,12 @@
     --navy:#001F4C; --navy-soft:#16336e; --paper:#F6F8F9; --card:#ffffff; --tint:#fafbfd;
     --pill:#F2F4F6; --pill-hover:#d9dce6; --body-soft:rgba(0,31,76,.78);
     --muted:#6b7490; --muted-strong:#5f6884; --accent-line:#dbe4f5;
-    --accent:#006ACC; --accent-hover:#0058b0; --sky:#9fd6ff; --footer-email:#D9F9F7;
+    --accent:#006ACC; --accent-hover:#0058b0; --sky:#73ebc7;
+    /* EBS house palette, taken from ebs.ee's own tokens. Mint is 11.1:1 on
+       navy but only 1.45:1 on white, so it is a dark-surface and gradient
+       colour only — never body text on paper. */
+    --ebs-mint:#73ebc7; --ebs-blue-mid:#006aac;
+    --ebs-mint-tint:#ebfffa; --ebs-blue-tint:#d1e6fa; --footer-email:#D9F9F7;
     --warn:#9A5C06; --warn-bg:#FFF6E6;
   }
 
@@ -50,6 +55,14 @@
   .skip-link:focus{ left:24px; }
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px 56px; }
+
+  /* EBS's signature under-nav accent, same stops as its own
+     --gradient-ebs-under-nav-accent token. */
+  .topbar{ position:relative; }
+  .topbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+    background:linear-gradient(270deg,#001f4c 5.23%,var(--ebs-blue-mid) 48.88%,var(--ebs-mint) 91.17%);
+  }
   .logo-img{ height:32px; width:auto; display:block; }
   .site-nav{ display:flex; align-items:center; gap:28px; }
   .nav-link{ color:#fff; text-decoration:none; font-size:16px; font-weight:600; }
@@ -67,7 +80,7 @@
   .nav-link{ position:relative; }
   .nav-link::after{
     content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px;
-    background:currentColor; border-radius:2px;
+    background:var(--ebs-mint); border-radius:2px;
     transform:scaleX(0); transform-origin:left center;
     transition:transform .24s cubic-bezier(.4,0,.2,1);
   }
@@ -93,8 +106,9 @@
   .hero{
     border-radius:22px; padding:60px 64px;
     background:
-      radial-gradient(120% 140% at 88% 10%, rgba(0,106,204,.55) 0%, rgba(0,106,204,0) 58%),
-      linear-gradient(112deg,#001F4C 0%,#062a63 52%,var(--navy-soft) 100%);
+      radial-gradient(90% 120% at 93% 6%, rgba(115,235,199,.24) 0%, rgba(115,235,199,0) 55%),
+      radial-gradient(120% 140% at 78% 18%, rgba(0,106,172,.62) 0%, rgba(0,106,172,0) 62%),
+      linear-gradient(112deg,#001F4C 0%,#032a5c 55%,#063a74 100%);
   }
   .hero-eyebrow{ font-size:13px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--sky); margin:0 0 16px; }
   .hero h1{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:72px; line-height:1; color:#fff; text-transform:uppercase; margin:0 0 20px; }
@@ -128,35 +142,32 @@
   }
   .btn-refresh:hover{ background:var(--navy); color:#fff; }
   .btn-refresh:disabled{ opacity:.5; cursor:not-allowed; }
-  .status-note{ font-size:13px; color:var(--muted-strong); line-height:1.5; margin-top:-8px; margin-bottom:20px; }
 
-  /* ---- KPI row ---- */
-  .kpi-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
-  .kpi{ padding:4px 26px; border-left:1px solid var(--accent-line); }
-  .kpi:first-child{ border-left:none; padding-left:0; }
-  .kpi-value{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:48px; line-height:1; margin-bottom:8px; font-variant-numeric:tabular-nums; }
-  .kpi-label{ font-size:13.5px; color:var(--muted-strong); line-height:1.4; }
+  /* ---- Headline figure ---- */
+  .headline{ display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; }
+  .headline-value{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:60px; line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .headline-delta{ font-size:19px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .data.compact .detail{ display:none; }
 
   /* ---- Allocation bar ---- */
-  .alloc-bar{ display:flex; width:100%; height:62px; gap:2px; border-radius:6px; overflow:hidden; margin-bottom:20px; }
-  .seg{ position:relative; display:flex; align-items:center; justify-content:center; min-width:0; color:#fff; font-size:13px; font-weight:700; background:var(--c); }
-  .seg:first-child{ border-radius:4px 0 0 4px; }
-  .seg:last-child{ border-radius:0 4px 4px 0; }
-  .seg .seg-pct{ text-shadow:0 1px 2px rgba(0,0,0,.35); }
-  .seg[data-narrow="1"] .seg-pct{ display:none; }
-  .legend{ display:flex; flex-wrap:wrap; gap:10px 26px; }
-  .legend-item{ display:flex; align-items:center; gap:9px; font-size:14px; color:var(--body-soft); }
-  .legend-swatch{ width:12px; height:12px; border-radius:3px; background:var(--c); flex-shrink:0; }
-  .legend-item b{ color:var(--navy); font-variant-numeric:tabular-nums; }
-  .viz-tooltip{
-    position:fixed; z-index:60; pointer-events:none; opacity:0; transform:translate(-50%,-130%);
-    background:var(--navy); color:#fff; font-size:13px; font-weight:600; padding:8px 12px;
-    border-radius:8px; white-space:nowrap; box-shadow:0 6px 18px rgba(0,0,0,.22); transition:opacity .12s ease;
-  }
-  .viz-tooltip[data-show="1"]{ opacity:1; }
+  /* ---- Per-holding weight bars ----
+     The weight bar is the allocation chart now: one bar per holding, coloured
+     by the exposure it belongs to. Every bar is accompanied by its figure and
+     its exposure name in text, so colour never carries meaning on its own. */
+  .wcol, .wcell{ min-width:170px; }
+  .wbar{ display:block; height:8px; border-radius:4px; background:var(--pill); overflow:hidden; margin-bottom:6px; }
+  .wbar > span{ display:block; height:100%; border-radius:4px; background:var(--c); }
+  .wnum{ font-size:12.5px; color:var(--muted-strong); font-variant-numeric:tabular-nums; }
+  .status-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
   /* ---- Tables ---- */
-  .table-wrap{ overflow-x:auto; margin-top:24px; }
+  .table-wrap{
+    overflow-x:auto; margin-top:24px; padding-top:22px;
+    border-top:1px solid var(--accent-line);
+  }
   table.data{ width:100%; border-collapse:collapse; font-size:15px; }
   table.data caption{ text-align:left; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-bottom:12px; }
   table.data th{ text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700; padding:0 14px 12px; border-bottom:1px solid var(--accent-line); white-space:nowrap; }
@@ -167,8 +178,6 @@
   .num{ text-align:right; font-variant-numeric:tabular-nums; }
   .name-cell{ font-weight:700; color:var(--navy); }
   .sub{ display:block; font-size:12.5px; font-weight:500; color:var(--muted); margin-top:3px; }
-  .tick-cell{ font-variant-numeric:tabular-nums; font-weight:600; color:var(--navy); }
-  .swatch-inline{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:9px; background:var(--c); }
   /* The sign is in the text, so colour is never the only channel. */
   .delta-pos{ color:var(--pos); font-weight:700; }
   .delta-neg{ color:var(--neg); font-weight:700; }
@@ -202,8 +211,6 @@
     .band, .disclaimer{ padding-left:32px; padding-right:32px; }
     .band{ padding-top:52px; }
     .card{ padding:30px 26px; }
-    .kpi-row{ grid-template-columns:repeat(2,1fr); gap:24px 0; }
-    .kpi:nth-child(odd){ border-left:none; padding-left:0; }
     .prose-grid{ grid-template-columns:1fr; }
     .side-col{ border-left:none; border-top:1px solid var(--accent-line); border-radius:0 0 22px 22px; }
     .footer{ padding:32px 28px; }
@@ -221,10 +228,7 @@
     .band{ padding-top:38px; padding-bottom:26px; }
     .band-head h2{ font-size:30px; }
     .card{ padding:22px 18px; }
-    .kpi-row{ grid-template-columns:1fr; gap:20px; }
-    .kpi{ border-left:none; padding:0; }
-    .kpi-value{ font-size:40px; }
-    .alloc-bar{ height:50px; }
+    .headline-value{ font-size:44px; }
     .prose-col, .side-col{ padding:26px 20px; }
     .disclaimer-inner{ padding:24px 20px; }
     .footer{ padding:26px 20px; flex-direction:column; align-items:flex-start; gap:14px; }
@@ -255,14 +259,14 @@
     <section class="hero">
       <p class="hero-eyebrow">Portfolio Team</p>
       <h1>The club<br>portfolio</h1>
-      <p>What the club holds, how it is allocated, and how each position has done since it was
-         bought — with prices refreshed live during market hours.</p>
+      <p>What the club owns, and how each holding is doing. Prices update while markets are
+         open.</p>
     </section>
   </div>
 
   <main id="main" class="viz">
 
-    <!-- ---------- Totals ---------- -->
+    <!-- ---------- Overview ---------- -->
     <section class="band">
       <div class="band-head">
         <h2>Where things<br>stand</h2>
@@ -272,54 +276,26 @@
           <span class="status-pill" id="status-pill" data-state="loading">
             <span class="status-dot"></span><span id="status-text">Loading prices…</span>
           </span>
-          <button class="btn-refresh" id="refresh-btn" type="button">Refresh</button>
+          <span class="status-actions">
+            <button class="btn-refresh" id="detail-btn" type="button" aria-expanded="false">Show cost basis</button>
+            <button class="btn-refresh" id="refresh-btn" type="button">Refresh</button>
+          </span>
         </div>
-        <p class="status-note" id="status-note"></p>
-        <div class="kpi-row" id="kpi-row"></div>
-      </div>
-    </section>
 
-    <!-- ---------- Allocation ---------- -->
-    <section class="band">
-      <div class="band-head">
-        <h2>Allocation<br>by exposure</h2>
-        <p>Grouped by what each holding actually tracks, not by product type — so the two VUAA
-           lines count as one S&amp;P 500 exposure. Shares are of live market value.</p>
-      </div>
-      <div class="card">
-        <div class="alloc-bar" id="alloc-bar" role="img" aria-labelledby="alloc-desc"></div>
-        <p id="alloc-desc" style="position:absolute;left:-9999px;"></p>
-        <div class="legend" id="alloc-legend"></div>
+        <div class="headline" id="headline"></div>
+
         <div class="table-wrap">
-          <table class="data">
-            <caption>Allocation, as a table</caption>
-            <thead><tr><th scope="col">Exposure</th><th scope="col" class="num">Value</th><th scope="col" class="num">Share</th></tr></thead>
-            <tbody id="alloc-table"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- Positions ---------- -->
-    <section class="band">
-      <div class="band-head">
-        <h2>Positions and<br>return since entry</h2>
-        <p>Change is measured against the average price the club paid, not from the start of the
-           year. Values are converted to euros; dollar-quoted lines are marked.</p>
-      </div>
-      <div class="card">
-        <div class="table-wrap" style="margin-top:0;">
-          <table class="data">
+          <table class="data compact" id="positions">
             <caption>Holdings</caption>
             <thead>
               <tr>
-                <th scope="col">Instrument</th>
-                <th scope="col">Ticker</th>
-                <th scope="col" class="num">Qty</th>
-                <th scope="col" class="num">Cost</th>
-                <th scope="col" class="num">Price</th>
+                <th scope="col">Holding</th>
+                <th scope="col" class="wcol">Weight</th>
+                <th scope="col" class="num detail">Qty</th>
+                <th scope="col" class="num detail">Cost</th>
+                <th scope="col" class="num detail">Price</th>
                 <th scope="col" class="num">Since entry</th>
-                <th scope="col" class="num">Profit</th>
+                <th scope="col" class="num detail">Profit</th>
                 <th scope="col" class="num">Value</th>
               </tr>
             </thead>
@@ -341,7 +317,6 @@
 
 </div>
 
-<div class="viz-tooltip" id="viz-tooltip" role="status" aria-live="polite"></div>
 
 <script src="quotes-config.js"></script>
 <script>
@@ -418,85 +393,61 @@
   function changePct(p){ return (price(p) - p.cost) / p.cost * 100; }
 
   // ---- rendering ------------------------------------------------------
-  function renderKpis(){
+  function renderHeadline(){
     var t = totals();
-    var tiles = [
-      { v: eur(t.value),                     l: "total market value" },
-      { v: signed(t.profit, 2, " €"),   l: "profit since entry", cls: t.profit >= 0 ? "delta-pos" : "delta-neg" },
-      { v: signed(t.ret, 2, "%"),            l: "return since entry", cls: t.ret >= 0 ? "delta-pos" : "delta-neg" },
-      { v: String(POSITIONS.length),         l: "open positions" }
-    ];
-    document.getElementById("kpi-row").innerHTML = tiles.map(function(t){
-      return '<div class="kpi"><div class="kpi-value ' + (t.cls || "") + '">' + esc(t.v) + '</div>' +
-             '<div class="kpi-label">' + esc(t.l) + '</div></div>';
-    }).join("");
+    var cls = t.profit >= 0 ? "delta-pos" : "delta-neg";
+    document.getElementById("headline").innerHTML =
+      '<span class="headline-value">' + eur(t.value) + '</span>' +
+      '<span class="headline-delta ' + cls + '">' + signed(t.ret, 2, "%") + " \u00B7 " +
+        signed(t.profit, 2, " \u20AC") + '</span>';
   }
 
-  function renderAllocation(){
+  var GROUP_COLOUR = {};
+
+  // Each holding's weight bar is coloured by the exposure it belongs to, so the
+  // two VUAA lines read as one S&P 500 position. The grouping is still named in
+  // text on every row, so the colour is reinforcement, not the only signal.
+  function assignGroupColours(){
     var groups = {};
     POSITIONS.forEach(function(p){ groups[p.group] = (groups[p.group] || 0) + valueEur(p); });
-    var total = Object.keys(groups).reduce(function(a,k){ return a + groups[k]; }, 0);
-    var rows = Object.keys(groups).map(function(k){
-      return { name: k, value: groups[k], pct: groups[k] / total * 100 };
-    }).sort(function(a,b){ return b.value - a.value; });
-
-    document.getElementById("alloc-bar").innerHTML = rows.map(function(d,i){
-      return '<div class="seg" data-narrow="0"' +
-             ' style="flex:0 0 ' + d.pct.toFixed(3) + '%; --c:' + SERIES[i % SERIES.length] + '"' +
-             ' data-name="' + esc(d.name) + '" data-pct="' + nf(d.pct,1) + '">' +
-             '<span class="seg-pct">' + nf(d.pct,1) + '%</span></div>';
-    }).join("");
-
-    document.getElementById("alloc-desc").textContent = "Allocation by exposure: " +
-      rows.map(function(d){ return d.name + " " + nf(d.pct,1) + "%"; }).join(", ") + ".";
-
-    document.getElementById("alloc-legend").innerHTML = rows.map(function(d,i){
-      return '<span class="legend-item"><span class="legend-swatch" style="--c:' + SERIES[i % SERIES.length] + '"></span>' +
-             esc(d.name) + ' <b>' + nf(d.pct,1) + '%</b></span>';
-    }).join("");
-
-    document.getElementById("alloc-table").innerHTML = rows.map(function(d,i){
-      return '<tr><td><span class="swatch-inline" style="--c:' + SERIES[i % SERIES.length] + '"></span>' +
-             esc(d.name) + '</td><td class="num">' + eur(d.value) + '</td>' +
-             '<td class="num">' + nf(d.pct,1) + '%</td></tr>';
-    }).join("");
-
-    fitSegLabels();
+    var order = Object.keys(groups).sort(function(a,b){ return groups[b] - groups[a]; });
+    GROUP_COLOUR = {};
+    order.forEach(function(name,i){ GROUP_COLOUR[name] = SERIES[i % SERIES.length]; });
   }
 
-  // Two of the categorical slots sit under 3:1 against white, and their visible
-  // label is what makes them legal. So drop a label only when the segment is
-  // genuinely too narrow to hold one — measured in pixels, not guessed from the
-  // percentage, which behaves differently at phone width.
-  function fitSegLabels(){
-    Array.prototype.forEach.call(document.querySelectorAll("#alloc-bar .seg"), function(seg){
-      seg.setAttribute("data-narrow", seg.offsetWidth < 38 ? "1" : "0");
-    });
-  }
+  var showDetail = false;
 
   function renderPositions(changedTickers){
     changedTickers = changedTickers || {};
-    document.getElementById("positions-table").innerHTML = POSITIONS.map(function(p){
-      var chg = changePct(p), prof = profitEur(p);
+    var t = totals();
+    // Biggest holding first: this list doubles as the allocation chart, so it
+    // should read top-down like one.
+    var rows = POSITIONS.slice().sort(function(a,b){ return valueEur(b) - valueEur(a); });
+
+    document.getElementById("positions-table").innerHTML = rows.map(function(p){
+      var chg = changePct(p), prof = profitEur(p), val = valueEur(p);
+      var w = t.value ? val / t.value * 100 : 0;
       var key = p.symbol + ":" + p.exchange;
       return '<tr' + (changedTickers[key] ? ' class="fresh"' : '') + '>' +
         '<td class="name-cell">' + esc(p.name) +
-          '<span class="sub">' + esc(p.exchange) + ' · ' + esc(p.currency) +
-          (p.currency === "USD" ? " (converted)" : "") + '</span></td>' +
-        '<td class="tick-cell">' + esc(p.ticker) + '</td>' +
-        '<td class="num">' + p.qty + '</td>' +
-        '<td class="num">' + nf(p.cost,2) + '</td>' +
-        '<td class="num">' + nf(price(p),2) + '</td>' +
+          '<span class="sub">' + esc(p.ticker) + ' \u00B7 ' + esc(p.exchange) +
+          (p.currency === "USD" ? " \u00B7 USD, converted" : "") + '</span></td>' +
+        '<td class="wcell">' +
+          '<span class="wbar" aria-hidden="true"><span style="width:' + w.toFixed(2) +
+            '%; --c:' + (GROUP_COLOUR[p.group] || SERIES[0]) + '"></span></span>' +
+          '<span class="wnum">' + nf(w,1) + '% \u00B7 ' + esc(p.group) + '</span></td>' +
+        '<td class="num detail">' + p.qty + '</td>' +
+        '<td class="num detail">' + nf(p.cost,2) + '</td>' +
+        '<td class="num detail">' + nf(price(p),2) + '</td>' +
         '<td class="num ' + (chg >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(chg,2,"%") + '</td>' +
-        '<td class="num ' + (prof >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(prof,2," €") + '</td>' +
-        '<td class="num">' + eur(valueEur(p)) + '</td></tr>';
+        '<td class="num detail ' + (prof >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(prof,2," \u20AC") + '</td>' +
+        '<td class="num">' + eur(val) + '</td></tr>';
     }).join("");
 
-    var t = totals();
     document.getElementById("positions-foot").innerHTML =
-      '<tr><td colspan="5">Total</td>' +
+      '<tr><td colspan="' + (showDetail ? 5 : 2) + '">Total</td>' +
       '<td class="num ' + (t.profit >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(t.ret,2,"%") + '</td>' +
-      '<td class="num ' + (t.profit >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(t.profit,2," €") + '</td>' +
+      '<td class="num detail ' + (t.profit >= 0 ? "delta-pos" : "delta-neg") + '">' + signed(t.profit,2," \u20AC") + '</td>' +
       '<td class="num">' + eur(t.value) + '</td></tr>';
   }
 
@@ -504,12 +455,15 @@
     var pill = document.getElementById("status-pill");
     pill.setAttribute("data-state", stateName);
     document.getElementById("status-text").textContent = text;
-    document.getElementById("status-note").textContent = note || "";
+    // The detail (where prices came from, the FX rate, how to enable live
+    // updates) is kept on the pill as a tooltip instead of a line of technical
+    // copy on the page. The pill's own text still names the state.
+    if (note) pill.setAttribute("title", note); else pill.removeAttribute("title");
   }
 
   function renderAll(changed){
-    renderKpis();
-    renderAllocation();
+    renderHeadline();
+    assignGroupColours();
     renderPositions(changed);
   }
 
@@ -596,6 +550,7 @@
   }
 
   function report(res){
+    state.source = (res && res.source) || "snapshot";
     var fxNote = state.fxLive
       ? "USD lines converted at " + nf(state.fx, 5) + " EUR/USD (ECB reference rate, live)."
       : "USD lines converted at the recorded rate " + nf(state.fx, 5) + " EUR/USD.";
@@ -605,7 +560,7 @@
       var stamp = when ? when.toLocaleString(undefined, { hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }) : "";
       setStatus(res.n === POSITIONS.length ? "live" : "snapshot",
         "Prices from " + stamp,
-        "Fetched by refresh-prices.py from Boerse Frankfurt — no API key needed. Run it again to update. " + fxNote);
+        "Fetched by refresh-prices.py from Boerse Frankfurt, which publishes quotes about 15 minutes delayed. No API key needed. Run it with --watch to keep it updating. " + fxNote);
     } else if (res && res.source === "twelvedata"){
       var now = new Date().toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
       setStatus(res.n === POSITIONS.length ? "live" : "snapshot",
@@ -638,36 +593,28 @@
       .then(function(){ btn.disabled = false; });
   }
 
-  function wireTooltip(){
-    var tip = document.getElementById("viz-tooltip");
-    var bar = document.getElementById("alloc-bar");
-    function show(e){
-      var seg = e.target.closest && e.target.closest(".seg");
-      if (!seg) return;
-      tip.textContent = seg.getAttribute("data-name") + " · " + seg.getAttribute("data-pct") + "%";
-      tip.setAttribute("data-show","1");
-      var r = seg.getBoundingClientRect();
-      tip.style.left = (r.left + r.width/2) + "px";
-      tip.style.top = r.top + "px";
-    }
-    function hide(){ tip.removeAttribute("data-show"); }
-    bar.addEventListener("mousemove", show);
-    bar.addEventListener("mouseleave", hide);
-    bar.addEventListener("focusin", show);
-    bar.addEventListener("focusout", hide);
-  }
 
   function init(){
     renderAll();                 // snapshot first, so the page is never empty
-    wireTooltip();
-    window.addEventListener("resize", fitSegLabels);
+    document.getElementById("detail-btn").addEventListener("click", function(){
+      showDetail = !showDetail;
+      document.getElementById("positions").classList.toggle("compact", !showDetail);
+      this.textContent = showDetail ? "Hide cost basis" : "Show cost basis";
+      this.setAttribute("aria-expanded", showDetail ? "true" : "false");
+      renderPositions();
+    });
     document.getElementById("refresh-btn").addEventListener("click", refresh);
-    refresh();
+    refresh().then(schedule);
 
-    var every = (cfg && cfg.refreshMs) || 300000;
-    setInterval(function(){
-      if (document.visibilityState === "visible") refresh();
-    }, every);
+    // prices.json is same-origin and unmetered, so poll it often; a provider
+    // with a request quota gets the slower cadence instead.
+    function schedule(){
+      var ms = (state.source === "local") ? 60000 : ((cfg && cfg.refreshMs) || 300000);
+      setTimeout(function(){
+        if (document.visibilityState === "visible") refresh().then(schedule);
+        else schedule();
+      }, ms);
+    }
   }
 
   if (document.readyState === "loading"){

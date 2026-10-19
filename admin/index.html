@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event back office | EBS Investment Club</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#001F4C">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
+
+<link rel="preload" href="../assets/fonts/ZinDisplayCond-Medium.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="../assets/fonts/Montserrat-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+  @font-face{ font-family:"Zin Display Cond"; src:url("../assets/fonts/ZinDisplayCond-Medium.otf") format("opentype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+
+  :root{
+    --navy:#001F4C; --paper:#F6F8F9; --card:#ffffff; --tint:#fafbfd;
+    --pill:#F2F4F6; --pill-hover:#d9dce6; --body-soft:rgba(0,31,76,.78);
+    --muted:#6b7490; --muted-strong:#5f6884; --accent-line:#dbe4f5;
+    --accent:#006ACC; --accent-hover:#0058b0;
+    --ebs-mint:#73ebc7; --ebs-blue-mid:#006aac;
+    --ok:#0b7a40; --warn:#9A5C06; --warn-bg:#FFF6E6; --err:#b42318; --err-bg:#fdeceb;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--paper); color:var(--navy);
+             font-family:"Montserrat","Segoe UI",Arial,sans-serif; }
+  a{ color:inherit; }
+  h1,h2,h3{ margin:0; }
+  p{ margin:0; }
+
+  .topbar{
+    position:relative; background:var(--navy); display:flex; align-items:center;
+    justify-content:space-between; gap:20px; padding:20px 32px;
+  }
+  .topbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+    background:linear-gradient(270deg,#001f4c 5.23%,var(--ebs-blue-mid) 48.88%,var(--ebs-mint) 91.17%);
+  }
+  .brand{ display:flex; align-items:center; gap:16px; min-width:0; }
+  .logo-img{ height:26px; width:auto; display:block; }
+  .brand-label{
+    font-size:11.5px; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--ebs-mint); white-space:nowrap;
+  }
+  .topbar a.back{ color:#fff; text-decoration:none; font-size:14.5px; font-weight:600; white-space:nowrap; }
+  .topbar a.back:hover{ opacity:.85; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:28px 24px 64px; }
+
+  .bar{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    flex-wrap:wrap; margin-bottom:20px;
+  }
+  .status{
+    display:inline-flex; align-items:center; gap:9px; font-size:13px; font-weight:700;
+    padding:8px 15px; border-radius:999px; background:var(--pill); color:var(--navy);
+  }
+  .status .dot{ width:9px; height:9px; border-radius:50%; background:var(--muted); flex-shrink:0; }
+  .status[data-s="ready"]{ background:#e9f7ef; color:var(--ok); }
+  .status[data-s="ready"] .dot{ background:var(--ok); }
+  .status[data-s="dirty"]{ background:var(--warn-bg); color:var(--warn); }
+  .status[data-s="dirty"] .dot{ background:var(--warn); }
+  .status[data-s="error"]{ background:var(--err-bg); color:var(--err); }
+  .status[data-s="error"] .dot{ background:var(--err); }
+  .note{ font-size:13px; line-height:1.55; color:var(--muted-strong); margin-bottom:18px; }
+
+  .btn{
+    font:inherit; font-size:14.5px; font-weight:600; padding:11px 20px; border-radius:999px;
+    border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .btn:disabled{ opacity:.5; cursor:not-allowed; }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-primary:hover:not(:disabled){ background:var(--accent-hover); transform:translateY(-1px); }
+  .btn-ghost{ background:var(--pill); color:var(--navy); }
+  .btn-ghost:hover:not(:disabled){ background:var(--pill-hover); }
+  .btn-outline{ background:#fff; color:var(--navy); border:1.5px solid var(--navy); }
+  .btn-outline:hover:not(:disabled){ background:var(--navy); color:#fff; }
+  .btn-sm{ font-size:13px; padding:8px 14px; }
+  .btn-danger{ background:#fff; color:var(--err); border:1.5px solid var(--err); }
+  .btn-danger:hover:not(:disabled){ background:var(--err); color:#fff; }
+  :focus-visible{ outline:3px solid var(--navy); outline-offset:3px; }
+
+  .card{ background:var(--card); border-radius:18px; box-shadow:0 2px 10px rgba(16,38,90,.05); padding:22px 24px; }
+  .card + .card{ margin-top:16px; }
+
+  /* ---- list ---- */
+  .ev{ display:flex; align-items:flex-start; gap:18px; padding:16px 0; border-bottom:1px solid var(--accent-line); }
+  .ev:last-child{ border-bottom:none; }
+  .ev-when{
+    flex:0 0 108px; font-variant-numeric:tabular-nums; font-size:13.5px; font-weight:700; color:var(--navy);
+  }
+  .ev-when small{ display:block; font-weight:500; color:var(--muted-strong); margin-top:2px; }
+  .ev-main{ flex:1 1 auto; min-width:0; }
+  .ev-title{ font-size:16px; font-weight:700; margin-bottom:5px; }
+  .ev-sub{ font-size:13px; color:var(--muted-strong); }
+  .chip{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    padding:3px 9px; border-radius:999px; background:var(--accent-line); color:var(--navy); margin-right:6px;
+  }
+  .chip-tbc{ background:var(--warn-bg); color:var(--warn); }
+  .chip-past{ background:var(--pill); color:var(--muted-strong); }
+  .ev-actions{ flex:0 0 auto; display:flex; gap:8px; flex-wrap:wrap; }
+  .empty{ padding:26px 0; text-align:center; color:var(--muted); font-size:14.5px; }
+
+  /* ---- form ---- */
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .f-full{ grid-column:1 / -1; }
+  label.lab{ display:block; font-size:12.5px; font-weight:700; margin-bottom:6px; color:var(--navy); }
+  .req{ color:var(--err); }
+  input[type="text"], input[type="url"], input[type="datetime-local"], textarea, select{
+    width:100%; font:inherit; font-size:14.5px; padding:11px 14px; border:1.5px solid var(--accent-line);
+    border-radius:10px; background:#fff; color:var(--navy);
+  }
+  textarea{ min-height:76px; resize:vertical; }
+  input:focus, textarea:focus, select:focus{ outline:none; border-color:var(--accent); }
+  input[aria-invalid="true"]{ border-color:var(--err); background:var(--err-bg); }
+  .hint{ font-size:12px; color:var(--muted); margin-top:5px; }
+  .err{ font-size:12.5px; color:var(--err); font-weight:600; margin-top:5px; min-height:16px; }
+  .check{ display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; }
+  .check input{ width:18px; height:18px; accent-color:var(--accent); }
+  .form-actions{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+
+  details.json summary{ cursor:pointer; font-size:14px; font-weight:700; }
+  details.json textarea{ margin-top:12px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12.5px; min-height:170px; }
+
+  h2.sec{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:26px;
+    text-transform:uppercase; margin:0 0 14px;
+  }
+
+  @media (max-width:720px){
+    .topbar{ padding:16px 18px; }
+    .wrap{ padding:20px 16px 48px; }
+    .form-grid{ grid-template-columns:1fr; }
+    .ev{ flex-direction:column; gap:10px; }
+    .ev-when{ flex:0 0 auto; }
+    .ev-actions{ width:100%; }
+    .btn{ flex:1 1 auto; justify-content:center; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <a href="../"><img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club"></a>
+    <span class="brand-label">Event back office</span>
+  </div>
+  <a class="back" href="../events/" target="_blank" rel="noreferrer">View calendar &#8599;</a>
+</header>
+
+<div class="wrap">
+
+  <div class="bar">
+    <span class="status" id="status" data-s="loading"><span class="dot"></span><span id="status-text">Loading…</span></span>
+    <span style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn btn-ghost" id="new-btn" type="button">+ New event</button>
+      <button class="btn btn-primary" id="save-btn" type="button" disabled>Save changes</button>
+    </span>
+  </div>
+  <p class="note" id="note"></p>
+
+  <!-- ---- editor ---- -->
+  <section class="card" id="editor" hidden>
+    <h2 class="sec" id="editor-title">New event</h2>
+    <form id="form" novalidate>
+      <div class="form-grid">
+        <div class="f-full">
+          <label class="lab" for="f-title">Title <span class="req">*</span></label>
+          <input type="text" id="f-title" maxlength="140" autocomplete="off">
+          <div class="err" id="e-title"></div>
+        </div>
+
+        <div>
+          <label class="lab" for="f-start">Starts <span class="req">*</span></label>
+          <input type="datetime-local" id="f-start">
+          <div class="err" id="e-start"></div>
+        </div>
+        <div>
+          <label class="lab" for="f-end">Ends</label>
+          <input type="datetime-local" id="f-end">
+          <div class="hint">Leave empty for two hours after the start.</div>
+        </div>
+
+        <div>
+          <label class="lab" for="f-kind">Kind</label>
+          <input type="text" id="f-kind" list="kinds" maxlength="40" autocomplete="off" placeholder="Workshop">
+          <datalist id="kinds">
+            <option value="Speaker evening"></option>
+            <option value="Workshop"></option>
+            <option value="Club meeting"></option>
+            <option value="Social"></option>
+          </datalist>
+        </div>
+        <div>
+          <label class="lab" for="f-location">Location</label>
+          <input type="text" id="f-location" maxlength="120" autocomplete="off" placeholder="Estonian Business School, Tallinn">
+        </div>
+
+        <div>
+          <label class="lab" for="f-url">Link</label>
+          <input type="text" id="f-url" maxlength="300" autocomplete="off" placeholder="https://… or ../portfolio/">
+          <div class="err" id="e-url"></div>
+        </div>
+        <div>
+          <label class="lab" for="f-urllabel">Link label</label>
+          <input type="text" id="f-urllabel" maxlength="40" autocomplete="off" placeholder="Event page">
+        </div>
+
+        <div class="f-full">
+          <label class="lab" for="f-blurb">Description</label>
+          <textarea id="f-blurb" maxlength="400"></textarea>
+        </div>
+
+        <div class="f-full">
+          <label class="check"><input type="checkbox" id="f-tbc"> Date not confirmed (shows a TBC chip)</label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit" id="apply-btn">Add event</button>
+        <button class="btn btn-ghost" type="button" id="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ---- list ---- -->
+  <section class="card">
+    <h2 class="sec">Calendar</h2>
+    <div id="list"></div>
+  </section>
+
+  <!-- ---- raw json ---- -->
+  <section class="card">
+    <details class="json">
+      <summary>events.json</summary>
+      <p class="hint" style="margin-top:10px;">
+        What gets written. You can paste a replacement here and import it.
+      </p>
+      <textarea id="json-box" spellcheck="false"></textarea>
+      <div class="form-actions">
+        <button class="btn btn-outline btn-sm" type="button" id="download-btn">Download events.json</button>
+        <button class="btn btn-outline btn-sm" type="button" id="copy-btn">Copy</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="import-btn">Import from box</button>
+      </div>
+      <div class="err" id="e-json"></div>
+    </details>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var ENDPOINT = "/api/events";
+  var SRC = "../events/events.json";
+  var DRAFT_KEY = "ebsic-events-draft";
+
+  var state = { events: [], saved: "", canPost: null, editing: null };
+
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function uid(title){
+    var base = String(title || "event").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+    return (base || "event") + "-" + Date.now().toString(36).slice(-4);
+  }
+  function parse(s){
+    var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(String(s || ""));
+    return m ? new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5]) : null;
+  }
+  function serialise(){
+    return JSON.stringify({ events: state.events }, null, 2);
+  }
+
+  // ---- persistence -----------------------------------------------------
+  function setStatus(s, text, note){
+    $("status").setAttribute("data-s", s);
+    $("status-text").textContent = text;
+    if (note !== undefined) $("note").textContent = note;
+  }
+
+  function markDirty(){
+    var dirty = serialise() !== state.saved;
+    $("save-btn").disabled = !dirty;
+    if (dirty){
+      setStatus("dirty", "Unsaved changes");
+      try{ localStorage.setItem(DRAFT_KEY, serialise()); }catch(e){}
+    }
+    renderJson();
+  }
+
+  function markClean(msg){
+    state.saved = serialise();
+    $("save-btn").disabled = true;
+    try{ localStorage.removeItem(DRAFT_KEY); }catch(e){}
+    setStatus("ready", msg || "Saved");
+  }
+
+  function load(){
+    return fetch(SRC + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(d){
+        state.events = (d && Array.isArray(d.events)) ? d.events : [];
+        state.saved = serialise();
+        setStatus("ready", "Loaded " + state.events.length + " event" + (state.events.length === 1 ? "" : "s"),
+          "Editing events.json. Changes are kept in this browser until you save.");
+      })
+      .catch(function(e){
+        state.events = [];
+        state.saved = serialise();
+        setStatus("error", "Could not load events.json",
+          "Starting from an empty calendar (" + e.message + "). Saving will create the file.");
+      })
+      .then(restoreDraft);
+  }
+
+  function restoreDraft(){
+    var raw = null;
+    try{ raw = localStorage.getItem(DRAFT_KEY); }catch(e){}
+    if (!raw || raw === state.saved) return;
+    try{
+      var d = JSON.parse(raw);
+      if (d && Array.isArray(d.events)){
+        state.events = d.events;
+        setStatus("dirty", "Unsaved changes",
+          "Restored a draft from this browser that was never saved. Save it, or reload the page to discard.");
+        $("save-btn").disabled = false;
+      }
+    }catch(e){}
+  }
+
+  function save(){
+    var btn = $("save-btn");
+    btn.disabled = true;
+    setStatus("loading", "Saving…");
+    return fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: serialise()
+    }).then(function(r){
+      return r.json().catch(function(){ return { ok:false, error:"HTTP " + r.status }; })
+        .then(function(d){ if (!r.ok || !d.ok) throw new Error(d.error || ("HTTP " + r.status)); return d; });
+    }).then(function(d){
+      state.canPost = true;
+      markClean("Saved " + d.count + " event" + (d.count === 1 ? "" : "s"));
+      $("note").textContent = "Written to events/events.json. The calendar picks it up on reload.";
+    }).catch(function(e){
+      state.canPost = false;
+      btn.disabled = false;
+      setStatus("error", "Could not save",
+        "No write endpoint here (" + e.message + "). Run `python3 serve-admin.py` from the site folder " +
+        "and open the back office through it. You can also use Download events.json below and drop the file into events/.");
+    });
+  }
+
+  // ---- list ------------------------------------------------------------
+  function sorted(){
+    return state.events.slice().sort(function(a,b){
+      var da = parse(a.start), db = parse(b.start);
+      if (!da && !db) return 0;
+      if (!da) return 1;
+      if (!db) return -1;
+      return da - db;
+    });
+  }
+
+  function renderList(){
+    var now = new Date();
+    var rows = sorted();
+    $("list").innerHTML = rows.length ? rows.map(function(ev){
+      var d = parse(ev.start);
+      var past = d && d < now;
+      var when = d
+        ? d.toLocaleDateString(undefined, { day:"numeric", month:"short", year:"numeric" })
+        : "<span style=\"color:var(--err)\">no date</span>";
+      var time = d ? d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" }) : "";
+      return '<div class="ev" data-id="' + esc(ev.id) + '">' +
+        '<div class="ev-when">' + when + '<small>' + time + '</small></div>' +
+        '<div class="ev-main">' +
+          '<div class="ev-title">' + esc(ev.title || "(untitled)") + '</div>' +
+          '<div class="ev-sub">' +
+            (ev.kind ? '<span class="chip">' + esc(ev.kind) + '</span>' : '') +
+            (ev.tbc ? '<span class="chip chip-tbc">TBC</span>' : '') +
+            (past ? '<span class="chip chip-past">Past</span>' : '') +
+            esc(ev.location || "") +
+          '</div>' +
+        '</div>' +
+        '<div class="ev-actions">' +
+          '<button class="btn btn-ghost btn-sm" type="button" data-act="edit">Edit</button>' +
+          '<button class="btn btn-ghost btn-sm" type="button" data-act="dup">Duplicate</button>' +
+          '<button class="btn btn-danger btn-sm" type="button" data-act="del">Delete</button>' +
+        '</div></div>';
+    }).join("") : '<div class="empty">No events yet. Add the first one.</div>';
+  }
+
+  function renderJson(){ $("json-box").value = serialise(); }
+  function renderAll(){ renderList(); renderJson(); }
+
+  // ---- editor ----------------------------------------------------------
+  function openEditor(ev){
+    state.editing = ev ? ev.id : null;
+    $("editor").hidden = false;
+    $("editor-title").textContent = ev ? "Edit event" : "New event";
+    $("apply-btn").textContent = ev ? "Save event" : "Add event";
+    $("f-title").value = ev ? (ev.title || "") : "";
+    $("f-start").value = ev ? (ev.start || "") : "";
+    $("f-end").value = ev ? (ev.end || "") : "";
+    $("f-kind").value = ev ? (ev.kind || "") : "";
+    $("f-location").value = ev ? (ev.location || "") : "Estonian Business School, Tallinn";
+    $("f-url").value = ev ? (ev.url || "") : "";
+    $("f-urllabel").value = ev ? (ev.urlLabel || "") : "";
+    $("f-blurb").value = ev ? (ev.blurb || "") : "";
+    $("f-tbc").checked = ev ? !!ev.tbc : true;
+    ["title","start","url"].forEach(function(k){ $("e-" + k).textContent = ""; $("f-" + k).removeAttribute("aria-invalid"); });
+    $("editor").scrollIntoView({ block:"nearest" });
+    $("f-title").focus();
+  }
+  function closeEditor(){ $("editor").hidden = true; state.editing = null; }
+
+  function validate(){
+    var ok = true;
+    function fail(k, msg){ $("e-" + k).textContent = msg; $("f-" + k).setAttribute("aria-invalid","true"); ok = false; }
+    ["title","start","url"].forEach(function(k){ $("e-" + k).textContent = ""; $("f-" + k).removeAttribute("aria-invalid"); });
+
+    if (!$("f-title").value.trim()) fail("title", "A title is required.");
+    if (!$("f-start").value) fail("start", "A start date and time is required.");
+    else if (!parse($("f-start").value)) fail("start", "That date doesn't look right.");
+
+    var end = $("f-end").value, start = parse($("f-start").value);
+    if (end && start && parse(end) && parse(end) <= start) fail("start", "The end time is before the start.");
+
+    var url = $("f-url").value.trim();
+    if (url && !/^(https?:\/\/|\.{0,2}\/|mailto:|#)/.test(url))
+      fail("url", "Use a full https:// link, or a path like ../portfolio/");
+    return ok;
+  }
+
+  function readForm(){
+    return {
+      title: $("f-title").value.trim(),
+      kind: $("f-kind").value.trim(),
+      start: $("f-start").value,
+      end: $("f-end").value,
+      location: $("f-location").value.trim(),
+      url: $("f-url").value.trim(),
+      urlLabel: $("f-urllabel").value.trim(),
+      blurb: $("f-blurb").value.trim(),
+      tbc: $("f-tbc").checked
+    };
+  }
+
+  // ---- wiring ----------------------------------------------------------
+  function wire(){
+    $("new-btn").addEventListener("click", function(){ openEditor(null); });
+    $("cancel-btn").addEventListener("click", closeEditor);
+    $("save-btn").addEventListener("click", save);
+
+    $("form").addEventListener("submit", function(e){
+      e.preventDefault();
+      if (!validate()) return;
+      var data = readForm();
+      if (state.editing){
+        state.events = state.events.map(function(ev){
+          return ev.id === state.editing ? Object.assign({}, ev, data) : ev;
+        });
+      } else {
+        data.id = uid(data.title);
+        state.events.push(data);
+      }
+      closeEditor(); renderAll(); markDirty();
+    });
+
+    $("list").addEventListener("click", function(e){
+      var btn = e.target.closest("[data-act]");
+      if (!btn) return;
+      var id = e.target.closest(".ev").getAttribute("data-id");
+      var ev = state.events.filter(function(x){ return x.id === id; })[0];
+      if (!ev) return;
+      var act = btn.getAttribute("data-act");
+      if (act === "edit") return openEditor(ev);
+      if (act === "dup"){
+        var copy = Object.assign({}, ev, { id: uid(ev.title), title: ev.title + " (copy)" });
+        state.events.push(copy); renderAll(); markDirty(); return;
+      }
+      if (act === "del"){
+        if (!confirm("Delete “" + (ev.title || "this event") + "”?\n\nIt is removed when you save.")) return;
+        state.events = state.events.filter(function(x){ return x.id !== id; });
+        if (state.editing === id) closeEditor();
+        renderAll(); markDirty();
+      }
+    });
+
+    $("download-btn").addEventListener("click", function(){
+      var blob = new Blob([serialise() + "\n"], { type:"application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "events.json";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    });
+
+    $("copy-btn").addEventListener("click", function(){
+      var btn = this;
+      var done = function(t){ btn.textContent = t; setTimeout(function(){ btn.textContent = "Copy"; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(serialise()).then(function(){ done("Copied"); }, function(){ done("Failed"); });
+      } else { $("json-box").select(); done("Select + copy"); }
+    });
+
+    $("import-btn").addEventListener("click", function(){
+      $("e-json").textContent = "";
+      try{
+        var d = JSON.parse($("json-box").value);
+        if (!d || !Array.isArray(d.events)) throw new Error("expected an object with an “events” array");
+        var bad = d.events.filter(function(ev){ return !ev || !ev.title || !ev.start; });
+        if (bad.length) throw new Error(bad.length + " event(s) missing a title or start");
+        state.events = d.events.map(function(ev, i){
+          return Object.assign({ id: ev.id || uid(ev.title) }, ev);
+        });
+        renderAll(); markDirty();
+      }catch(e){ $("e-json").textContent = "Could not import: " + e.message; }
+    });
+
+    window.addEventListener("beforeunload", function(e){
+      if (serialise() !== state.saved){ e.preventDefault(); e.returnValue = ""; }
+    });
+  }
+
+  load().then(function(){ renderAll(); wire(); });
+})();
+</script>
+
+</body>
+</html>

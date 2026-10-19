@@ -49,8 +49,8 @@ broker records it — fixed at the purchase-date rate — because profit is
 
 These are invented so the layout could be built. Replace before showing anyone:
 
-- Home: the four stat figures, the five partner slots, the three team heads
-  (`Name Surname`, marked `TBC`), and the social links
+- Home: the four stat figures, the five partner slots, and the social links
+  (the three team heads are real)
 - Events: every date marked `TBC` — only the Jo Bhakdi evening is real
 - Portfolio: **confirm `DX2X` maps to `XSX6`** (ISIN LU0328475792, Xtrackers
   STOXX Europe 600 1C) before relying on the live price

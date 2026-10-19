@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EBS Investment Club — Learn to invest, together</title>
+<title>EBS Investment Club | Learn to invest, together</title>
 <meta name="description" content="EBS Investment Club brings together students who want to understand markets: analysis, speaker events and a network of people learning to invest.">
 <meta name="theme-color" content="#001F4C">
 <meta name="color-scheme" content="light">
@@ -34,7 +34,12 @@
     --accent-line:#dbe4f5;
     --accent:#006ACC;
     --accent-hover:#0058b0;
-    --sky:#9fd6ff;
+    --sky:#73ebc7;
+    /* EBS house palette, taken from ebs.ee's own tokens. Mint is 11.1:1 on
+       navy but only 1.45:1 on white, so it is a dark-surface and gradient
+       colour only — never body text on paper. */
+    --ebs-mint:#73ebc7; --ebs-blue-mid:#006aac;
+    --ebs-mint-tint:#ebfffa; --ebs-blue-tint:#d1e6fa;
     --footer-email:#D9F9F7;
     --draft:#9A5C06;
     --draft-bg:#FFF6E6;
@@ -65,6 +70,14 @@
 
   /* ---- Top bar ---- */
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px 56px; }
+
+  /* EBS's signature under-nav accent, same stops as its own
+     --gradient-ebs-under-nav-accent token. */
+  .topbar{ position:relative; }
+  .topbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+    background:linear-gradient(270deg,#001f4c 5.23%,var(--ebs-blue-mid) 48.88%,var(--ebs-mint) 91.17%);
+  }
   .logo-img{ height:32px; width:auto; display:block; }
   .site-nav{ display:flex; align-items:center; gap:28px; }
   .nav-link{ color:#fff; text-decoration:none; font-size:16px; font-weight:600; }
@@ -87,7 +100,7 @@
   .nav-link{ position:relative; }
   .nav-link::after{
     content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px;
-    background:currentColor; border-radius:2px;
+    background:var(--ebs-mint); border-radius:2px;
     transform:scaleX(0); transform-origin:left center;
     transition:transform .24s cubic-bezier(.4,0,.2,1);
   }
@@ -115,8 +128,9 @@
   .hero{
     border-radius:22px; overflow:hidden; padding:72px 64px;
     background:
-      radial-gradient(120% 140% at 88% 10%, rgba(0,106,204,.55) 0%, rgba(0,106,204,0) 58%),
-      linear-gradient(112deg,#001F4C 0%,#062a63 52%,var(--navy-soft) 100%);
+      radial-gradient(90% 120% at 93% 6%, rgba(115,235,199,.24) 0%, rgba(115,235,199,0) 55%),
+      radial-gradient(120% 140% at 78% 18%, rgba(0,106,172,.62) 0%, rgba(0,106,172,0) 62%),
+      linear-gradient(112deg,#001F4C 0%,#032a5c 55%,#063a74 100%);
   }
   .hero-eyebrow{ font-size:13px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--sky); margin:0 0 16px; }
   .hero h1{
@@ -167,15 +181,28 @@
 
   .card{ background:var(--card); border-radius:22px; box-shadow:0 2px 10px rgba(16,38,90,.05); padding:44px 40px; }
 
-  /* ---- Stats ---- */
-  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
-  .stat{ padding:8px 28px; border-left:1px solid var(--accent-line); }
-  .stat:first-child{ border-left:none; padding-left:0; }
-  .stat-num{
-    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:64px; line-height:1;
-    color:var(--navy); margin-bottom:8px; font-variant-numeric:tabular-nums;
+  /* ---- What's on (home calendar, same source as /events/) ---- */
+  .home-events{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .he{
+    background:var(--card); border-radius:18px; box-shadow:0 2px 10px rgba(16,38,90,.05);
+    padding:22px 24px; display:flex; gap:16px; align-items:flex-start; text-decoration:none;
+    transition:transform .18s ease;
   }
-  .stat-label{ font-size:14px; font-weight:500; line-height:1.4; color:var(--muted-strong); }
+  .he:hover{ transform:translateY(-2px); }
+  .he-date{ flex:0 0 62px; text-align:center; background:var(--navy); color:#fff; border-radius:12px; padding:9px 6px 7px; }
+  .he-dow{ font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ebs-mint); }
+  .he-day{ font-family:"Zin Display Cond",Georgia,serif; font-size:26px; line-height:1.05; }
+  .he-mon{ font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; opacity:.9; }
+  .he-body{ min-width:0; }
+  .he-kind{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+            color:var(--navy); background:var(--accent-line); padding:3px 9px; border-radius:999px; }
+  .he-title{ font-size:16px; font-weight:700; line-height:1.35; margin:8px 0 5px; }
+  .he-meta{ font-size:13px; color:var(--muted-strong); line-height:1.45; }
+  .empty-slot{
+    grid-column:1 / -1; background:var(--card); border-radius:18px; padding:26px; text-align:center;
+    color:var(--muted); font-size:14.5px; box-shadow:0 2px 10px rgba(16,38,90,.05);
+  }
+  .home-more{ margin-top:18px; }
 
   /* ---- Teams ---- */
   .team-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
@@ -183,16 +210,17 @@
   .team-card h3{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:30px; text-transform:uppercase; margin:0 0 14px; }
   .team-card p{ font-size:15.5px; line-height:1.65; color:var(--body-soft); margin:0 0 28px; flex-grow:1; }
 
-  /* Team head. Replace the name in the markup and delete the TBC chip. */
+  /* Team head: initials avatar, name, role. .head-chip carries any second
+     title the person holds, such as the presidency. */
   .team-head{
     display:flex; align-items:center; gap:14px; margin-top:auto;
     padding-top:20px; border-top:1px solid var(--accent-line);
   }
   .head-avatar{
-    width:46px; height:46px; border-radius:50%; background:var(--pill); color:var(--muted);
+    width:46px; height:46px; border-radius:50%; background:var(--accent-line); color:var(--navy);
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-size:14.5px; font-weight:700; letter-spacing:.03em;
   }
-  .head-avatar svg{ width:24px; height:24px; }
   .head-meta{ display:flex; flex-direction:column; min-width:0; }
   .head-name{
     font-size:15.5px; font-weight:700; color:var(--navy);
@@ -201,9 +229,9 @@
   .head-name a{ text-decoration:none; }
   .head-name a:hover{ color:var(--accent); }
   .head-role{ font-size:13px; color:var(--muted-strong); margin-top:3px; }
-  .head-tbc{
+  .head-chip{
     font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--draft); background:var(--draft-bg); padding:3px 8px; border-radius:999px;
+    color:#fff; background:var(--navy); padding:3px 9px; border-radius:999px;
   }
 
   /* ---- FAQ ---- */
@@ -272,10 +300,7 @@
     .band, .cta-band{ padding-left:32px; padding-right:32px; }
     .band{ padding-top:56px; }
     .card{ padding:36px 30px; }
-    .stat-grid{ grid-template-columns:repeat(2,1fr); gap:28px 0; }
-    .stat{ padding:8px 24px; }
-    .stat:nth-child(odd){ border-left:none; padding-left:0; }
-    .team-grid, .teaser-grid{ grid-template-columns:1fr; }
+    .team-grid, .teaser-grid, .home-events{ grid-template-columns:1fr; }
     .cta-inner{ padding:40px 32px; }
     .footer{ padding:44px 28px 28px; }
     .footer-grid{ grid-template-columns:1fr 1fr; }
@@ -295,9 +320,6 @@
     .band{ padding-top:40px; padding-bottom:32px; }
     .band-head h2{ font-size:32px; }
     .card{ padding:28px 22px; }
-    .stat-grid{ grid-template-columns:1fr; gap:24px; }
-    .stat{ border-left:none; padding:0; }
-    .stat-num{ font-size:52px; }
     .cta-inner{ padding:32px 24px; }
     .cta-inner h2{ font-size:30px; }
     .footer{ padding:36px 20px 24px; }
@@ -317,8 +339,8 @@
 
   <!-- DRAFT ONLY — delete this element and the .draft-note CSS block before publishing. -->
   <div class="draft-note">
-    Draft preview. The figures in <code>STATS</code>, the partner slots and the social links are
-    placeholders — I don't know the real values. Replace them before this goes anywhere public.
+    Draft preview. The partner logos and social links are still placeholders. Please replace
+    them before this page goes public.
   </div>
 
   <header class="topbar">
@@ -337,9 +359,8 @@
     <section class="hero">
       <p class="hero-eyebrow">EBS Investment Club</p>
       <h1>Real markets.<br>Real analysis.<br><span class="dim">Real network.</span></h1>
-      <p>A student club at Estonian Business School for people who want to understand how investing
-         actually works — by researching companies, pitching ideas, and meeting the people who do it
-         for a living.</p>
+      <p>We are a student club at Estonian Business School. We learn how investing really works. We
+         study companies, share our ideas, and meet people who invest for a living.</p>
       <div class="hero-actions">
         <a class="btn-apply" href="https://forms.cloud.microsoft/e/5nPxMLS6NB" target="_blank" rel="noreferrer">Apply now</a>
         <a class="btn-ghost" href="#teams">See the teams</a>
@@ -349,81 +370,46 @@
 
   <main id="main">
 
-    <!-- ---------- Stats ---------- -->
-    <section class="band">
-      <div class="band-head">
-        <h2>Numbers that<br>speak for themselves</h2>
-        <p>What the club has added up to so far.</p>
-      </div>
-      <div class="card">
-        <!-- PLACEHOLDER FIGURES — invented so the layout can be reviewed.
-             Edit the number in both data-to and the text, then delete the
-             draft banner above, before this is published anywhere. -->
-        <div class="stat-grid" id="stat-grid">
-          <div class="stat">
-            <div class="stat-num" data-to="60">60</div>
-            <div class="stat-label">active members</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" data-to="25">25</div>
-            <div class="stat-label">company analyses presented</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" data-to="12">12</div>
-            <div class="stat-label">speakers hosted</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" data-to="3">3</div>
-            <div class="stat-label">teams to join</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ---------- Teams ---------- -->
     <section class="band" id="teams">
       <div class="band-head">
         <h2>Three teams,<br>one club</h2>
-        <p>Everyone joins a team. Pick the one that matches what you want to get better at — no prior
-           experience is assumed for any of them.</p>
+        <p>Everyone joins a team. Pick the one that fits what you want to learn. You do not need
+           any experience to start.</p>
       </div>
       <div class="team-grid">
         <div class="card team-card">
           <h3>Events</h3>
-          <p>Plans and runs the club's events: inviting speakers, handling the logistics and building the
-             community around them. A fit if you like organising, communicating and making things happen.</p>
-          <!-- Team head — replace "Name Surname" and drop the TBC chip once confirmed. -->
+          <p>This team plans our events. They invite speakers, sort out the details, and bring people
+             together. Join this team if you like organising and talking to people.</p>
           <div class="team-head">
-            <span class="head-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20c1.3-3.6 4.1-5.4 7.5-5.4s6.2 1.8 7.5 5.4" stroke-linecap="round"></path></svg></span>
+            <span class="head-avatar" aria-hidden="true">BK</span>
             <span class="head-meta">
-              <span class="head-name">Name Surname <span class="head-tbc">TBC</span></span>
+              <span class="head-name">Bruno Patrick Koovits</span>
               <span class="head-role">Head of Events</span>
             </span>
           </div>
         </div>
         <div class="card team-card">
           <h3>Marketing</h3>
-          <p>Owns how the club looks and sounds — social media, promoting events and workshops, and
-             developing the visual identity. A fit if you're into marketing, branding or content.</p>
-          <!-- Team head — replace "Name Surname" and drop the TBC chip once confirmed. -->
+          <p>This team runs our social media and tells people about our events. They also shape how the
+             club looks. Join this team if you like marketing, design, or making content.</p>
           <div class="team-head">
-            <span class="head-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20c1.3-3.6 4.1-5.4 7.5-5.4s6.2 1.8 7.5 5.4" stroke-linecap="round"></path></svg></span>
+            <span class="head-avatar" aria-hidden="true">KS</span>
             <span class="head-meta">
-              <span class="head-name">Name Surname <span class="head-tbc">TBC</span></span>
+              <span class="head-name">Kaisa Sakarias <span class="head-chip">President</span></span>
               <span class="head-role">Head of Marketing</span>
             </span>
           </div>
         </div>
         <div class="card team-card">
           <h3>Portfolio</h3>
-          <p>Focuses on investment analysis and strategy: studying companies and markets, presenting
-             ideas, and building the club's collective knowledge. A fit if you like financial analysis
-             and long-term thinking.</p>
-          <!-- Team head — replace "Name Surname" and drop the TBC chip once confirmed. -->
+          <p>This team studies companies and markets. They present stock ideas to the club and help
+             everyone learn. Join this team if you like numbers and thinking long term.</p>
           <div class="team-head">
-            <span class="head-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20c1.3-3.6 4.1-5.4 7.5-5.4s6.2 1.8 7.5 5.4" stroke-linecap="round"></path></svg></span>
+            <span class="head-avatar" aria-hidden="true">SV</span>
             <span class="head-meta">
-              <span class="head-name">Name Surname <span class="head-tbc">TBC</span></span>
+              <span class="head-name">Sten-Eerik Valliste</span>
               <span class="head-role">Head of Portfolio</span>
             </span>
           </div>
@@ -431,33 +417,46 @@
       </div>
     </section>
 
+
+    <!-- ---------- What's on ---------- -->
+    <section class="band" id="whats-on">
+      <div class="band-head">
+        <h2>What's<br>on</h2>
+        <p>Here are our next few events.</p>
+      </div>
+      <div class="home-events" id="home-events"></div>
+      <div class="home-more">
+        <a class="btn-team" href="events/">See the full calendar <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </section>
+
     <!-- ---------- What we do ---------- -->
     <section class="band">
       <div class="band-head">
-        <h2>Events, analysis<br>and people — in one place</h2>
-        <p>The club runs on three things: learning the craft, practising it, and meeting the people
-           already doing it.</p>
+        <h2>Events, ideas<br>and people</h2>
+        <p>The club is built on three things. You learn, you practise, and you meet people who
+           invest.</p>
       </div>
       <div class="teaser-grid">
         <a class="card teaser" href="https://ebsic.ee/jobhakdi/">
           <span class="kicker">Events</span>
           <h3>Speakers worth showing up for</h3>
-          <p>Founders and investors come in to talk about what they actually do — most recently Jo Bhakdi
-             on AI investing and building in Silicon Valley.</p>
+          <p>Founders and investors visit us and talk about their work. Our last guest was Jo
+             Bhakdi.</p>
           <span class="more">See the next event &#8594;</span>
         </a>
         <a class="card teaser" href="https://ebsic.ee/workshop/">
           <span class="kicker">Workshops</span>
           <h3>Pick a stock, build the case</h3>
-          <p>Hands-on sessions where teams claim a company, spend an hour on the analysis, and pitch it
-             to the room in three minutes.</p>
+          <p>Teams pick a company and study it for an hour. Then they pitch it to the room in three
+             minutes.</p>
           <span class="more">See the workshop &#8594;</span>
         </a>
         <a class="card teaser" href="https://forms.cloud.microsoft/e/5nPxMLS6NB" target="_blank" rel="noreferrer">
           <span class="kicker">Community</span>
           <h3>People who care about the same thing</h3>
-          <p>The reason most members stay: a group of students who read, argue and invest, and an
-             alumni network that keeps growing.</p>
+          <p>Most members stay for the people. Students here read, argue, and invest together. Our alumni
+             network keeps growing.</p>
           <span class="more">Join the club &#8594;</span>
         </a>
       </div>
@@ -488,7 +487,7 @@
       <div class="cta-text">
         <p class="cta-eyebrow">Applications</p>
         <h2>Want to grow your future?</h2>
-        <p>Join a group of students learning how to invest — and build the network that comes with it.</p>
+        <p>Join other students who are learning to invest. You will build a strong network too.</p>
       </div>
       <a class="btn-cta" href="https://forms.cloud.microsoft/e/5nPxMLS6NB" target="_blank" rel="noreferrer">Apply now &#8594;</a>
     </div>
@@ -534,73 +533,64 @@
 
 <script>
 (function(){
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // The figures live in the markup, so they survive this script not running at
-  // all. Everything below is decoration on top of that, and is deliberately
-  // written so a tile can never be left reading 0: the real number is also set
-  // by a timer, not only by animation frames, and the trigger is a plain rect
-  // check rather than IntersectionObserver.
-  function countUp(el){
-    if (el.getAttribute("data-started")) return;
-    el.setAttribute("data-started", "1");
-    var target = parseFloat(el.getAttribute("data-to")) || 0;
-    var suffix = el.getAttribute("data-suffix") || "";
-    var duration = 1100;
-    var start = null;
-    function step(ts){
-      if (start === null) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3);   // ease-out, decelerating into place
-      el.textContent = Math.round(target * eased) + suffix;
-      if (p < 1) requestAnimationFrame(step);
+  // The home page shows the next few sessions from the same events.json the
+  // back office writes, so adding an event there updates both pages. Cards
+  // link to the calendar rather than the event's own url, because urls in
+  // that file are written relative to /events/, not to this page.
+  function renderHomeEvents(){
+    var box = document.getElementById("home-events");
+    if (!box) return;
+    function parse(s){
+      var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(String(s || ""));
+      return m ? new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5]) : null;
     }
-    requestAnimationFrame(step);
-    // Backstop: if frames stall or never arrive, still land on the real number.
-    setTimeout(function(){ el.textContent = target + suffix; }, duration + 200);
-  }
-
-  function initStats(){
-    var nums = document.querySelectorAll(".stat-num");
-    if (!nums.length || reduceMotion) return;
-    Array.prototype.forEach.call(nums, function(el){
-      el.textContent = "0" + (el.getAttribute("data-suffix") || "");
-    });
-    function check(){
-      var h = window.innerHeight || document.documentElement.clientHeight;
-      Array.prototype.forEach.call(nums, function(el){
-        if (el.getAttribute("data-started")) return;
-        var r = el.getBoundingClientRect();
-        if (r.top < h * 0.9 && r.bottom > 0) countUp(el);
+    function esc(s){
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
       });
     }
-    var queued = false;
-    function onScroll(){
-      if (queued) return;
-      queued = true;
-      setTimeout(function(){ queued = false; check(); }, 100);
-    }
-    check();                                    // in view already on load
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-  }
+    fetch("events/events.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(d){
+        var now = new Date();
+        var up = (d && d.events ? d.events : []).filter(function(ev){
+          var s = parse(ev.start); if (!s) return false;
+          var e = parse(ev.end) || new Date(s.getTime() + 2 * 3600 * 1000);
+          return e >= now;
+        }).sort(function(a, b){ return parse(a.start) - parse(b.start); }).slice(0, 3);
 
-  // Only one FAQ answer open at a time.
-  function wireFaq(){
-    var items = document.querySelectorAll(".faq-item");
-    Array.prototype.forEach.call(items, function(item){
-      item.addEventListener("toggle", function(){
-        if (!item.open) return;
-        Array.prototype.forEach.call(items, function(other){
-          if (other !== item) other.open = false;
-        });
+        if (!up.length){
+          box.innerHTML = '<div class="empty-slot">Nothing scheduled right now.</div>';
+          return;
+        }
+        box.innerHTML = up.map(function(ev){
+          var s = parse(ev.start);
+          var href = /^https?:/.test(ev.url || "") ? ev.url : "events/";
+          var ext = /^https?:/.test(ev.url || "") ? ' target="_blank" rel="noreferrer"' : '';
+          return '<a class="he" href="' + esc(href) + '"' + ext + '>' +
+            '<span class="he-date" aria-hidden="true">' +
+              '<span class="he-dow">' + s.toLocaleDateString(undefined,{weekday:"short"}) + '</span>' +
+              '<span class="he-day" style="display:block">' + s.getDate() + '</span>' +
+              '<span class="he-mon">' + s.toLocaleDateString(undefined,{month:"short"}) + '</span>' +
+            '</span>' +
+            '<span class="he-body">' +
+              (ev.kind ? '<span class="he-kind">' + esc(ev.kind) + '</span>' : '') +
+              '<span class="he-title" style="display:block">' + esc(ev.title) + '</span>' +
+              '<span class="he-meta">' +
+                s.toLocaleDateString(undefined,{day:"numeric",month:"long"}) + ', ' +
+                s.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"}) +
+                (ev.location ? ' \u00B7 ' + esc(ev.location) : '') +
+              '</span>' +
+            '</span></a>';
+        }).join("");
+      })
+      .catch(function(){
+        box.innerHTML = '<div class="empty-slot">Calendar unavailable \u2014 see the events page.</div>';
       });
-    });
   }
 
   function init(){
-    initStats();
-    wireFaq();
+    renderHomeEvents();
     var y = document.getElementById("year");
     if (y) y.textContent = new Date().getFullYear();
   }

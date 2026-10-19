@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Events — EBS Investment Club</title>
+<title>Events | EBS Investment Club</title>
 <meta name="description" content="What's coming up at EBS Investment Club: speaker events, workshops and club meetings.">
 <meta name="theme-color" content="#001F4C">
 <meta name="color-scheme" content="light">
@@ -24,7 +24,12 @@
     --navy:#001F4C; --navy-soft:#16336e; --paper:#F6F8F9; --card:#ffffff; --tint:#fafbfd;
     --pill:#F2F4F6; --pill-hover:#d9dce6; --body-soft:rgba(0,31,76,.78);
     --muted:#6b7490; --muted-strong:#5f6884; --accent-line:#dbe4f5;
-    --accent:#006ACC; --accent-hover:#0058b0; --sky:#9fd6ff; --footer-email:#D9F9F7;
+    --accent:#006ACC; --accent-hover:#0058b0; --sky:#73ebc7;
+    /* EBS house palette, taken from ebs.ee's own tokens. Mint is 11.1:1 on
+       navy but only 1.45:1 on white, so it is a dark-surface and gradient
+       colour only — never body text on paper. */
+    --ebs-mint:#73ebc7; --ebs-blue-mid:#006aac;
+    --ebs-mint-tint:#ebfffa; --ebs-blue-tint:#d1e6fa; --footer-email:#D9F9F7;
     --draft:#9A5C06; --draft-bg:#FFF6E6;
   }
 
@@ -41,6 +46,14 @@
   .draft-note code{ font-size:12.5px; background:rgba(154,92,6,.12); padding:2px 6px; border-radius:4px; }
 
   .topbar{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:30px 56px; }
+
+  /* EBS's signature under-nav accent, same stops as its own
+     --gradient-ebs-under-nav-accent token. */
+  .topbar{ position:relative; }
+  .topbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+    background:linear-gradient(270deg,#001f4c 5.23%,var(--ebs-blue-mid) 48.88%,var(--ebs-mint) 91.17%);
+  }
   .logo-img{ height:32px; width:auto; display:block; }
   .site-nav{ display:flex; align-items:center; gap:28px; }
   .nav-link{ color:#fff; text-decoration:none; font-size:16px; font-weight:600; }
@@ -58,7 +71,7 @@
   .nav-link{ position:relative; }
   .nav-link::after{
     content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px;
-    background:currentColor; border-radius:2px;
+    background:var(--ebs-mint); border-radius:2px;
     transform:scaleX(0); transform-origin:left center;
     transition:transform .24s cubic-bezier(.4,0,.2,1);
   }
@@ -84,8 +97,9 @@
   .hero{
     border-radius:22px; padding:60px 64px;
     background:
-      radial-gradient(120% 140% at 88% 10%, rgba(0,106,204,.55) 0%, rgba(0,106,204,0) 58%),
-      linear-gradient(112deg,#001F4C 0%,#062a63 52%,var(--navy-soft) 100%);
+      radial-gradient(90% 120% at 93% 6%, rgba(115,235,199,.24) 0%, rgba(115,235,199,0) 55%),
+      radial-gradient(120% 140% at 78% 18%, rgba(0,106,172,.62) 0%, rgba(0,106,172,0) 62%),
+      linear-gradient(112deg,#001F4C 0%,#032a5c 55%,#063a74 100%);
   }
   .hero-eyebrow{ font-size:13px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--sky); margin:0 0 16px; }
   .hero h1{ font-family:"Zin Display Cond",Georgia,serif; font-weight:500; font-size:72px; line-height:1; color:#fff; text-transform:uppercase; margin:0 0 20px; }
@@ -189,9 +203,9 @@
 
   <!-- DRAFT ONLY — delete this element once the real dates are in. -->
   <div class="draft-note">
-    Draft preview. Only the Jo Bhakdi evening is a real, confirmed event. Everything marked
-    <code>TBC</code> is a placeholder date I invented so the layout can be reviewed — replace them
-    in <code>EVENTS</code> before this is shown to anyone.
+    Draft preview. Only the Jo Bhakdi evening is a real, confirmed event. Every date marked
+    <code>TBC</code> is made up so the page could be built. Please replace them before anyone
+    sees this.
   </div>
 
   <header class="topbar">
@@ -210,8 +224,7 @@
     <section class="hero">
       <p class="hero-eyebrow">What's on</p>
       <h1>Club<br>events</h1>
-      <p>Speaker evenings, workshops and club meetings. Add anything you want to attend straight
-         to your own calendar.</p>
+      <p>Speaker nights, workshops, and club meetings. You can add any event to your own calendar.</p>
     </section>
   </div>
 
@@ -226,7 +239,7 @@
     <section class="band">
       <div class="band-head">
         <h2>Already<br>happened</h2>
-        <p>Past sessions, kept so you can see what the club actually does.</p>
+        <p>Past events, so you can see what we do.</p>
       </div>
       <div id="past"></div>
     </section>
@@ -423,7 +436,24 @@
     });
   }
 
-  function init(){ render(); wire(); }
+  // The calendar is maintained in events.json through the back office at
+  // /admin/. The array above is the fallback, so the page still shows
+  // something if that file is missing — a fresh clone, or a host it wasn't
+  // copied to. Paint immediately from the fallback, then swap in the file.
+  function load(){
+    return fetch("events.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(d){
+        if (d && Array.isArray(d.events) && d.events.length) EVENTS = d.events;
+      })
+      .catch(function(){ /* keep the built-in list */ });
+  }
+
+  function init(){
+    render();
+    wire();
+    load().then(render);
+  }
   if (document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); }
   else { init(); }
 })();
