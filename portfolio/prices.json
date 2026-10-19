@@ -1,41 +1,41 @@
 {
-  "updated": "2026-10-19T08:12:10+00:00",
+  "updated": "2026-10-19T18:20:19+00:00",
   "source": "Boerse Frankfurt (prices) + Frankfurter/ECB (FX)",
-  "fxUsdEur": 0.88865,
+  "fxUsdEur": 0.89087,
   "quotes": {
     "GOOGL:NASDAQ": {
-      "price": 306.2,
+      "price": 307.4,
       "currency": "EUR",
-      "changePct": 0.08,
-      "asOf": "2026-10-19T07:56:59Z",
+      "changePct": 0.67,
+      "asOf": "2026-10-19T18:05:16Z",
       "isin": "US02079K3059"
     },
     "EXXT:XETR": {
-      "price": 256.35,
+      "price": 257.2,
       "currency": "EUR",
-      "changePct": 0.41,
-      "asOf": "2026-10-19T07:57:07Z",
+      "changePct": 1.08,
+      "asOf": "2026-10-19T18:05:15Z",
       "isin": "DE000A0F5UF5"
     },
     "VUAA:XETR": {
-      "price": 133.2,
+      "price": 132.845,
       "currency": "EUR",
-      "changePct": 0.3,
-      "asOf": "2026-10-19T07:57:07Z",
+      "changePct": 0.38,
+      "asOf": "2026-10-19T18:05:18Z",
       "isin": "IE00BFMXXD54"
     },
     "VUAA:LSE": {
-      "price": 133.2,
+      "price": 132.845,
       "currency": "EUR",
-      "changePct": 0.3,
-      "asOf": "2026-10-19T07:57:08Z",
+      "changePct": 0.38,
+      "asOf": "2026-10-19T18:05:18Z",
       "isin": "IE00BFMXXD54"
     },
     "XSX6:XETR": {
-      "price": 167.2,
+      "price": 166.42,
       "currency": "EUR",
-      "changePct": -0.74,
-      "asOf": "2026-10-19T07:57:08Z",
+      "changePct": -0.81,
+      "asOf": "2026-10-19T18:05:14Z",
       "isin": "LU0328475792"
     }
   },
