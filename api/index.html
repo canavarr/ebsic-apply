@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EBS Investment Club | API</title>
+<meta name="description" content="Two open JSON endpoints from EBS Investment Club: the event calendar and the club portfolio, both readable from any origin.">
+<meta name="theme-color" content="#001F4C">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<link rel="preload" href="../assets/fonts/ZinDisplayCond-Medium.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="../assets/fonts/Montserrat-Medium.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+  @font-face{ font-family:"Zin Display Cond"; src:url("../assets/fonts/ZinDisplayCond-Medium.otf") format("opentype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:"Montserrat"; src:url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+
+  :root{
+    --navy:#001F4C;
+    --paper:#F6F8F9;
+    --card:#ffffff;
+    --tint:#fafbfd;
+    --pill:#F2F4F6;
+    --body-soft:rgba(0,31,76,.78);
+    --muted:#6b7490;
+    --accent-line:#dbe4f5;
+    --accent:#006ACC;
+    --accent-hover:#0058b0;
+    --sky:#73ebc7;
+    --footer-email:#D9F9F7;
+    --code-bg:#F2F5F9;
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--paper); color:var(--navy);
+    font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-weight:500; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--accent); }
+  .skip-link{
+    position:absolute; left:-9999px; top:0; background:#fff; color:var(--navy);
+    padding:12px 18px; border-radius:0 0 10px 0; z-index:20;
+  }
+  .skip-link:focus{ left:0; }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--navy); outline-offset:3px; }
+  .topbar a:focus-visible, .footer a:focus-visible{ outline-color:#fff; }
+
+  /* ---- Header ---- */
+  .topbar{
+    background:var(--navy); display:flex; align-items:center; justify-content:space-between;
+    gap:24px; padding:22px 56px;
+  }
+  .logo-img{ height:28px; width:auto; display:block; }
+  .site-nav{ display:flex; align-items:center; gap:22px; }
+  .nav-link{
+    color:#fff; text-decoration:none; font-size:16px; font-weight:500;
+    padding-bottom:3px; border-bottom:2px solid transparent;
+  }
+  .nav-link:hover{ border-bottom-color:var(--sky); }
+  .nav-link[aria-current="page"]{ border-bottom-color:var(--sky); }
+
+  /* ---- Hero ---- */
+  .hero-wrap{ background:var(--navy); padding:0 56px 36px; }
+  .hero{
+    border-radius:22px; overflow:hidden; padding:52px 48px; color:#fff;
+    background:
+      radial-gradient(90% 120% at 93% 6%, rgba(115,235,199,.24) 0%, rgba(115,235,199,0) 55%),
+      radial-gradient(120% 140% at 78% 18%, rgba(0,106,172,.62) 0%, rgba(0,106,172,0) 62%),
+      linear-gradient(112deg,#001F4C 0%,#032a5c 55%,#063a74 100%);
+  }
+  .eyebrow{
+    font-size:13px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+    color:var(--sky); margin:0 0 12px;
+  }
+  .hero h1{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; text-transform:uppercase;
+    font-size:58px; line-height:.98; margin:0 0 16px; max-width:18ch;
+  }
+  .hero p{ font-size:17px; line-height:1.55; margin:0; max-width:62ch; color:#eef2fb; }
+
+  /* ---- Bands ---- */
+  .band{ padding:64px; }
+  .band-head{ margin-bottom:28px; }
+  .band-head h2{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; text-transform:uppercase;
+    font-size:38px; line-height:1.02; margin:0 0 10px;
+  }
+  .band-head p{ margin:0; font-size:16px; color:var(--body-soft); max-width:70ch; }
+
+  /* ---- Endpoint cards ---- */
+  .endpoints{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .card{
+    background:var(--card); border:1px solid var(--accent-line); border-radius:18px;
+    padding:34px 32px; box-shadow:0 2px 10px rgba(16,38,90,.05);
+  }
+  .card h3{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; text-transform:uppercase;
+    font-size:26px; margin:0 0 6px;
+  }
+  .card > p{ margin:0 0 18px; font-size:15px; color:var(--body-soft); }
+  .badge{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:.08em;
+    text-transform:uppercase; background:var(--pill); color:var(--navy);
+    padding:6px 11px; border-radius:999px; margin-bottom:14px;
+  }
+  .url{
+    display:block; background:var(--code-bg); border:1px solid var(--accent-line);
+    border-radius:10px; padding:13px 15px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:13.5px; color:var(--navy); word-break:break-all; text-decoration:none; margin-bottom:18px;
+  }
+  .url:hover{ border-color:var(--accent); }
+  .fields{ margin:0; padding:0; list-style:none; border-top:1px solid var(--accent-line); }
+  .fields li{
+    display:flex; gap:14px; padding:10px 0; border-bottom:1px solid var(--accent-line);
+    font-size:14px; align-items:baseline;
+  }
+  .fields code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    color:var(--navy); background:var(--code-bg); padding:2px 7px; border-radius:6px;
+    flex:0 0 auto; min-width:116px;
+  }
+  .fields span{ color:var(--body-soft); }
+
+  /* ---- Live preview ---- */
+  .preview{ background:var(--tint); border:1px solid var(--accent-line); border-radius:18px; padding:28px 30px; }
+  .preview h3{
+    font-family:"Zin Display Cond",Georgia,serif; font-weight:500; text-transform:uppercase;
+    font-size:24px; margin:0 0 4px;
+  }
+  .preview p.sub{ margin:0 0 18px; font-size:14px; color:var(--muted); }
+  pre{
+    margin:0; background:var(--navy); color:#E8EEF8; border-radius:12px; padding:20px 22px;
+    overflow-x:auto; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:13px; line-height:1.65;
+  }
+  pre b{ color:var(--sky); font-weight:500; }
+
+  /* ---- Notes ---- */
+  .notes{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .note{ background:var(--card); border:1px solid var(--accent-line); border-radius:16px; padding:26px 26px; }
+  .note h4{
+    font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 10px;
+  }
+  .note p{ margin:0; font-size:14.5px; color:var(--body-soft); }
+  .note code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    background:var(--code-bg); padding:2px 6px; border-radius:5px;
+  }
+
+  /* ---- Footer ---- */
+  .footer{ background:var(--navy); padding:48px 56px 30px; color:#fff; }
+  .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px; align-items:start; }
+  .footer h4{
+    font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--sky); margin:0 0 14px;
+  }
+  .footer p{ margin:14px 0 0; font-size:15px; color:#dfe6f5; }
+  .footer ul{ list-style:none; margin:0; padding:0; }
+  .footer li{ margin-bottom:9px; font-size:15px; }
+  .footer a{ color:#dfe6f5; text-decoration:none; }
+  .footer a:hover{ text-decoration:underline; }
+  .footer-email{ color:var(--footer-email); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,.16); margin-top:34px; padding-top:18px;
+    font-size:13px; color:#b9c6e0;
+  }
+
+  @media (max-width:1024px){
+    .topbar{ padding:22px 28px; }
+    .hero-wrap{ padding:0 20px 28px; }
+    .hero{ padding:46px 32px; }
+    .hero h1{ font-size:46px; }
+    .band{ padding:56px 32px; }
+    .endpoints, .notes{ grid-template-columns:1fr; }
+    .footer{ padding:44px 28px 26px; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:767px){
+    .topbar{ padding:18px 20px; gap:14px; flex-wrap:wrap; }
+    .logo-img{ height:24px; }
+    .site-nav{ gap:14px; }
+    .nav-link{ font-size:15px; }
+    .hero-wrap{ padding:0 16px 24px; }
+    .hero{ border-radius:16px; padding:34px 22px; }
+    .hero h1{ font-size:36px; }
+    .band{ padding:40px 16px; }
+    .band-head h2{ font-size:32px; }
+    .card{ padding:28px 22px; }
+    .fields li{ flex-direction:column; gap:4px; }
+    .fields code{ min-width:0; }
+    .footer{ padding:36px 20px 24px; }
+    .footer-grid{ grid-template-columns:1fr; gap:26px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <a href="../"><img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club"></a>
+  <nav class="site-nav" aria-label="Main">
+    <a class="nav-link" href="../">Home</a>
+    <a class="nav-link" href="../events/">Events</a>
+    <a class="nav-link" href="../portfolio/">Portfolio</a>
+    <a class="nav-link" href="./" aria-current="page">API</a>
+  </nav>
+</header>
+
+<div class="hero-wrap">
+  <div class="hero">
+    <p class="eyebrow">Open data</p>
+    <h1>The club API</h1>
+    <p>Two JSON endpoints: everything on our calendar, and every position the club holds. No key, no sign-up, and readable from any website. Use them for a student project, a dashboard or your own page.</p>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="band">
+    <div class="band-head">
+      <h2>Endpoints</h2>
+      <p>Both are plain JSON over HTTPS. Send a GET request. Every response has a <code>generated</code> timestamp in UTC.</p>
+    </div>
+
+    <div class="endpoints">
+      <article class="card">
+        <span class="badge">Events</span>
+        <h3>Our calendar</h3>
+        <p>Every event we have planned, with the past ones kept so you can show a history.</p>
+        <a class="url" href="events.json">https://ebsic.ee/api/events.json</a>
+        <ul class="fields">
+          <li><code>events[]</code><span>One entry per event, earliest first.</span></li>
+          <li><code>start</code>, <code>end</code><span>Full ISO timestamps with the Tallinn offset. <code>end</code> is <code>null</code> when we have not set one.</span></li>
+          <li><code>status</code><span><code>upcoming</code> or <code>past</code>, worked out when the file is built.</span></li>
+          <li><code>dateConfirmed</code><span><code>false</code> while the date can still move.</span></li>
+          <li><code>next</code><span>The id of the next event, so you can skip the filtering.</span></li>
+          <li><code>counts</code><span>How many events in total, upcoming and past.</span></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="badge">Portfolio</span>
+        <h3>What we hold</h3>
+        <p>Every position, valued in euros, with what we paid and what it is worth now.</p>
+        <a class="url" href="portfolio.json">https://ebsic.ee/api/portfolio.json</a>
+        <ul class="fields">
+          <li><code>holdings[]</code><span>One entry per position, with name, ticker, ISIN and quantity.</span></li>
+          <li><code>valueEur</code><span>What the position is worth today.</span></li>
+          <li><code>costEur</code><span>What we paid, at the exchange rate on the day we bought.</span></li>
+          <li><code>profitEur</code><span><code>valueEur</code> minus <code>costEur</code>.</span></li>
+          <li><code>totals</code><span>The same three figures for the whole portfolio, plus <code>returnPct</code>.</span></li>
+          <li><code>groups[]</code><span>Value and weight per kind of holding.</span></li>
+          <li><code>prices</code><span>Where the prices came from and when. See the delay below.</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0;">
+    <div class="preview">
+      <h3>Try it</h3>
+      <p class="sub">Copy either line into a terminal.</p>
+<pre><b>curl</b> https://ebsic.ee/api/events.json
+<b>curl</b> https://ebsic.ee/api/portfolio.json
+
+<span style="color:#9fb4d4;"># the next event, with jq</span>
+<b>curl</b> -s https://ebsic.ee/api/events.json | jq '.events[] | select(.status=="upcoming")' | head -20
+
+<span style="color:#9fb4d4;"># from a browser, any site, no key</span>
+<b>const</b> r = <b>await</b> fetch("https://ebsic.ee/api/portfolio.json");
+<b>const</b> p = <b>await</b> r.json();
+console.log(p.totals.valueEur, p.totals.returnPct + "%");</pre>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0;">
+    <div class="band-head">
+      <h2>Things to know</h2>
+    </div>
+    <div class="notes">
+      <div class="note">
+        <h4>Prices are delayed</h4>
+        <p>Exchange prices come from Boerse Frankfurt and run about 15 minutes behind the market. Good enough to follow along, not good enough to trade on.</p>
+      </div>
+      <div class="note">
+        <h4>How often it updates</h4>
+        <p>Prices refresh every 15 minutes while European markets are open, on weekdays. The calendar updates when we add an event. Both files carry their own <code>updated</code> time, so check that rather than guessing.</p>
+      </div>
+      <div class="note">
+        <h4>Caching and fair use</h4>
+        <p>Responses are cached for 10 minutes, so asking more often than that gains you nothing. There is no rate limit and no key. Please cache on your side too.</p>
+      </div>
+      <div class="note">
+        <h4>Euros throughout</h4>
+        <p>Every money field is in euros. Dollar positions are converted at the European Central Bank rate, which the response reports under <code>fx</code>.</p>
+      </div>
+      <div class="note">
+        <h4>Fields can be added</h4>
+        <p>We may add fields, so read the ones you need by name and ignore the rest. We will not rename or remove a field without changing the path.</p>
+      </div>
+      <div class="note">
+        <h4>Not investment advice</h4>
+        <p>This is a student club showing its own holdings so members can learn. It is not a recommendation to buy anything.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <img class="logo-img" src="../assets/ebsic-logo.svg" width="1489" height="431" alt="EBS Investment Club">
+      <p>A student investment club at<br>Estonian Business School.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a class="footer-email" href="mailto:investeerimisklubi@ebs.ee">investeerimisklubi@ebs.ee</a></li>
+        <li><a href="https://ebsic.ee/">ebsic.ee</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="../events/">Events</a></li>
+        <li><a href="../portfolio/">Portfolio</a></li>
+        <li><a href="events.json">events.json</a></li>
+        <li><a href="portfolio.json">portfolio.json</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year">2026</span> EBS Investment Club</span>
+    <span>Estonian Business School, Tallinn</span>
+  </div>
+</footer>
+
+<script>
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

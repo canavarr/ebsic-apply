@@ -1,0 +1,70 @@
+# Keeps the portfolio page and the API current without anyone running anything.
+#
+# GitHub Pages has no server, so prices.json cannot be refreshed on request —
+# it is a file in the repo, and the site shows whatever that file last said.
+# This job fetches new prices, rebuilds the API, and commits the result to the
+# branch Pages serves, which is what makes the figures change on the site.
+#
+# IMPORTANT: GitHub only runs `schedule:` triggers from a repository's DEFAULT
+# branch. This file therefore has to live on `main`, even though everything it
+# touches is on the Pages branch, which it checks out below.
+
+name: Refresh portfolio prices
+
+on:
+  schedule:
+    # Every 15 minutes while European markets trade, Monday to Friday. Cron is
+    # always UTC: 07:00-17:00 UTC covers XETRA's 09:00-17:30 local clock in both
+    # CET and CEST. The underlying quotes are themselves about 15 minutes
+    # delayed, so running this more often would not return fresher numbers.
+    # Each run that finds a price change makes one commit, so roughly 40 commits
+    # on a busy day. Widen the interval to */30 or @hourly to quieten that down.
+    - cron: "*/15 7-17 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Two overlapping runs would race to push the same file.
+concurrency:
+  group: refresh-prices
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the branch Pages serves
+        uses: actions/checkout@v4
+        with:
+          ref: cursor/ebsic-apply-page-f81f
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No API key anywhere: Boerse Frankfurt and Frankfurter are both keyless.
+      - name: Fetch prices
+        working-directory: portfolio
+        run: python3 refresh-prices.py
+
+      - name: Rebuild the API
+        run: python3 api/build-api.py
+
+      - name: Commit only if a price actually moved
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # api/*.json carry a "generated" timestamp that changes every run, so
+          # prices.json is the file that decides whether anything is worth a
+          # commit. Without this check the branch would gain a commit every
+          # 15 minutes even on a public holiday.
+          if git diff --quiet -- portfolio/prices.json; then
+            echo "No price change since the last run. Nothing to commit."
+            exit 0
+          fi
+
+          git add portfolio/prices.json api/portfolio.json api/events.json
+          git commit -m "Refresh portfolio prices [skip ci]"
+          git push

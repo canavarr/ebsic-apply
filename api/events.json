@@ -1,0 +1,75 @@
+{
+  "$schema": "https://ebsic.ee/api/",
+  "endpoint": "https://ebsic.ee/api/events.json",
+  "generated": "2026-10-19T17:58:36+00:00",
+  "source": "EBS Investment Club event calendar",
+  "timezone": "Europe/Tallinn",
+  "counts": {
+    "total": 4,
+    "upcoming": 3,
+    "past": 1
+  },
+  "next": "stock-workshop-2026-10",
+  "events": [
+    {
+      "id": "jo-bhakdi-2026-09",
+      "title": "From Silicon Valley to AI investing with Jo Bhakdi",
+      "kind": "Speaker evening",
+      "start": "2026-09-24T19:00:00+03:00",
+      "end": null,
+      "endEstimated": true,
+      "timezone": "Europe/Tallinn",
+      "location": "Estonian Business School, Tallinn",
+      "blurb": "Founder and investor Jo Bhakdi on AI, investing and building in Silicon Valley.",
+      "url": "https://ebsic.ee/jobhakdi/",
+      "urlLabel": "Event page",
+      "dateConfirmed": true,
+      "status": "past"
+    },
+    {
+      "id": "stock-workshop-2026-10",
+      "title": "Stock analysis workshop",
+      "kind": "Workshop",
+      "start": "2026-10-29T17:00:00+02:00",
+      "end": null,
+      "endEstimated": true,
+      "timezone": "Europe/Tallinn",
+      "location": "Estonian Business School, Tallinn",
+      "blurb": "Teams claim a company, spend an hour on the analysis, and pitch it to the room in three minutes.",
+      "url": "https://ebsic.ee/workshop/",
+      "urlLabel": "Register your pick",
+      "dateConfirmed": false,
+      "status": "upcoming"
+    },
+    {
+      "id": "portfolio-review-2026-11",
+      "title": "Portfolio review and new pitches",
+      "kind": "Club meeting",
+      "start": "2026-11-12T18:00:00+02:00",
+      "end": null,
+      "endEstimated": true,
+      "timezone": "Europe/Tallinn",
+      "location": "Estonian Business School, Tallinn",
+      "blurb": "The Portfolio team walks through current positions and presents candidates for the next one.",
+      "url": "https://ebsic.ee/portfolio/",
+      "urlLabel": "See the portfolio",
+      "dateConfirmed": false,
+      "status": "upcoming"
+    },
+    {
+      "id": "investing-101-2026-11",
+      "title": "Investing 101: from theory to a first trade",
+      "kind": "Workshop",
+      "start": "2026-11-26T18:00:00+02:00",
+      "end": null,
+      "endEstimated": true,
+      "timezone": "Europe/Tallinn",
+      "location": "Estonian Business School, Tallinn",
+      "blurb": "An introduction for members who have joined but not yet bought anything.",
+      "url": null,
+      "urlLabel": null,
+      "dateConfirmed": false,
+      "status": "upcoming"
+    }
+  ]
+}

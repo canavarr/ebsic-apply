@@ -1,0 +1,150 @@
+{
+  "$schema": "https://ebsic.ee/api/",
+  "endpoint": "https://ebsic.ee/api/portfolio.json",
+  "generated": "2026-10-19T17:58:36+00:00",
+  "baseCurrency": "EUR",
+  "prices": {
+    "source": "Boerse Frankfurt (prices) + Frankfurter/ECB (FX)",
+    "updated": "2026-10-19T08:12:10+00:00",
+    "live": 5,
+    "fallback": 0,
+    "delayMinutes": 15,
+    "note": "Exchange prices are delayed by about 15 minutes. Not for trading."
+  },
+  "fx": {
+    "pair": "USD/EUR",
+    "rate": 0.88865,
+    "source": "Frankfurter / ECB reference rate"
+  },
+  "totals": {
+    "costEur": 11978.99,
+    "valueEur": 14384.95,
+    "profitEur": 2405.96,
+    "returnPct": 20.08,
+    "positions": 5
+  },
+  "groups": [
+    {
+      "group": "S&P 500",
+      "valueEur": 5994.0,
+      "costEur": 4680.91,
+      "weightPct": 41.67
+    },
+    {
+      "group": "Nasdaq-100",
+      "valueEur": 5383.35,
+      "costEur": 4496.38,
+      "weightPct": 37.42
+    },
+    {
+      "group": "Single stock",
+      "valueEur": 1837.2,
+      "costEur": 1828.0,
+      "weightPct": 12.77
+    },
+    {
+      "group": "Europe 600",
+      "valueEur": 1170.4,
+      "costEur": 973.7,
+      "weightPct": 8.14
+    }
+  ],
+  "holdings": [
+    {
+      "name": "Alphabet Inc.",
+      "ticker": "GOOGL",
+      "symbol": "GOOGL",
+      "exchange": "NASDAQ",
+      "isin": "US02079K3059",
+      "group": "Single stock",
+      "quantity": 6,
+      "currency": "USD",
+      "entryPrice": 341.08,
+      "price": 344.57,
+      "priceSource": "Boerse Frankfurt",
+      "priceAsOf": "2026-10-19T07:56:59Z",
+      "changeSinceEntryPct": 1.02,
+      "costEur": 1828.0,
+      "valueEur": 1837.2,
+      "profitEur": 9.2,
+      "weightPct": 12.77
+    },
+    {
+      "name": "iShares NASDAQ-100 UCITS ETF",
+      "ticker": "EXXT",
+      "symbol": "EXXT",
+      "exchange": "XETR",
+      "isin": "DE000A0F5UF5",
+      "group": "Nasdaq-100",
+      "quantity": 21,
+      "currency": "EUR",
+      "entryPrice": 214.11,
+      "price": 256.35,
+      "priceSource": "Boerse Frankfurt",
+      "priceAsOf": "2026-10-19T07:57:07Z",
+      "changeSinceEntryPct": 19.73,
+      "costEur": 4496.38,
+      "valueEur": 5383.35,
+      "profitEur": 886.97,
+      "weightPct": 37.42
+    },
+    {
+      "name": "Vanguard S&P 500 UCITS ETF",
+      "ticker": "VUAA",
+      "symbol": "VUAA",
+      "exchange": "XETR",
+      "isin": "IE00BFMXXD54",
+      "group": "S&P 500",
+      "quantity": 40,
+      "currency": "EUR",
+      "entryPrice": 103.37,
+      "price": 133.2,
+      "priceSource": "Boerse Frankfurt",
+      "priceAsOf": "2026-10-19T07:57:07Z",
+      "changeSinceEntryPct": 28.86,
+      "costEur": 4134.95,
+      "valueEur": 5328.0,
+      "profitEur": 1193.05,
+      "weightPct": 37.04
+    },
+    {
+      "name": "Vanguard S&P 500 UCITS ETF",
+      "ticker": "VUAA",
+      "symbol": "VUAA",
+      "exchange": "LSE",
+      "isin": "IE00BFMXXD54",
+      "group": "S&P 500",
+      "quantity": 5,
+      "currency": "USD",
+      "entryPrice": 122.24,
+      "price": 149.89,
+      "priceSource": "Boerse Frankfurt",
+      "priceAsOf": "2026-10-19T07:57:08Z",
+      "changeSinceEntryPct": 22.62,
+      "costEur": 545.96,
+      "valueEur": 666.0,
+      "profitEur": 120.04,
+      "weightPct": 4.63
+    },
+    {
+      "name": "Xtrackers STOXX Europe 600 1C",
+      "ticker": "DX2X",
+      "symbol": "XSX6",
+      "exchange": "XETR",
+      "isin": "LU0328475792",
+      "group": "Europe 600",
+      "quantity": 7,
+      "currency": "EUR",
+      "entryPrice": 139.1,
+      "price": 167.2,
+      "priceSource": "Boerse Frankfurt",
+      "priceAsOf": "2026-10-19T07:57:08Z",
+      "changeSinceEntryPct": 20.2,
+      "costEur": 973.7,
+      "valueEur": 1170.4,
+      "profitEur": 196.7,
+      "weightPct": 8.14
+    }
+  ],
+  "complete": true
+}
