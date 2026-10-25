@@ -802,7 +802,7 @@ body.nav-lock{ overflow: hidden; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(90deg, #006ACC 0%, rgba(0,106,204,.86) 14%, rgba(0,106,204,0) 46%);
+  background: linear-gradient(90deg, #006ACC 0%, rgba(0,106,204,.88) 5%, rgba(0,106,204,0) 24%);
 }
 .hero h1{ margin-bottom: 30px; }
 
@@ -940,7 +940,7 @@ body.nav-lock{ overflow: hidden; }
   .hero-photo-wrap{ height: 340px; }
   .hero-photo{ object-position: 50% 14%; }
   .hero-photo-wrap::before{
-    background: linear-gradient(180deg, #006ACC 0%, rgba(0,106,204,0) 38%);
+    background: linear-gradient(180deg, #006ACC 0%, rgba(0,106,204,0) 20%);
   }
   .details-bar{ padding: 0 32px 48px; }
   .details-inner{ padding: 36px 32px; }
