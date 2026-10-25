@@ -14,52 +14,16 @@
       "tbc": false
     },
     {
-      "id": "stock-workshop-2026-10",
-      "title": "Stock analysis workshop",
-      "kind": "Workshop",
-      "start": "2026-10-29T17:00",
-      "end": "",
-      "location": "Estonian Business School, Tallinn",
-      "url": "https://ebsic.ee/workshop/",
-      "urlLabel": "Register your pick",
-      "blurb": "Teams claim a company, spend an hour on the analysis, and pitch it to the room in three minutes.",
-      "tbc": true
-    },
-    {
       "id": "maarja-pehk-2026-10",
       "title": "The Creative Investor with Maarja Pehk",
       "kind": "Speaker evening",
       "start": "2026-10-29T19:00",
-      "end": "2026-10-29T20:30",
+      "end": "2026-10-29T21:00",
       "location": "Estonian Business School, room 413, Tallinn",
       "url": "https://ebsic.ee/maarjapehk/",
       "urlLabel": "Event page",
       "blurb": "Maarja Pehk of SmartCap on the unconventional road from music and media into venture capital, with an open Q&A after.",
       "tbc": false
-    },
-    {
-      "id": "portfolio-review-2026-11",
-      "title": "Portfolio review and new pitches",
-      "kind": "Club meeting",
-      "start": "2026-11-12T18:00",
-      "end": "",
-      "location": "Estonian Business School, Tallinn",
-      "url": "../portfolio/",
-      "urlLabel": "See the portfolio",
-      "blurb": "The Portfolio team walks through current positions and presents candidates for the next one.",
-      "tbc": true
-    },
-    {
-      "id": "investing-101-2026-11",
-      "title": "Investing 101: from theory to a first trade",
-      "kind": "Workshop",
-      "start": "2026-11-26T18:00",
-      "end": "",
-      "location": "Estonian Business School, Tallinn",
-      "url": "",
-      "urlLabel": "",
-      "blurb": "An introduction for members who have joined but not yet bought anything.",
-      "tbc": true
     }
   ]
 }
