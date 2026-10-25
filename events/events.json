@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T00:00:00Z",
+  "updated": "2026-10-25T00:00:00Z",
   "events": [
     {
       "id": "jo-bhakdi-2026-09",
@@ -24,6 +24,18 @@
       "urlLabel": "Register your pick",
       "blurb": "Teams claim a company, spend an hour on the analysis, and pitch it to the room in three minutes.",
       "tbc": true
+    },
+    {
+      "id": "maarja-pehk-2026-10",
+      "title": "The Creative Investor with Maarja Pehk",
+      "kind": "Speaker evening",
+      "start": "2026-10-29T19:00",
+      "end": "2026-10-29T20:30",
+      "location": "Estonian Business School, room 413, Tallinn",
+      "url": "https://ebsic.ee/maarjapehk/",
+      "urlLabel": "Event page",
+      "blurb": "Maarja Pehk of SmartCap on the unconventional road from music and media into venture capital, with an open Q&A after.",
+      "tbc": false
     },
     {
       "id": "portfolio-review-2026-11",
